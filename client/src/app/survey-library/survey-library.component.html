@@ -1,0 +1,50 @@
+<h1>Active Surveys</h1>
+<!-- Table for active surveys with example data-->
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Survey Name</th>
+      <th scope="col">Date Created</th>
+      <th scope="col">Responses</th>
+      <th scope="col">Take Survey</th>
+      <th scope="col">View Results</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let survey of surveys">
+      <th scope="row">{{ survey._id }}</th>
+      <td>{{ survey.name }}</td>
+      <td>{{ survey.dateCreated }}</td>
+      <td>{{ survey.responses }}</td>
+      <td>
+        <a href="#" class="btn btn-success btn-sm">
+          Take Survey
+        </a>
+      </td>
+      <td>
+        <a href="#" class="btn btn-success btn-sm">
+          View Results
+        </a>
+      </td>
+    </tr>
+
+  </tbody>
+
+  <div class="form-inline float-left mr-1">
+    <select class="form-control" [value]='surveysPerPage' (change)="changePageSize($event.target.value)">
+      <option value="3">3 per page</option>
+      <option value="4">4 per page</option>
+      <option value="6">6 per page</option>
+      <option value="8">8 per page</option>
+    </select>
+  </div>
+
+  <div class="btn-group float-right">
+    <button class="btn btn-outline-primary" *counter="let page of pageCount" (click)="changePage(page)"
+      [class.active]="page===selectedPage">
+      {{ page }}
+    </button>
+  </div>
+</table>
