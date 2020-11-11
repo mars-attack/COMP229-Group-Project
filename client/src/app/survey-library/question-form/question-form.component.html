@@ -1,0 +1,29 @@
+<form>
+  <h4>{{question ? 'Update Question' : 'Add Question'}}</h4>
+  <div class="form-group">
+    <label>Question Title</label>
+    <input class="form-control" placeholder="Enter question title" name="title" [(ngModel)]="placeholderQuestion.title">
+  </div>
+  <div *ngFor="let option of placeholderQuestion.options; let i = index;" class="form-group">
+    <label>Option Description {{option.details}}</label>
+    <div class="d-flex flex-row">
+      <i class="fas fa-minus-circle p-1" style="font-size: 1.5em; color: rgb(252, 29, 29);" (click)="onDelete(i)"></i>
+      <input class="form-control" placeholder="Enter option description" name="details + {{i}}"
+        [(ngModel)]="option.details">
+    </div>
+  </div>
+
+  <div class="row">
+    <button [disabled]="!placeholderQuestion.title" (click)="onAddOption()" class="btn btn-info btn-sm m-1">
+      <i class="fas fa-plus-circle"></i> ADD OPTION
+    </button>
+
+    <div>
+      <button [disabled]="!placeholderQuestion.title" (click)="onSave()" class="btn btn-success btn-sm m-1">
+        {{question ? 'SAVE' : 'ADD QUESTION'}}
+      </button>
+    </div>
+
+  </div>
+
+</form>
