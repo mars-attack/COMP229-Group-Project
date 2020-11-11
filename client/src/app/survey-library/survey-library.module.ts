@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ModelModule } from '../model/model.module';
 import { CounterDirective } from './counter.directive';
 import { SurveyLibraryComponent } from '../survey-library/survey-library.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { QuestionFormComponent } from './question-form/question-form.component';
+import { CreateSurveyComponent } from './create-survey/create-survey.component';
 
 
 @NgModule({
@@ -14,11 +17,14 @@ import { SurveyLibraryComponent } from '../survey-library/survey-library.compone
   ],
   declarations: [
     SurveyLibraryComponent,
-    CounterDirective
+    CounterDirective,
+    QuestionsComponent,
+    QuestionFormComponent,
+    CreateSurveyComponent
   ],
   exports: [
     SurveyLibraryComponent,
-    CounterDirective
+    CounterDirective,
   ]
 })
 export class SurveyLibraryModule {}

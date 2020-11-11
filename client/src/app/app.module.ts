@@ -13,7 +13,7 @@ import { SurveyLibraryModule } from './survey-library/survey-library.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
