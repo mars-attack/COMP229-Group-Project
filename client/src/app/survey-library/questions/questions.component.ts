@@ -18,4 +18,9 @@ export class QuestionsComponent implements OnInit {
   onEdit(question: Question): void {
     this.edit.emit(question);
   }
+
+  onDelete(question: Question): void {
+    const index = this.questions.indexOf(question);
+    this.questions.splice(index, 1);
+  }
 }
