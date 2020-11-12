@@ -17,14 +17,14 @@ module.exports.getSurveys = (req, res, next) => {
 module.exports.getSurvey = (req, res, next) => {
   let id = req.params.id
   
-  Survey.findById({_id: id}, (err, surveys) => {
+  Survey.findById({_id: id}, (err, foundSurvey) => {
     if (err) {
       console.error(err);
       res.end(err);
     } else {
       res.json({
         error: err,
-        surveys: surveys
+        survey: foundSurvey
       });
     }
   });
@@ -39,7 +39,7 @@ module.exports.addSurveys = (req, res, next) => {
       "responses":req.body.responses,
       "questions":req.body.questions
   });  
-  Survey.create((newSurvey, (err, Survey) =>{
+  Survey.create((newSurvey, (err) =>{
     if(err)
     {
       console.error(err);
@@ -48,8 +48,7 @@ module.exports.addSurveys = (req, res, next) => {
     else
     {
       res.json({
-        error: err,
-        surveys: surveys
+        error: err        
       });
       
     }
@@ -67,16 +66,14 @@ module.exports.updateSurveys = (req, res, next) => {
     "questions":req.body.questions
   })
 
-  Survey.updateOne({_id: id}, updateSurveys, (err, surveys) => {
+  Survey.updateOne({_id: id}, updateSurveys, (err) => {
     if (err) {
       console.error(err);
       res.end(err);
     } else 
     {
       res.json({
-        error: err,
-        
-        surveys: surveys
+        error: err        
       });
     }
     });
@@ -94,8 +91,7 @@ module.exports.deleteSurveys = (req, res, next) => {
     else
      {
       res.json({
-        error: err,
-        surveys: surveys
+        error: err
       });
       }
     });
