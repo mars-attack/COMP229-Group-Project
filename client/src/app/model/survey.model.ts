@@ -2,7 +2,7 @@ export class Survey
 {
   constructor(
       // tslint:disable-next-line: variable-name
-      public _id?: number,
+      public _id?: string,
       public name?: string,
       public dateCreated?: string,
       public responses?: number,
