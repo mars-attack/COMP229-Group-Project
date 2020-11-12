@@ -9,15 +9,16 @@ router.get('/', surveyController.getSurveys);
 // TODOS:
 
 //* GET survey by id
-// router.get('/:id', surveyController.getSurvey);
+router.get('/:id', surveyController.getSurvey);
 
 //* POST add survey
-// router.post('/add', surveyController.addSurvey);
+router.post('/add',surveyController.addSurveys);
 
 //* POST update survey by id 
-// router.post('/update/:id', surveyController.updateSurvey);
+router.post('/update/:id', surveyController.updateSurveys);
 
 //* POST delete survey by id
-// router.post('/delete/:id', surveyController.deleteSurvey);
+router.post('/delete/:id', surveyController.deleteSurveys);
+
 
 module.exports = router;
