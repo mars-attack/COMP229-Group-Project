@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <h1 class="text-center">Survey Management</h1>
+  <!-- Section for creating a new survey -->
+  <div class="container bg-light p-4 mt-4 rounded shadow">
+    <h4>Create a survey</h4>
+    <div class="form-group">
+      <div class="row">
+        <input class="form-control col-10" placeholder="Enter survery name" name="survey-name"
+          [(ngModel)]="newSurvey.name">
+        <button [disabled]="!newSurvey.name" (click)="onCreateSurvey()" class="btn btn-success btn-sm ml-2">
+          CREATE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table for all surveys-->
+  <div class="mt-5">
+    <h4>All Surveys</h4>
+    <table class="table">
+      <thead class="col-9">
+        <tr>
+          <th scope="col" style="width:70%">Survey Name</th>
+          <th scope="col">EDIT</th>
+          <th scope="col">DELETE</th>
+          <th scope="col">RESULTS</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let survey of surveys">
+          <td>
+            <div>
+              {{ survey.name }}
+            </div>
+          </td>
+          <td>
+            <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-success btn-sm">
+              EDIT
+            </button>
+          </td>
+          <td>
+            <button (click)="onDeleteSurvey(survey._id)" class="btn btn-danger btn-sm">
+              DELETE
+            </button>
+          </td>
+          <td>
+            <button href="#" class="btn btn-info btn-sm">
+              View Results
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -6,21 +6,25 @@ import { CounterDirective } from './counter.directive';
 import { SurveyLibraryComponent } from '../survey-library/survey-library.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
-import { CreateSurveyComponent } from './create-survey/create-survey.component';
+import { EditSurveyComponent } from './edit-survey/edit-survey.component';
+import { SurveyManagementComponent } from './survey-management/survey-management.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   imports: [
     ModelModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     SurveyLibraryComponent,
     CounterDirective,
     QuestionsComponent,
     QuestionFormComponent,
-    CreateSurveyComponent
+    EditSurveyComponent,
+    SurveyManagementComponent
   ],
   exports: [
     SurveyLibraryComponent,

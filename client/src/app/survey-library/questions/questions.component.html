@@ -1,4 +1,3 @@
-<h1>Survey</h1>
 <!-- Table for active surveys with example data-->
 <table class="table">
   <thead class="col-9">
@@ -25,7 +24,7 @@
         </button>
       </td>
       <td>
-        <button class="btn btn-danger btn-sm">
+        <button (click)="onDelete(question)" class="btn btn-danger btn-sm">
           DELETE
         </button>
       </td>

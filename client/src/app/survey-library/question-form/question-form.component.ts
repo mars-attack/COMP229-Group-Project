@@ -30,7 +30,7 @@ export class QuestionFormComponent implements OnInit, OnChanges {
   onDelete(index: number): void {
     if (this.placeholderQuestion.options.length > 1)
     {
-      this.placeholderQuestion.options.splice(index, index + 1);
+      this.placeholderQuestion.options.splice(index, 1);
     }
   }
 

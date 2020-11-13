@@ -19,9 +19,23 @@ export class SurveyRepository
     return this.surveys;
   }
 
-  getSurvey(id: number): Survey
+  getSurvey(id: string): Survey
   {
-    return this.surveys.find(s => id === s._id);
+    console.log(id);
+    console.log(this.surveys);
+    console.log(this.surveys.find(s => id == s._id));
+    return this.surveys.find(s => id == s._id);
+  }
+
+  addSurvey(survey: Survey): void
+  {
+    this.surveys.push(survey);
+  }
+
+  deleteSurvey(id: string): void
+  {
+    const foundIndex = this.surveys.findIndex(s => id === s._id);
+    this.surveys.splice(foundIndex, 1);
   }
 
 }

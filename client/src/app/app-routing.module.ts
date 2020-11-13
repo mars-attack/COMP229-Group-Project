@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { CreateSurveyComponent } from './survey-library/create-survey/create-survey.component';
+import { EditSurveyComponent } from './survey-library/edit-survey/edit-survey.component';
+import { SurveyManagementComponent } from './survey-library/survey-management/survey-management.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
-  {path: 'create', component: CreateSurveyComponent, data: {title: 'Create Survey'}},
+  {path: 'surveys', component: SurveyManagementComponent, data: {title: 'Surveys'}},
+  {path: 'surveys/edit/:id', component: EditSurveyComponent, data: {title: 'Edit Survey'}},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
