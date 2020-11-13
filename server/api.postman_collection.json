@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "eb8c7ce2-ad2a-4708-998a-e991058e54a7",
+		"name": "Survey Site",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Surveys",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/surveys",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"surveys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Survey",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/surveys/5fad500f3a24c13beed9d118",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"surveys",
+						"5fad500f3a24c13beed9d118"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Survey",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fec12f4f-b4e0-4b30-8464-30ef7e287baa",
+						"exec": [
+							"const dateNow = new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\":\"Survey 1234\",\r\n  \"dateCreated\": \"{{$isoTimestamp}}\",\r\n  \"responses\":7,\r\n  \"questions\":[\r\n    {\r\n      \"title\":\"Q1: T/F the room is hot\",\r\n      \"options\":[{\"details\":\"True\",\"count\":4},{\"details\":\"False\",\"count\":3}]\r\n    },\r\n    {\r\n      \"title\":\"Q2: T/F the room is hot\",\r\n      \"options\":[{\"details\":\"True\",\"count\":4},{\"details\":\"False\",\"count\":3}]\r\n    },\r\n    {\r\n      \"title\":\"Q3: T/F the room is hot\",\r\n      \"options\":[{\"details\":\"True\",\"count\":4},{\"details\":\"False\",\"count\":3}]\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/surveys/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"surveys",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Survey",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "839b90c8-b0e0-47da-a3ee-b60ef6d741c4",
+						"exec": [
+							"const dateNow = new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\":\"Survey modified\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/surveys/update/5fae01475bda27ec84a685fe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"surveys",
+						"update",
+						"5fae01475bda27ec84a685fe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Survey",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6704b1e8-7db5-40d7-8b61-bc45e1ea79aa",
+						"exec": [
+							"const dateNow = new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/surveys/delete/5fae01475bda27ec84a685fe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"surveys",
+						"delete",
+						"5fae01475bda27ec84a685fe"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

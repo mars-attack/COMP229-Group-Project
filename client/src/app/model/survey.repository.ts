@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
-import { StaticDataSource } from './static.datasource';
+import { RestDataSource } from './rest.datasouce';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SurveyRepository
 {
   private surveys: Survey[] = [];
 
-  constructor(private dataSource: StaticDataSource)
+  constructor(private restDataSource: RestDataSource, private router: Router)
   {
-    dataSource.getSurveys().subscribe(data => {
-      this.surveys = data;
-    });
+    this.initializeSurveys();
   }
 
   getSurveys(): Survey[]
@@ -21,21 +20,57 @@ export class SurveyRepository
 
   getSurvey(id: string): Survey
   {
-    console.log(id);
-    console.log(this.surveys);
-    console.log(this.surveys.find(s => id == s._id));
     return this.surveys.find(s => id == s._id);
+    // this.restDataSource.addSurvey(survey)
   }
 
   addSurvey(survey: Survey): void
   {
-    this.surveys.push(survey);
+    this.restDataSource.addSurvey(survey).subscribe(data => {
+      const addedSurvey = data.data as Survey;
+      const error = data.error;
+
+      if (error) {
+        // TODO: enhancement - show error in ui
+      } else if (addedSurvey) {
+        // TODO: enhancement - show success toast
+
+        this.initializeSurveys(); // reload surveys
+      }
+    });
   }
 
   deleteSurvey(id: string): void
   {
-    const foundIndex = this.surveys.findIndex(s => id === s._id);
-    this.surveys.splice(foundIndex, 1);
+    this.restDataSource.deleteSurvey(id).subscribe(data => {
+      const error = data.error;
+
+      if (error) {
+        // TODO: enhancement - show error in ui
+      } else {
+        this.initializeSurveys(); // reload surveys
+      }
+    });
+  }
+
+  updateSurvey(survey: Survey): void
+  {
+    this.restDataSource.updateSurvey(survey).subscribe(data => {
+      const error = data.error;
+
+      if (error) {
+        // TODO: enhancement - show error in ui
+      } else {
+        this.router.navigateByUrl('/surveys');
+      }
+    });
+  }
+
+  initializeSurveys(): void {
+    this.restDataSource.getSurveys().subscribe(data => {
+      this.surveys = data.data;
+      // TODO: sort by decending dateCreated
+    });
   }
 
 }

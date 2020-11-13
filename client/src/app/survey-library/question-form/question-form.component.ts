@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Question } from 'src/app/interfaces';
 
 @Component({
@@ -8,6 +8,7 @@ import { Question } from 'src/app/interfaces';
 })
 export class QuestionFormComponent implements OnInit, OnChanges {
   @Input() question: Question;
+  @Output() save = new EventEmitter();
   public placeholderQuestion: Question;
   constructor() { }
 
@@ -15,6 +16,7 @@ export class QuestionFormComponent implements OnInit, OnChanges {
     this.initializePlaceholderQuestion();
   }
 
+  // lifecycle hook: executes whenever one of our input prperties have changed
   ngOnChanges(changes: SimpleChanges): void {
     if (this.question) {
       this.placeholderQuestion = this.question;
@@ -36,11 +38,9 @@ export class QuestionFormComponent implements OnInit, OnChanges {
 
   // save edits
   onSave(): void {
-    // TODO: do api to update
-    console.log(this.placeholderQuestion);
-
+    // to reset the parent's selectedQuestion (to edit)
+    this.save.emit(this.placeholderQuestion);
     // reset form input
-    this.question = undefined;
     this.initializePlaceholderQuestion();
   }
 

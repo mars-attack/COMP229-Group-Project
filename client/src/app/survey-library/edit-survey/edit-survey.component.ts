@@ -29,4 +29,17 @@ export class EditSurveyComponent implements OnInit {
   onQuestionEdit(question: Question): void {
     this.selectedQuestion = question;
   }
+
+  onQuestionSave(question: Question): void {
+    if (this.selectedQuestion) {
+      this.selectedQuestion = question;
+    } else {
+      this.survey.questions.push(question);
+    }
+    this.selectedQuestion = undefined;
+  }
+
+  onSurveySave(): void {
+    this.surveyRepository.updateSurvey(this.survey);
+  }
 }

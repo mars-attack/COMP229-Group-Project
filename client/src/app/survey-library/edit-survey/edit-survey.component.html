@@ -1,13 +1,19 @@
-<div class="container">
+<div class="container mb-5">
 
   <div class="jumbotron">
-    <h1>Create questions</h1>
+    <h1>Edit Survey</h1>
   </div>
   <h4>
-    <span class="mr-2" contenteditable="true" [textContent]="survey.name"
+    <span class="mr-2" contenteditable="true" [textContent]="survey?.name"
       (input)="survey.name=$event.target.textContent"></span>
     <i class="fas fa-pencil-alt"></i>
   </h4>
-  <app-questions [questions]="survey.questions" (edit)="onQuestionEdit($event)"></app-questions>
-  <app-question-form [question]="selectedQuestion"></app-question-form>
+  <app-questions [questions]="survey?.questions" (edit)="onQuestionEdit($event)"></app-questions>
+  <app-question-form (save)="onQuestionSave($event)" [question]="selectedQuestion"></app-question-form>
+
+  <div class="mt-4 d-flex justify-content-center">
+    <button (click)="onSurveySave()" class="btn btn-success btn-sm m-1 p-2">
+      <i class="far fa-lg fa-save"></i> SAVE SURVEY
+    </button>
+  </div>
 </div>

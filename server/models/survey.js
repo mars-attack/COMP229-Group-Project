@@ -6,10 +6,14 @@ let surveyModel = mongoose.Schema({
     name: String,
     dateCreated:
     {
-      type: Date,
-      default: Date.now()
+      type: String,
+      default: new Date().toISOString()
     },
-    responses: Number,
+    responses:
+    {
+      type: Number,
+      default: 0
+    },
     questions: [{
       title: String,
       options: [{

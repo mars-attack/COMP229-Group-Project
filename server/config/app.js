@@ -3,6 +3,7 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let cors = require('cors');
 
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
@@ -22,15 +23,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
-//* database setup
+app.use(cors());
+
+// database setup
 
 let mongoose = require('mongoose');
 let DB = require('./db');
 
-//* point mongoose to the db URI
+// point mongoose to the db URI
 mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true} ); // connects to MongoDB Atlas
 
-//* configuring connection listeners
+// configuring connection listeners
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error: ')); // if there is a connection error, this will send an error message to the console
 mongoDB.once('open', ()=> {

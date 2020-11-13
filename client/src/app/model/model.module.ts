@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { SurveyRepository } from './survey.repository';
-import { StaticDataSource } from './static.datasource';
 import { HttpClientModule } from '@angular/common/http';
 import { RestDataSource } from './rest.datasouce';
 
@@ -10,8 +9,8 @@ import { RestDataSource } from './rest.datasouce';
   ],
   providers: [
     SurveyRepository,
-    StaticDataSource,
-    {provide: StaticDataSource, useClass: RestDataSource}]
+    RestDataSource
+  ]
 })
 export class ModelModule
 {
