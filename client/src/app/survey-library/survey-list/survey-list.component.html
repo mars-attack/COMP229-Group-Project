@@ -12,15 +12,15 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let survey of surveys">
-      <th scope="row">{{ survey._id }}</th>
+    <tr *ngFor="let survey of surveys; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
       <td>{{ survey.name }}</td>
-      <td>{{ survey.dateCreated }}</td>
+      <td>{{ survey.dateCreated.substring(0, 10) }}</td>
       <td>{{ survey.responses }}</td>
       <td>
-        <a href="#" class="btn btn-success btn-sm">
+        <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-success btn-sm">
           Take Survey
-        </a>
+        </button>
       </td>
     </tr>
   </tbody>

@@ -16,6 +16,7 @@ export class QuestionFormComponent implements OnInit, OnChanges {
     this.initializePlaceholderQuestion();
   }
 
+  // lifecycle hook: executes whenever one of our input prperties have changed
   ngOnChanges(changes: SimpleChanges): void {
     if (this.question) {
       this.placeholderQuestion = this.question;

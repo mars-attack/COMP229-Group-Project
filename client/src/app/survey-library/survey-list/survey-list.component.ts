@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Survey } from '../model/survey.model';
-import { SurveyRepository } from '../model/survey.repository';
+import { Survey } from '../../model/survey.model';
+import { SurveyRepository } from '../../model/survey.repository';
+
 
 
 @Component({
-  selector: 'app-survey-library',
-  templateUrl: './survey-library.component.html',
-  styleUrls: ['./survey-library.component.css']
+  selector: 'app-survey-list',
+  templateUrl: './survey-list.component.html',
+  styleUrls: ['./survey-list.component.css']
 })
-export class SurveyLibraryComponent implements OnInit {
+export class SurveyListComponent implements OnInit {
 
   public surveysPerPage = 4;
   public selctedPage = 1;
