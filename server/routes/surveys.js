@@ -12,13 +12,13 @@ router.get('/', surveyController.getSurveys);
 router.get('/:id', surveyController.getSurvey);
 
 //* POST add survey
-router.post('/add',surveyController.addSurveys);
+router.post('/add',surveyController.addSurvey);
 
 //* POST update survey by id 
-router.post('/update/:id', surveyController.updateSurveys);
+router.post('/update/:id', surveyController.updateSurvey);
 
 //* POST delete survey by id
-router.post('/delete/:id', surveyController.deleteSurveys);
+router.post('/delete/:id', surveyController.deleteSurvey);
 
 
 module.exports = router;

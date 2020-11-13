@@ -9,6 +9,7 @@ import { QuestionFormComponent } from './question-form/question-form.component';
 import { EditSurveyComponent } from './edit-survey/edit-survey.component';
 import { SurveyManagementComponent } from './survey-management/survey-management.component';
 import { RouterModule } from '@angular/router';
+import { TakeSurveyComponent } from './take-survey/take-survey.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     QuestionsComponent,
     QuestionFormComponent,
     EditSurveyComponent,
-    SurveyManagementComponent
+    SurveyManagementComponent,
+    TakeSurveyComponent
   ],
   exports: [
     SurveyLibraryComponent,

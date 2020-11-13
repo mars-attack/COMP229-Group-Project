@@ -7,6 +7,11 @@ import { Survey } from './survey.model';
 const PROTOCOL = 'http';
 const  PORT = 3000;
 
+export interface IResponse {
+  error: string | undefined | null;
+  data: any;
+}
+
 @Injectable()
 export class RestDataSource
 {
@@ -16,9 +21,28 @@ export class RestDataSource
     this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
-  getSurveys(): Observable<Survey[]>
+  getSurveys(): Observable<IResponse>
   {
-    console.log('get survey', this.baseUrl);
-    return this.http.get<Survey[]>(this.baseUrl + 'home');
+    return this.http.get<IResponse>(this.baseUrl + 'surveys');
+  }
+
+  getSurvey(id: string): Observable<IResponse>
+  {
+    return this.http.get<IResponse>(this.baseUrl + `surveys/${id}`);
+  }
+
+  addSurvey(survey: Survey): Observable<IResponse>
+  {
+    return this.http.post<IResponse>(this.baseUrl + 'surveys/add', survey);
+  }
+
+  deleteSurvey(id: string): Observable<IResponse>
+  {
+    return this.http.post<IResponse>(this.baseUrl + `surveys/delete/${id}`, {});
+  }
+
+  updateSurvey(survey: Survey): Observable<IResponse>
+  {
+    return this.http.post<IResponse>(this.baseUrl + `surveys/update/${survey._id}`, survey);
   }
 }

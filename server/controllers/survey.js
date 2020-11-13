@@ -8,7 +8,7 @@ module.exports.getSurveys = (req, res, next) => {
     } else {
       res.json({
         error: err,
-        surveys: surveys
+        data: surveys
       });
     }
   });
@@ -24,22 +24,22 @@ module.exports.getSurvey = (req, res, next) => {
     } else {
       res.json({
         error: err,
-        survey: foundSurvey
+        data: foundSurvey
       });
     }
   });
 };
 
 
-module.exports.addSurveys = (req, res, next) => {
-  
+module.exports.addSurvey = (req, res, next) => {
   let newSurvey = Survey({      
       "name":req.body.name,
       "dateCreated":req.body.dateCreated,
       "responses":req.body.responses,
       "questions":req.body.questions
   });  
-  Survey.create((newSurvey, (err) =>{
+
+  Survey.create(newSurvey, (err, survey) => {
     if(err)
     {
       console.error(err);
@@ -48,17 +48,16 @@ module.exports.addSurveys = (req, res, next) => {
     else
     {
       res.json({
-        error: err        
-      });
-      
+        error: err,
+        data: survey
+      });      
     }
-  }
-  ));
+  });
 }
 
-module.exports.updateSurveys = (req, res, next) => {
+module.exports.updateSurvey = (req, res, next) => {
   let id = req.params.id
-  let updateSurveys = Survey({
+  let survey = Survey({
     "_id": id,
     "name": req.body.name,
     "dateCreated":req.body.dateCreated,
@@ -66,7 +65,7 @@ module.exports.updateSurveys = (req, res, next) => {
     "questions":req.body.questions
   })
 
-  Survey.updateOne({_id: id}, updateSurveys, (err) => {
+  Survey.updateOne({_id: id}, survey, (err) => {
     if (err) {
       console.error(err);
       res.end(err);
@@ -79,7 +78,7 @@ module.exports.updateSurveys = (req, res, next) => {
     });
 }
 
-module.exports.deleteSurveys = (req, res, next) => {
+module.exports.deleteSurvey = (req, res, next) => {
   let id = req.params.id;
 
   Survey.remove({_id: id}, (err)=> {
