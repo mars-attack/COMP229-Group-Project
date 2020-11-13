@@ -6,6 +6,7 @@ let logger = require('morgan');
 
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
+let surveysRouter = require('../routes/surveys');
 
 let app = express();
 
@@ -21,8 +22,25 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
+//* database setup
+
+let mongoose = require('mongoose');
+let DB = require('./db');
+
+//* point mongoose to the db URI
+mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true} ); // connects to MongoDB Atlas
+
+//* configuring connection listeners
+let mongoDB = mongoose.connection;
+mongoDB.on('error', console.error.bind(console, 'Connection Error: ')); // if there is a connection error, this will send an error message to the console
+mongoDB.once('open', ()=> {
+  console.log('Connected to MongoDB...');
+})
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/surveys', surveysRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -150,6 +150,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "survey-site"
 }
