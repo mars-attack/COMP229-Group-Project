@@ -36,7 +36,7 @@ export class QuestionFormComponent implements OnInit, OnChanges {
     }
   }
 
-  // save edits
+  // save edits to questions
   onSave(): void {
     // to reset the parent's selectedQuestion (to edit)
     this.save.emit(this.placeholderQuestion);

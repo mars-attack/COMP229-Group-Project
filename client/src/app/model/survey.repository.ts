@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
-import { RestDataSource } from './rest.datasouce';
+import { IResponse, RestDataSource } from './rest.datasouce';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SurveyRepository
@@ -53,23 +54,18 @@ export class SurveyRepository
     });
   }
 
-  updateSurvey(survey: Survey): void
+  updateSurvey(survey: Survey): Observable<IResponse>
   {
-    this.restDataSource.updateSurvey(survey).subscribe(data => {
-      const error = data.error;
-
-      if (error) {
-        // TODO: enhancement - show error in ui
-      } else {
-        this.router.navigateByUrl('/surveys');
-      }
-    });
+    return this.restDataSource.updateSurvey(survey);
   }
 
   initializeSurveys(): void {
     this.restDataSource.getSurveys().subscribe(data => {
-      this.surveys = data.data;
-      // TODO: sort by decending dateCreated
+      // sort by dateCreated desc
+      const survey = data.data.slice().sort((a, b) => {
+        return (new Date(b.dateCreated) as any) - ( new Date(a.dateCreated) as any);
+      });
+      this.surveys = survey;
     });
   }
 

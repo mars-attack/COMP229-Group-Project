@@ -20,7 +20,8 @@
     <table class="table">
       <thead class="col-9">
         <tr>
-          <th scope="col" style="width:70%">Survey Name</th>
+          <th scope="col" style="width:50%">Survey Name</th>
+          <th scope="col">CREATED</th>
           <th scope="col">EDIT</th>
           <th scope="col">DELETE</th>
           <th scope="col">RESULTS</th>
@@ -34,6 +35,7 @@
               {{ survey.name }}
             </div>
           </td>
+          <td>{{ survey.dateCreated.substring(0, 10) }}</td>
           <td>
             <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-success btn-sm">
               EDIT
@@ -45,7 +47,7 @@
             </button>
           </td>
           <td>
-            <button href="#" class="btn btn-info btn-sm">
+            <button routerLink="/surveys/results/{{survey._id}}" class="btn btn-info btn-sm">
               View Results
             </button>
           </td>

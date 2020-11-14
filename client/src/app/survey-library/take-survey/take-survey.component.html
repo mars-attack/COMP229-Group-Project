@@ -1,19 +1,22 @@
 <div class="container">
   <h1>{{survey?.name}}</h1>
   <form>
+    <!--Populating the page with questions-->
     <div class="bg-light shoddow rounded m-3" *ngFor="let question of survey?.questions; let questionIndex= index;">
       <h5>{{question.title}}</h5>
 
-      <div class="form-check" *ngFor="let option of question.options; let optionIndex= index; trackBy:customBTrackBy">
-        <!-- <input type="radio" class="form-check-input" name="'question' + questionIndex" value="true">
-        {{'question' + questionIndex}} -->
+      <!--Populating the page with options-->
+      <form class="form-check" *ngFor="let option of question.options; let optionIndex= index;">
+        <!--handles user input changes-->
+        <input type="radio" id="{{'question' + questionIndex +'option' + questionIndex}}" class="form-check-input"
+          name="{{'question' + questionIndex}}" value="{{option._id}}" [checked]="question.chosenOption === option._id"
+          (change)="onSelectOption(questionIndex, option._id)" />
         <label class="form-check-label" for="materialUnchecked">{{option.details}}</label>
-      </div>
-      <span>{{question.choosenOption}}</span>
+      </form>
+      <span>{{option}}</span>
     </div>
 
-
-    <button class="btn btn-success btn-sm m-1 p-2" (click)="onSurveySave()">
+    <button class="btn btn-success btn-sm m-1 p-2" (click)="onSurveySave($event)">
       SUBMIT
     </button>
   </form>

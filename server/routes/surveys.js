@@ -6,8 +6,6 @@ let surveyController = require('../controllers/survey');
 // GET List of surveys
 router.get('/', surveyController.getSurveys);
 
-// TODOS:
-
 //* GET survey by id
 router.get('/:id', surveyController.getSurvey);
 
