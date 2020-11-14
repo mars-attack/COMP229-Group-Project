@@ -9,6 +9,5 @@ export class Survey
       public dateCreated?: string,
       public responses?: number,
       public questions?: Question[]
-
   ){}
 }

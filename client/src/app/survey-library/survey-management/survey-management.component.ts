@@ -30,13 +30,8 @@ export class SurveyManagementComponent implements OnInit {
     this.repository.deleteSurvey(id);
   }
 
-  onEdit(survey: Survey): void {
-
-  }
-
   initializeNewSurvey(): void {
     this.newSurvey = {
-      _id: new Date().valueOf().toString(), // remove when hooking up backend
       name: ''
     };
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/interfaces';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
@@ -12,6 +12,7 @@ import { SurveyRepository } from 'src/app/model/survey.repository';
 export class EditSurveyComponent implements OnInit {
   public selectedQuestion: Question;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private surveyRepository: SurveyRepository
   ) {}
@@ -19,7 +20,6 @@ export class EditSurveyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // persist data on refresh
   get survey(): Survey
   {
     const id = this.route.snapshot.params.id;
@@ -31,6 +31,7 @@ export class EditSurveyComponent implements OnInit {
   }
 
   onQuestionSave(question: Question): void {
+    // check if edit of add
     if (this.selectedQuestion) {
       this.selectedQuestion = question;
     } else {
@@ -40,6 +41,16 @@ export class EditSurveyComponent implements OnInit {
   }
 
   onSurveySave(): void {
-    this.surveyRepository.updateSurvey(this.survey);
+    console.log(this.survey);
+    this.surveyRepository.updateSurvey(this.survey).subscribe(data => {
+      const error = data.error;
+
+      if (error) {
+        // TODO: enhancement - show error in ui
+      } else {
+        this.surveyRepository.initializeSurveys();
+        this.router.navigateByUrl('/surveys');
+      }
+    });
   }
 }

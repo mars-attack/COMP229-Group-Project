@@ -18,7 +18,10 @@ let surveyModel = mongoose.Schema({
       title: String,
       options: [{
         details: String,
-        count: Number
+        count:{ 
+          type: Number, 
+          default: 0
+        }
       }]
     }]
 },
