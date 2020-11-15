@@ -6,16 +6,16 @@ let surveyController = require('../controllers/survey');
 // GET List of surveys
 router.get('/', surveyController.getSurveys);
 
-//* GET survey by id
+// GET survey by id
 router.get('/:id', surveyController.getSurvey);
 
-//* POST add survey
+// POST add survey
 router.post('/add',surveyController.addSurvey);
 
-//* POST update survey by id 
+// POST update survey by id 
 router.post('/update/:id', surveyController.updateSurvey);
 
-//* POST delete survey by id
+// POST delete survey by id
 router.post('/delete/:id', surveyController.deleteSurvey);
 
 

@@ -31,7 +31,7 @@ export class EditSurveyComponent implements OnInit {
   }
 
   onQuestionSave(question: Question): void {
-    // check if edit of add
+    // check if edit or add
     if (this.selectedQuestion) {
       this.selectedQuestion = question;
     } else {

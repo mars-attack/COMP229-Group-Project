@@ -22,7 +22,6 @@ export class SurveyRepository
   getSurvey(id: string): Survey
   {
     return this.surveys.find(s => id == s._id);
-    // this.restDataSource.addSurvey(survey)
   }
 
   addSurvey(survey: Survey): void
