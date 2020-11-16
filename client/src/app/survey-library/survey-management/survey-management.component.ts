@@ -14,6 +14,7 @@ export class SurveyManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeNewSurvey();
+    this.repository.initializeSurveys();
   }
 
   get surveys(): Survey[]

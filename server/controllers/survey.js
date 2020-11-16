@@ -35,6 +35,8 @@ module.exports.addSurvey = (req, res, next) => {
   let newSurvey = Survey({      
       "name":req.body.name,
       "dateCreated":req.body.dateCreated,
+      "dateActive":req.body.dateActive,
+      "dateExpire":req.body.dateExpire,
       "responses":req.body.responses,
       "questions":req.body.questions
   });  
@@ -61,6 +63,8 @@ module.exports.updateSurvey = (req, res, next) => {
     "_id": id,
     "name": req.body.name,
     "dateCreated":req.body.dateCreated,
+    "dateActive":req.body.dateActive,
+    "dateExpire":req.body.dateExpire,
     "responses":req.body.responses,
     "questions":req.body.questions
   })

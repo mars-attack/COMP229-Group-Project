@@ -1,3 +1,8 @@
+import {
+  FlashMessagesModule,
+  FlashMessagesService
+} from 'angular2-flash-messages';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -18,9 +23,10 @@ import { SurveyLibraryModule } from './survey-library/survey-library.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SurveyLibraryModule
+    SurveyLibraryModule,
+    FlashMessagesModule.forRoot()
   ],
-  providers: [],
+  providers: [FlashMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

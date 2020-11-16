@@ -26,15 +26,12 @@ export class TakeSurveyComponent implements OnInit {
   {
     const id = this.route.snapshot.params.id;
     const survey = this.surveyRepository.getSurvey(id);
-    console.log(survey);
     return survey;
   }
 
   onSurveySave(event: Event): void {
     event.preventDefault();
-    console.log(this.survey);
     this.survey.responses++;
-
 
     // checking the selected option and updating the options count
     for (let index = 0; index <=  this.survey.questions.length - 1; index++)
@@ -46,7 +43,6 @@ export class TakeSurveyComponent implements OnInit {
       {
         if (question.chosenOption === question.options[j]._id)
         {
-          // console.log(question.options[j].count);
           question.options[j].count++;
         }
       }
@@ -68,7 +64,6 @@ export class TakeSurveyComponent implements OnInit {
   onSelectOption(questionIndex: number, optionId: string): void {
     const foundQuestion = this.survey.questions[questionIndex];
     foundQuestion.chosenOption = optionId;
-    console.log(foundQuestion);
   }
 
 }

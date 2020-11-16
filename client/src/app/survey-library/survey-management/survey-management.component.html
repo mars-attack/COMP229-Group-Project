@@ -15,14 +15,16 @@
     </div>
   </div>
 
-  <!-- Table for all surveys-->
+  <!-- Table displaying all surveys-->
   <div class="mt-5">
     <h4>All Surveys</h4>
     <table class="table">
       <thead class="col-9">
         <tr>
-          <th scope="col" style="width:50%">Survey Name</th>
+          <th scope="col" style="width:40%">Survey Name</th>
           <th scope="col">CREATED</th>
+          <th scope="col">ACTIVE DATE</th>
+          <th scope="col">EXPIRE DATE</th>
           <th scope="col">EDIT</th>
           <th scope="col">DELETE</th>
           <th scope="col">RESULTS</th>
@@ -37,6 +39,9 @@
             </div>
           </td>
           <td>{{ survey.dateCreated.substring(0, 10) }}</td>
+          <td>{{ survey.dateActive.substring(0, 10) }}</td>
+          <!-- TODO Change once set deactive date-->
+          <td>{{ survey.dateExpire? survey.dateExpire.substring(0, 10) : null}}</td>
           <td>
             <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-success btn-sm">
               EDIT

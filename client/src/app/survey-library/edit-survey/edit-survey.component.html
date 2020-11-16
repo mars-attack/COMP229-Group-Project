@@ -3,11 +3,23 @@
   <div class="jumbotron">
     <h1>Edit Survey</h1>
   </div>
-  <h4>
-    <span class="mr-2" contenteditable="true" [textContent]="survey?.name"
-      (input)="survey.name=$event.target.textContent"></span>
-    <i class="fas fa-pencil-alt"></i>
-  </h4>
+  <div class="row mb-2">
+    <h4 class="col-md-5 col-sm-12">
+      <span class="mr-2" contenteditable="true" [textContent]="survey?.name"
+        (input)="survey.name=$event.target.textContent"></span>
+      <i class="fas fa-pencil-alt"></i>
+    </h4>
+    <!-- Feilds for date active and expire -->
+    <div class="col-md-3 col-sm-12">
+      <label class="h4 pr-2" for="dateActive">Active: </label>
+      <input type="date" id="dateActive" name="dateActive" [(ngModel)]="survey.dateActive">
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <label class="h4 pr-2" for="dateExpire">Expires: </label>
+      <input type="date" id="dateExpire" name="dateExpire" [(ngModel)]="survey.dateExpire">
+    </div>
+  </div>
+
   <app-questions [questions]="survey?.questions" (edit)="onQuestionEdit($event)"></app-questions>
   <app-question-form (save)="onQuestionSave($event)" [question]="selectedQuestion"></app-question-form>
 
