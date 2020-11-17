@@ -14,6 +14,7 @@ export class SurveyListComponent implements OnInit {
   public surveysPerPage = 4;
   public selctedPage = 1;
 
+
   constructor(private repository: SurveyRepository) { }
 
   ngOnInit(): void {
@@ -44,5 +45,14 @@ export class SurveyListComponent implements OnInit {
       .getSurveys().length / this.surveysPerPage);
   }
 
+  // check if survey is active
 
+  isActive(survey: Survey): boolean {
+    if (new Date(survey.dateActive).getTime() <= Date.now() && new Date(survey.dateExpire).getTime())
+    {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

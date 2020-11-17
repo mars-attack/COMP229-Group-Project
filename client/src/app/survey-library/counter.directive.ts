@@ -6,7 +6,9 @@ import { Directive, ViewContainerRef, TemplateRef, Input, Attribute, SimpleChang
 })
 export class CounterDirective implements OnChanges
 {
-  constructor(private viewContainer: ViewContainerRef, private template: TemplateRef<any>) {}
+  constructor(
+    private viewContainer: ViewContainerRef,
+    private template: TemplateRef<any>) { }
 
   @Input('counterOf') counter: number;
 

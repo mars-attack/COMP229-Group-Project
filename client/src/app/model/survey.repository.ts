@@ -59,13 +59,15 @@ export class SurveyRepository
   }
 
   initializeSurveys(): void {
-    this.restDataSource.getSurveys().subscribe(data => {
-      // sort by dateCreated desc
-      const survey = data.data.slice().sort((a, b) => {
-        return (new Date(b.dateCreated) as any) - ( new Date(a.dateCreated) as any);
-      });
-      this.surveys = survey;
-    });
+    this.restDataSource.getSurveys().subscribe(data => { this.surveys = data.data });
+
+    // this.restDataSource.getSurveys().subscribe(data => {
+    //   // sort by dateCreated desc
+    //   const survey = data.data.slice().sort((a, b) => {
+    //     return (new Date(b.dateCreated) as any) - ( new Date(a.dateCreated) as any);
+    //   });
+    //   this.surveys = survey;
+    // });
   }
 
 }

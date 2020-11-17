@@ -11,7 +11,7 @@ module.exports.getSurveys = (req, res, next) => {
         data: surveys
       });
     }
-  });
+  }).sort({_id: -1});
 };
 
 module.exports.getSurvey = (req, res, next) => {

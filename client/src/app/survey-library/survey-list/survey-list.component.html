@@ -14,12 +14,12 @@
 
   <tbody>
     <tr *ngFor="let survey of surveys; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ survey.name }}</td>
+      <th scope="row" *ngIf="isActive(survey)">{{ i }}</th>
+      <td *ngIf="isActive(survey)">{{ survey.name }}</td>
       <!--Change once set deactive date-->
-      <td>{{ survey.dateExpire? survey.dateExpire.substring(0, 10) : null}}</td>
-      <td>{{ survey.responses }}</td>
-      <td>
+      <td *ngIf="isActive(survey)">{{ survey.dateExpire? survey.dateExpire.substring(0, 10) : null}}</td>
+      <td *ngIf="isActive(survey)">{{ survey.responses }}</td>
+      <td *ngIf="isActive(survey)">
         <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-success btn-sm">
           Take Survey
         </button>
@@ -29,7 +29,6 @@
 
   <div class="form-inline float-left mr-1">
     <select class="form-control" [value]='surveysPerPage' (change)="changePageSize($event.target.value)">
-      <option value="3">3 per page</option>
       <option value="4">4 per page</option>
       <option value="6">6 per page</option>
       <option value="8">8 per page</option>
