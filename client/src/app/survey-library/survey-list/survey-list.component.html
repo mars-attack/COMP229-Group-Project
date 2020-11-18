@@ -6,7 +6,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Survey Name</th>
-      <th scope="col">Expiry Date</th>
+      <th scope="col">Closing Date</th>
       <th scope="col">Responses</th>
       <th scope="col">Take Survey</th>
     </tr>
@@ -14,12 +14,12 @@
 
   <tbody>
     <tr *ngFor="let survey of surveys; let i = index">
-      <th scope="row" *ngIf="isActive(survey)">{{ i }}</th>
-      <td *ngIf="isActive(survey)">{{ survey.name }}</td>
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ survey.name }}</td>
       <!--Change once set deactive date-->
-      <td *ngIf="isActive(survey)">{{ survey.dateExpire? survey.dateExpire.substring(0, 10) : null}}</td>
-      <td *ngIf="isActive(survey)">{{ survey.responses }}</td>
-      <td *ngIf="isActive(survey)">
+      <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
+      <td>{{ survey.responses }}</td>
+      <td>
         <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-success btn-sm">
           Take Survey
         </button>

@@ -22,7 +22,6 @@
       <thead class="col-9">
         <tr>
           <th scope="col" style="width:40%">Survey Name</th>
-          <th scope="col">CREATED</th>
           <th scope="col">ACTIVE</th>
           <th scope="col">EXPIRE</th>
           <th scope="col">EDIT</th>
@@ -38,10 +37,8 @@
               {{ survey.name }}
             </div>
           </td>
-          <td>{{ survey.dateCreated.substring(0, 10) }}</td>
-          <td>{{ survey.dateActive.substring(0, 10) }}</td>
-          <!-- TODO Change once set deactive date-->
-          <td>{{ survey.dateExpire? survey.dateExpire.substring(0, 10) : null}}</td>
+          <td>{{ survey.dateActive | date: 'MMM d, y, h:mm a' }}</td>
+          <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
           <td>
             <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-success btn-sm">
               EDIT

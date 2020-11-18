@@ -12,7 +12,7 @@ import { SurveyRepository } from '../../model/survey.repository';
 export class SurveyListComponent implements OnInit {
 
   public surveysPerPage = 4;
-  public selctedPage = 1;
+  public selectedPage = 1;
 
 
   constructor(private repository: SurveyRepository) { }
@@ -24,13 +24,13 @@ export class SurveyListComponent implements OnInit {
   get surveys(): Survey[]
   {
     // for pagination
-    const pageIndex = (this.selctedPage - 1) * this.surveysPerPage;
-    return this.repository.getSurveys().slice(pageIndex, pageIndex + this.surveysPerPage);
+    const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
+    return this.repository.getActiveSurveys().slice(pageIndex, pageIndex + this.surveysPerPage);
   }
 
   changePage(newPage: number): void
   {
-    this.selctedPage = newPage;
+    this.selectedPage = newPage;
   }
 
   changePageSize(newSize: number): void
@@ -43,16 +43,5 @@ export class SurveyListComponent implements OnInit {
   {
     return Math.ceil(this.repository
       .getSurveys().length / this.surveysPerPage);
-  }
-
-  // check if survey is active
-
-  isActive(survey: Survey): boolean {
-    if (new Date(survey.dateActive).getTime() <= Date.now() && new Date(survey.dateExpire).getTime())
-    {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

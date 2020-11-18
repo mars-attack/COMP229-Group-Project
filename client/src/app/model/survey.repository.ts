@@ -14,6 +14,11 @@ export class SurveyRepository
     this.initializeSurveys();
   }
 
+  getActiveSurveys(): Survey[]
+  {
+    return this.surveys.filter((survey) => this.isActive(survey));
+  }
+
   getSurveys(): Survey[]
   {
     return this.surveys;
@@ -59,7 +64,7 @@ export class SurveyRepository
   }
 
   initializeSurveys(): void {
-    this.restDataSource.getSurveys().subscribe(data => { this.surveys = data.data });
+    this.restDataSource.getSurveys().subscribe(data => { this.surveys = data.data; });
 
     // this.restDataSource.getSurveys().subscribe(data => {
     //   // sort by dateCreated desc
@@ -68,6 +73,19 @@ export class SurveyRepository
     //   });
     //   this.surveys = survey;
     // });
+  }
+
+  isActive(survey: Survey): boolean {
+
+    const activeDate = new Date(survey.dateActive).getTime();
+    const expireDate = new Date(survey.dateExpire).getTime();
+
+    if (activeDate <= Date.now() &&  Date.now() <= expireDate)
+    {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
