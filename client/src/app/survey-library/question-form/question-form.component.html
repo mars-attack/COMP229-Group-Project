@@ -7,11 +7,15 @@
       <input class="form-control" placeholder="Enter question title" name="title"
         [(ngModel)]="placeholderQuestion.title">
     </div>
+
+    <!-- Looping to display options in form-->
     <div *ngFor="let option of placeholderQuestion.options; let i = index;" class="form-group">
       <label>Option Description</label>
       <div class="d-flex flex-row">
+        <!--icon for deleting otptions-->
         <i id="delete-option-button" class="fas fa-minus-circle p-1" (click)="onDelete(i)"
           *ngIf="placeholderQuestion.options.length > 1"></i>
+        <!--Options input-->
         <input class="form-control" placeholder="Enter option description" name="details + {{i}}"
           [(ngModel)]="option.details">
       </div>
