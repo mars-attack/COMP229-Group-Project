@@ -13,8 +13,6 @@ import { FooterComponent } from './partials/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SurveyLibraryModule } from './survey-library/survey-library.module';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -152,5 +152,8 @@
       }
     }
   },
-  "defaultProject": "survey-site"
+  "defaultProject": "survey-site",
+  "cli": {
+    "analytics": "bb717f47-67d9-40c1-83d4-8a90c7f56ad4"
+  }
 }
