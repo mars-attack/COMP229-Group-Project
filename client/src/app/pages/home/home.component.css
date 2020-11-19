@@ -1,0 +1,91 @@
+#background{
+  width: 100%;
+  height:570px;
+  overflow: hidden;
+  background-color: #2E61AE ;
+}
+#background2{
+  width: 100%;
+  height: auto;
+  margin-bottom: 50px;
+  background-color: #ffffff ;
+}
+#welcome_div_wrap {
+  width: 80%;
+  background-color: #2e61ae;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 1200px;
+}
+
+/*Welcome - text secion*/
+#text_div {
+  position: relative;
+  float: right;
+}
+#text_div_wrap {
+  float: left;
+  min-width: 600px;
+  width: 50%;
+  height: 550px;
+  background-color: #2e61ae;
+  color: white;
+  padding: 50px;
+  padding-left: 100px;
+}
+#text_top {
+  font-size: 50px;
+  font-weight: 500;
+}
+#text_subtitle_wrap {
+  margin-top: -30px;
+}
+#text_subtitle {
+  font-size: 35px;
+  font-weight: normal;
+}
+#text_content {
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 5px;
+}
+
+/*Welcome - pic secion*/
+#pic_div {
+  float: right;
+  min-width: 600px;
+  width: 50%;
+  background-color: #2e61ae;
+  height: 550px;
+  min-width: 600px;
+}
+#main_img {
+  padding-top: 70px;
+  margin-left: 5px;
+}
+
+/*button style*/
+#heroBtn {
+  background-color: #33cda8;
+  border-color: #33cda8;
+  padding-left: 35px;
+  padding-right: 35px;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+/*active Survey*/
+#active_wrap {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(255, 255, 255);
+  min-width: 1200px;
+}
+#table_wrap {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  min-width: 900px;
+  background-color: rgb(255, 255, 255);
+}
