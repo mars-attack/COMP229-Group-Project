@@ -12,25 +12,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
 
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/surveys">
-              Create Survey
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/surveys">
+            Create Survey
+          </a>
+        </li>
 
-          <!--Inpage hash tag link , coding part is not done yet-->
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['somepath']" fragment="table_wrap">
-              See Actvie Survey
-            </a>
-          </li>
+        <!--Inpage hash tag link , coding part is not done yet-->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['home']" pageScroll href="#table_wrapper" [pageScrollDuration]="200"
+            [pageScrollSpeed]="200" fragment="table_wrap">
+            See Active Surveys
+          </a>
+        </li>
 
-          <!--Inpage hash tag link , coding part is not done yet-->
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['somepath']" fragment="table_wrap">
-              Check Statistics
-            </a>
-          </li>
+        <!--Inpage hash tag link , coding part is not done yet-->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/surveys" fragment="table_wrap">
+            Check Statistics
+          </a>
+        </li>
 
       </ul>
     </div>
@@ -39,17 +40,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
 
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/resigter">
-              Register
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/resigter">
+            Register
+          </a>
+        </li>
 
-          <li class="nav-item">
-            <a routerLink="/login" class="btn btn-primary justify-content-center" id="heroBtn">
+        <li class="nav-item">
+          <a routerLink="/login" class="btn btn-primary justify-content-center" id="heroBtn">
             Login
-            </a>
-          </li>
+          </a>
+        </li>
 
       </ul>
     </div>
