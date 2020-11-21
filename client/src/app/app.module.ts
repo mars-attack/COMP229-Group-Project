@@ -12,6 +12,8 @@ import { HeaderComponent } from './partials/header/header.component';
 import { FooterComponent } from './partials/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SurveyLibraryModule } from './survey-library/survey-library.module';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { SurveyLibraryModule } from './survey-library/survey-library.module';
     BrowserModule,
     AppRoutingModule,
     SurveyLibraryModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    NgxPageScrollModule
   ],
   providers: [FlashMessagesService],
   bootstrap: [AppComponent]

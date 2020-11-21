@@ -7,14 +7,24 @@
       <h5>{{question.title}}</h5>
 
       <!--Populating the page with options-->
+
       <form class="form-check" *ngFor="let option of question.options; let optionIndex= index;">
-        <!--handles user input changes-->
-        <input type="radio" id="{{'question' + questionIndex +'option' + questionIndex}}" class="form-check-input"
-          name="{{'question' + questionIndex}}" value="{{option._id}}" [checked]="question.chosenOption === option._id"
-          (change)="onSelectOption(questionIndex, option._id)" />
-        <label class="form-check-label" for="materialUnchecked">{{option.details}}</label>
+
+        <!--Templete for radio button question-->
+        <div *ngIf="question.optionType === 'radio'">
+          <input type="radio" id="{{'question' + questionIndex +'option' + questionIndex}}" class="form-check-input"
+            name="{{'question' + questionIndex}}" value="{{option._id}}"
+            [checked]="checkIfSelected(question, option._id)" (change)="onSelectOption(question, option._id)" />
+          <label class="form-check-label" for="materialUnchecked">{{option.details}}</label>
+        </div>
+        <!--Templete for checkbox question-->
+        <div *ngIf="question.optionType === 'checkbox'">
+          <input type="checkbox" id="{{'question' + questionIndex +'option' + questionIndex}}" class="form-check-input"
+            name="{{'question' + questionIndex}}" value="{{option._id}}"
+            [checked]="checkIfSelected(question, option._id)" (change)="onSelectOption(question, option._id)" />
+          <label class="form-check-label" for="materialUnchecked">{{option.details}}</label>
+        </div>
       </form>
-      <span>{{option}}</span>
     </div>
 
     <button class="btn btn-success btn-sm m-1 p-2" (click)="onSurveySave($event)">

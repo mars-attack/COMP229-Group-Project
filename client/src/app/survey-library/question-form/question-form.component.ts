@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Question } from 'src/app/interfaces';
+import { Question, OptionType } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-question-form',
@@ -47,6 +47,7 @@ export class QuestionFormComponent implements OnInit, OnChanges {
   initializePlaceholderQuestion(): void {
     this.placeholderQuestion = {
       title: '',
+      optionType: OptionType.RADIO,
       options: [{
         details: ''
       }]

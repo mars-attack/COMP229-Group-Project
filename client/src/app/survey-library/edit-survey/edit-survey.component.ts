@@ -41,6 +41,13 @@ export class EditSurveyComponent implements OnInit {
     this.selectedQuestion = undefined;
   }
 
+  onCancelEdit(): void {
+    // TODO: Ask for confirmation
+    if (confirm('Are your sure?')) {
+      this.router.navigateByUrl('/surveys');
+    }
+  }
+
   onSurveySave(): void {
     if (this.validateDates() && this.validateQuestions()) {
       // if dates and number of questions are valid
@@ -66,7 +73,9 @@ export class EditSurveyComponent implements OnInit {
 
     if (activeDate < currentDate) {
       errorMessage = 'Error: Active date cannot be earlier than current date';
-    } else if (expireDate < activeDate) {
+    }
+
+    if (expireDate < activeDate) {
       errorMessage = 'Error: Expiry date cannot be before date active.';
     }
 
