@@ -14,7 +14,12 @@ let surveyModel = mongoose.Schema({
     type: String,
     default: new Date().toISOString()
   },
-  dateExpire: String
+  //***changed schema of dateExpire */
+  dateExpire: 
+  {
+    type: String,
+    default: ""
+  }
   ,
   responses:
   {
