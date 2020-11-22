@@ -5,6 +5,33 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let cors = require('cors');
 
+//***modules for authentication
+let session = require('express-session');
+let passport = require('passport');
+
+let passportJWT = require('passport-jwt');
+let JWTStrategy = passportJWT.Strategy;
+let ExtractJWT = passportJWT.ExtractJwt;
+
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
+
+// database setup
+
+let mongoose = require('mongoose');
+let DB = require('./db');
+
+// point mongoose to the db URI
+mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true} ); // connects to MongoDB Atlas
+
+// configuring connection listeners
+let mongoDB = mongoose.connection;
+mongoDB.on('error', console.error.bind(console, 'Connection Error: ')); // if there is a connection error, this will send an error message to the console
+mongoDB.once('open', ()=> {
+  console.log('Connected to MongoDB...');
+});
+
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
 let surveysRouter = require('../routes/surveys');
@@ -25,22 +52,50 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 app.use(cors());
 
-// database setup
+//***setup express session
+app.use(session({
+  secret: "SomeSecret",
+  saveUninitialized: false,
+  resave: false
+}));
 
-let mongoose = require('mongoose');
-let DB = require('./db');
+//***initialize flash
+app.use(flash());
 
-// point mongoose to the db URI
-mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true} ); // connects to MongoDB Atlas
+//***initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
-// configuring connection listeners
-let mongoDB = mongoose.connection;
-mongoDB.on('error', console.error.bind(console, 'Connection Error: ')); // if there is a connection error, this will send an error message to the console
-mongoDB.once('open', ()=> {
-  console.log('Connected to MongoDB...');
-})
+//***create a User Model Instance
+let userModel = require('../models/users');
+let User = userModel.User;
 
+//***implement a User Authentication Strategy
+passport.use(User.createStrategy());
 
+//serialize and deserialize the User info
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//***To verify whether the token is being sent by the user and is valid*/
+let jwtOptions = {};
+jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = DB.Secret;
+
+//***find user from database
+let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
+  User.findById(jwt_payload.id)
+  .then(user => {
+    return done(null, user);
+  })
+  .catch(err => {
+    return done(err, false);
+  })
+});
+
+passport.use(strategy);
+
+//routing
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/surveys', surveysRouter);
