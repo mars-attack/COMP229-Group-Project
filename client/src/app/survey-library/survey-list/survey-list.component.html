@@ -1,33 +1,74 @@
 <!--SurveyList Comoponent-->
-<h1>Active Surveys</h1>
 <!-- Table for active surveys with example data-->
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Survey Name</th>
-      <th scope="col">Closing Date</th>
-      <th scope="col">Responses</th>
-      <th scope="col">Take Survey</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <tr *ngFor="let survey of surveys; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ survey.name }}</td>
-      <!--Change once set deactive date-->
-      <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
-      <td>{{ survey.responses }}</td>
-      <td>
-        <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-success btn-sm">
+<!-- Note:Can't use flash-messages here becase welcome messgae blcok need to be at the top-->
+<span id="divider">&nbsp;<br></span>
+<span id="table_name">Active Surveys</span>
+
+<div id="table_wrapper">
+  <table>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+
+    <!--Title line-->
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+
+        <th>
+          Survey Name
+        </th>
+
+        <th>
+          Closing Date
+        </th>
+
+        <th>
+          Responses
+        </th>
+
+        <th>
           Take Survey
-        </button>
-      </td>
-    </tr>
-  </tbody>
+        </th>
 
-  <div class="form-inline float-left mr-1">
+        <th>
+          Statistics
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let survey of surveys; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td id="name">{{ survey.name }}</td>
+        <!--Change once set deactive date-->
+        <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
+        <td>{{ survey.responses }}</td>
+        <td>
+          <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-sm" id="take_survey_button">
+            Take Survey
+          </button>
+        </td>
+
+        <!--Check Statistics-->
+        <td>
+          <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-sm" id="statistics_button">
+            Statistics
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>&nbsp;
+
+  <div id="page_opt" class="form-inline float-left mr-1">
     <select class="form-control" [value]='surveysPerPage' (change)="changePageSize($event.target.value)">
       <option value="4">4 per page</option>
       <option value="6">6 per page</option>
@@ -35,10 +76,10 @@
     </select>
   </div>
 
-  <div class="btn-group float-right">
-    <button class="btn btn-outline-primary" *counter="let page of pageCount" (click)="changePage(page)"
+  <div class="btn-group float-right" id="not_selected">
+    <button class="btn" id="selected" *counter="let page of pageCount" (click)="changePage(page)"
       [class.active]="page===selectedPage">
       {{ page }}
     </button>
   </div>
-</table>
+</div>

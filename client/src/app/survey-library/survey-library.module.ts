@@ -13,6 +13,7 @@ import { TakeSurveyComponent } from './take-survey/take-survey.component';
 import { DisplayResultsComponent } from './display-results/display-results.component';
 
 
+
 @NgModule({
   imports: [
     ModelModule,
@@ -32,7 +33,7 @@ import { DisplayResultsComponent } from './display-results/display-results.compo
   ],
   exports: [
     SurveyListComponent,
-    CounterDirective,
+    CounterDirective
   ]
 })
 export class SurveyLibraryModule {}

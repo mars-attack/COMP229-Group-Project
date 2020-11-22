@@ -2,10 +2,19 @@
 <div class="bg=light rounded p-3 shadow">
   <form>
     <h4>{{question ? 'Update Question' : 'Add Question'}}</h4>
+
     <div class="form-group">
       <label>Question Title</label>
       <input class="form-control" placeholder="Enter question title" name="title"
         [(ngModel)]="placeholderQuestion.title">
+    </div>
+
+    <div class="form-group">
+      <label>Type</label>
+      <select name="optionType" [(ngModel)]="placeholderQuestion.optionType">
+        <option value="checkbox">Checkbox</option>
+        <option value="radio">Radio</option>
+      </select>
     </div>
 
     <!-- Looping to display options in form-->
