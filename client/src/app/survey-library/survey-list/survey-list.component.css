@@ -1,0 +1,156 @@
+#divider {
+  font-size: 20px;
+}
+#table_name {
+  font-size: 60px;
+  font-weight: 600;
+  padding-left: 60px;
+}
+
+#table_wrapper {
+  margin-top: 20px;
+}
+
+table {
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  border-spacing: 0;
+  border-collapse: collapse;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+th,
+td {
+  font-family: inherit;
+  font-size: 0.875em;
+  line-height: 1.45;
+  color: rgb(0, 0, 0);
+  vertical-align: middle;
+  text-align: left;
+  padding: 1em;
+}
+
+th {
+  font-weight: normal;
+  text-align: left;
+}
+
+colgroup:nth-child(1) {
+  height: 1%;
+  width: 5px;
+  font-size: 60px;
+  background-color: #f7f7fa;
+  border: 1px solid rgb(184, 184, 184);
+  text-align: left;
+}
+
+colgroup:nth-child(2) {
+  width: 40%;
+  border: 1px solid rgb(184, 184, 184);
+  text-align: left !important;
+}
+
+colgroup:nth-child(3) {
+  width: 35%;
+  border: 1px solid rgb(184, 184, 184);
+}
+
+colgroup:nth-child(4) {
+  width: 1%;
+  border: 1px solid rgb(184, 184, 184);
+}
+
+colgroup:nth-child(5) {
+  width: 17.5%;
+  border: 1px solid rgb(184, 184, 184);
+}
+
+colgroup:nth-child(6) {
+  width: 13.5%;
+  border: 1px solid rgb(184, 184, 184);
+}
+
+/* Tablehead */
+thead th {
+  background: #f7f7fa;
+  text-align: center;
+  position: relative;
+  border: 1px solid #ccc;
+  font-size: 20px;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+  height: 20px;
+}
+
+/* Tablebody */
+
+tbody th {
+  background: #fff;
+  border-left: 1px solid #ccc;
+}
+
+tbody th span {
+  font-weight: normal;
+  font-size: 87.5%;
+  color: #999;
+  display: block;
+}
+
+tbody td {
+  background: #fff;
+  text-align: center;
+}
+
+tbody tr:nth-child(even) th,
+tbody tr:nth-child(even) td {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-width: 1px 0 1px 1px;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0 none;
+}
+
+/*buttons*/
+#take_survey_button {
+  background-color: #2e61ae;
+  color: white;
+  font-size: 16px;
+}
+#statistics_button {
+  background-color: #ffa825;
+  color: black;
+  font-size: 16px;
+}
+
+#name {
+  text-align: left;
+}
+
+#selected {
+  border-radius: 15px;
+  margin-left: 10px;
+  color: #6e6e6e;
+  background-color: #f7f5f5;
+}
+
+#selected:active,
+#selected:focus {
+  border-radius: 15px;
+  margin-left: 10px;
+  color: #ffffff;
+  background-color: #33cda8;
+}
+
+.btn btn-outline-primary {
+  background-color: aquamarine !important;
+}
+
+#page_opt {
+  padding-left: 10px;
+}

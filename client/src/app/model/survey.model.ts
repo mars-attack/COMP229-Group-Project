@@ -7,6 +7,8 @@ export class Survey
       public _id?: string,
       public name?: string,
       public dateCreated?: string,
+      public dateActive?: string,
+      public dateExpire?: string,
       public responses?: number,
       public questions?: Question[]
   ){}

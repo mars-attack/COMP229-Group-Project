@@ -3,17 +3,32 @@
   <div class="jumbotron">
     <h1>Edit Survey</h1>
   </div>
-  <h4>
-    <span class="mr-2" contenteditable="true" [textContent]="survey?.name"
-      (input)="survey.name=$event.target.textContent"></span>
-    <i class="fas fa-pencil-alt"></i>
-  </h4>
+  <div class="row mb-2">
+    <h4 class="col-md-4 col-sm-12">
+      <span class="mr-2" contenteditable="true" [textContent]="survey?.name"
+        (input)="survey.name=$event.target.textContent"></span>
+      <i class="fas fa-pencil-alt"></i>
+    </h4>
+    <!-- Feilds for date active and expire -->
+    <div class="col-md-4 col-sm-12">
+      <label class="h4 pr-2" for="dateActive">Active: </label>
+      <input type="datetime-local" id="dateActive" name="dateActive" [(ngModel)]="survey.dateActive">
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <label class="h4 pr-2" for="dateExpire">Expires: </label>
+      <input type="datetime-local" id="dateExpire" name="dateExpire" [(ngModel)]="survey.dateExpire">
+    </div>
+  </div>
+
   <app-questions [questions]="survey?.questions" (edit)="onQuestionEdit($event)"></app-questions>
   <app-question-form (save)="onQuestionSave($event)" [question]="selectedQuestion"></app-question-form>
 
   <div class="mt-4 d-flex justify-content-center">
     <button (click)="onSurveySave()" class="btn btn-success btn-sm m-1 p-2">
       <i class="far fa-lg fa-save"></i> SAVE SURVEY
+    </button>
+    <button (click)="onCancelEdit()" class="btn btn-danger btn-sm m-1 p-2">
+      <i class="far fa-lg fa-save"></i> CANCEL
     </button>
   </div>
 </div>

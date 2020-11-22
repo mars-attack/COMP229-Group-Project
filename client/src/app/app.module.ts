@@ -1,3 +1,8 @@
+import {
+  FlashMessagesModule,
+  FlashMessagesService
+} from 'angular2-flash-messages';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +19,7 @@ export function jwtTokenGetter(): string
 {
   return localStorage.getItem('id_token');
 }
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 
 @NgModule({
@@ -21,21 +27,22 @@ export function jwtTokenGetter(): string
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SurveyLibraryModule,
+    FlashMessagesModule.forRoot(),
+    NgxPageScrollModule,
 
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtTokenGetter
       }
     })
-
   ],
-  providers: [],
+  providers: [FlashMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

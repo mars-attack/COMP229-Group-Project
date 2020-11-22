@@ -3,15 +3,23 @@ import { Survey } from './survey.model';
 import { IResponse, RestDataSource } from './rest.datasouce';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Injectable()
 export class SurveyRepository
 {
   private surveys: Survey[] = [];
 
-  constructor(private restDataSource: RestDataSource, private router: Router)
+  constructor(
+    private restDataSource: RestDataSource,
+    private flashMessage: FlashMessagesService)
   {
     this.initializeSurveys();
+  }
+
+  getActiveSurveys(): Survey[]
+  {
+    return this.surveys.filter((survey) => this.isActive(survey));
   }
 
   getSurveys(): Survey[]
@@ -21,7 +29,7 @@ export class SurveyRepository
 
   getSurvey(id: string): Survey
   {
-    return this.surveys.find(s => id == s._id);
+    return this.surveys.find(s => id === s._id);
   }
 
   addSurvey(survey: Survey): void
@@ -31,11 +39,12 @@ export class SurveyRepository
       const error = data.error;
 
       if (error) {
-        // TODO: enhancement - show error in ui
+        this.flashMessage.show('Error: failed to create survey, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
       } else if (addedSurvey) {
-        // TODO: enhancement - show success toast
 
+        this.flashMessage.show('Success! Survey created.', {cssClass: 'alert-success', timeOut: 6000});
         this.initializeSurveys(); // reload surveys
+        // this.router.navigateByUrl('/surveys/edit/' + addedSurvey._id);
       }
     });
   }
@@ -46,7 +55,7 @@ export class SurveyRepository
       const error = data.error;
 
       if (error) {
-        // TODO: enhancement - show error in ui
+        this.flashMessage.show('Error: failed to delete survey, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
       } else {
         this.initializeSurveys(); // reload surveys
       }
@@ -59,13 +68,28 @@ export class SurveyRepository
   }
 
   initializeSurveys(): void {
-    this.restDataSource.getSurveys().subscribe(data => {
-      // sort by dateCreated desc
-      const survey = data.data.slice().sort((a, b) => {
-        return (new Date(b.dateCreated) as any) - ( new Date(a.dateCreated) as any);
-      });
-      this.surveys = survey;
-    });
+    this.restDataSource.getSurveys().subscribe(data => { this.surveys = data.data; });
+
+    // this.restDataSource.getSurveys().subscribe(data => {
+    //   // sort by dateCreated desc
+    //   const survey = data.data.slice().sort((a, b) => {
+    //     return (new Date(b.dateCreated) as any) - ( new Date(a.dateCreated) as any);
+    //   });
+    //   this.surveys = survey;
+    // });
+  }
+
+  isActive(survey: Survey): boolean {
+
+    const activeDate = new Date(survey.dateActive).getTime();
+    const expireDate = new Date(survey.dateExpire).getTime();
+
+    if (activeDate <= Date.now() &&  Date.now() <= expireDate)
+    {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
