@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { NgModule } from '@angular/core';
 import { SurveyRepository } from './survey.repository';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,7 +10,8 @@ import { RestDataSource } from './rest.datasouce';
   ],
   providers: [
     SurveyRepository,
-    RestDataSource
+    RestDataSource,
+    AuthService
   ]
 })
 export class ModelModule
