@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit
         if (data.success)
         {
           this.auth.storeUserDate(data.token, data.user);
-          this.router.navigateByUrl('admin/main');
+          this.router.navigateByUrl('/surveys');
         }
         else
         {

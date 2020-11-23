@@ -1,3 +1,19 @@
-.container {
+/* .container {
   padding-bottom: 150px;
+} */
+
+#editSurveyContainer {
+  padding: 0;
+  margin: 0;
+  margin: auto;
+}
+
+#surveyName {
+  color: #2E61AE;
+}
+
+#editTitle {
+  height: 98px;
+  left: 15px;
+  top: 32px;
 }

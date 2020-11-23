@@ -4,6 +4,7 @@ import { IResponse, RestDataSource } from './rest.datasouce';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Injectable()
 export class SurveyRepository
@@ -39,10 +40,13 @@ export class SurveyRepository
       const error = data.error;
 
       if (error) {
-        this.flashMessage.show('Error: failed to create survey, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
+        Swal.fire({
+          title: 'Error',
+          text: 'Failed to create survey, please try again.',
+          icon: 'error'
+        });
+         // this.flashMessage.show('Error: failed to create survey, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
       } else if (addedSurvey) {
-
-        this.flashMessage.show('Success! Survey created.', {cssClass: 'alert-success', timeOut: 6000});
         this.initializeSurveys(); // reload surveys
         // this.router.navigateByUrl('/surveys/edit/' + addedSurvey._id);
       }
@@ -55,7 +59,13 @@ export class SurveyRepository
       const error = data.error;
 
       if (error) {
-        this.flashMessage.show('Error: failed to delete survey, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
+
+        Swal.fire({
+          title: 'Error',
+          text: 'Failed to delete survey, please try again.',
+          icon: 'error'
+        });
+       // this.flashMessage.show('Error: failed to delete survey, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
       } else {
         this.initializeSurveys(); // reload surveys
       }
