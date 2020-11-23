@@ -1,25 +1,27 @@
 import { AdminComponent } from './admin.component';
 import { FormsModule } from '@angular/forms';
-import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 import { CommonModule } from '@angular/common';
+import { RegisterComponent } from './register/register.component';
 
 
 const routing = RouterModule.forChild([
-  { path: 'auth', component: AuthComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'main', component: AdminComponent, canActivate: [AuthGuard],
     children: [
       { path: '**', redirectTo: 'surveys' },
     ]
   },
-  { path: '**', redirectTo: 'auth' },
+  { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: 'login' },
 ]);
 
 @NgModule({
   imports: [CommonModule, FormsModule, routing],
   providers: [AuthGuard],
-  declarations: [AuthComponent, AdminComponent]
+  declarations: [LoginComponent, AdminComponent, RegisterComponent]
 })
 export class AdminModule {}
