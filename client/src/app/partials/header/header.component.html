@@ -45,45 +45,50 @@
           <a class="nav-link" routerLink="/home"><i class="fas fa-lg fa-laptop-house"></i> Home </a>
         </li>
         <!-- CREATE SURVEYS -->
-        <li class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-link" routerLink="/surveys"><i class="fas fa-poll fa-lg"></i> Survey </a>
+        <li *ngIf='isLoggedIn()' class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" routerLink="/surveys"><i class="fas fa-poll fa-lg"></i> Manage Surveys </a>
         </li>
 
         <!-- LOGIN/LOGOUT -->
 
         <!-- Admin menu -->
-        <li *ngIf='isLoggedIn()' class="nav-item ml-5" [routerLinkActive]="['active']">
-          <a class="nav-link text-warning" routerLink="/admin/main"><i class="fas fa-lg fa-user-shield"></i> Admin </a>
+        <li *ngIf='isLoggedIn()' class="nav-item ml-4" [routerLinkActive]="['active']">
+          <a class="nav-link text-warning" routerLink="/admin/main"><i class="fas fa-lg fa-user-shield"></i>
+            {{ user.displayName }} </a>
         </li>
 
-        <!-- Display Name on navbar -->
+        <!-- Display Name on navbar
         <li *ngIf='isLoggedIn()' class="navbar-text text-success ml-5 mr-5 d-none d-lg-inline">
           <i class="fas fa-lg fa-user"></i> Welcome, {{ user.displayName }}
+        </li> -->
+
+
+        <!-- TODO: Change bellow after confirming nav layout -->
+        <li *ngIf='!isLoggedIn()' class="nav-item">
+          <a class="nav-link" routerLink="/register">
+            Register
+          </a>
         </li>
+
+        <!-- <li class="nav-item">
+          <a routerLink="/login" class="btn btn-primary justify-content-center" id="heroBtn">
+            Login
+          </a>
+        </li> -->
 
         <!-- Logout -->
         <li *ngIf='isLoggedIn()' class="nav-item">
-          <a (click)='onLogoutClick()' routerLink='/logout' class="nav-link" routerLink="/login">
+          <a (click)='onLogoutClick()' routerLink='/logout' class="btn btn-primary justify-content-center"
+            routerLink="/login" id="heroBtn">
             <i class="fas fa-sign-out-alt"></i> Logout </a>
         </li>
 
         <!-- Login -->
         <li *ngIf='!isLoggedIn()' class="nav-item">
-          <a class="nav-link" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Login </a>
+          <a class="nav-link" routerLink="/login" class="btn btn-primary justify-content-center" id="heroBtn"><i
+              class="fas fa-sign-in-alt"></i> Login </a>
         </li>
 
-        <!-- TODO: Change bellow after confirming nav layout -->
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/resigter">
-            Register
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a routerLink="/login" class="btn btn-primary justify-content-center" id="heroBtn">
-            Login
-          </a>
-        </li>
       </ul>
     </div>
 

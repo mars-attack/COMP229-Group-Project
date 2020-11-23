@@ -51,16 +51,19 @@ export class RestDataSource
 
   addSurvey(survey: Survey): Observable<IResponse>
   {
+    this.loadToken();
     return this.http.post<IResponse>(this.baseUrl + 'surveys/add', survey);
   }
 
   deleteSurvey(id: string): Observable<IResponse>
   {
+    this.loadToken();
     return this.http.post<IResponse>(this.baseUrl + `surveys/delete/${id}`, {});
   }
 
   updateSurvey(survey: Survey): Observable<IResponse>
   {
+    this.loadToken();
     return this.http.post<IResponse>(this.baseUrl + `surveys/update/${survey._id}`, survey);
   }
 
@@ -83,7 +86,7 @@ export class RestDataSource
     this.user = null;
     localStorage.clear();
 
-    return this.http.post<any>(this.baseUrl + 'logout', this.httpOptions);
+    return this.http.get<any>(this.baseUrl + 'logout', this.httpOptions);
   }
 
   loggedIn(): boolean
@@ -96,5 +99,9 @@ export class RestDataSource
     const token = localStorage.getItem('id_token');
     this.authToken = token;
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this.authToken);
+  }
+
+  registerUser(user: User): Observable<any> {
+    return this.http.post<any>( this.baseUrl + 'register', user, this.httpOptions);
   }
 }

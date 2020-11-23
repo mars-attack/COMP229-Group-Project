@@ -33,6 +33,12 @@ export class AuthService
   {
     return this.datasource.logout();
   }
+
+  registerUser(user: User): Observable<any>
+  {
+    return this.datasource. registerUser(user);
+  }
+
 }
 
 
