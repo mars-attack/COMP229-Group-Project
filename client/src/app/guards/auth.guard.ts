@@ -1,10 +1,10 @@
-import { AuthService } from './../../model/auth.service';
+import { AuthService } from '../model/auth.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 
-
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuard
 {
   path: ActivatedRouteSnapshot[];
