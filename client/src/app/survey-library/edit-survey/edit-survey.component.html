@@ -1,34 +1,49 @@
 <!--EditSurvey Component-->
-<div class="container mb-5">
-  <div class="jumbotron">
-    <h1>Edit Survey</h1>
-  </div>
-  <div class="row mb-2">
-    <h4 class="col-md-4 col-sm-12">
-      <span class="mr-2" contenteditable="true" [textContent]="survey?.name"
-        (input)="survey.name=$event.target.textContent"></span>
-      <i class="fas fa-pencil-alt"></i>
-    </h4>
-    <!-- Feilds for date active and expire -->
-    <div class="col-md-4 col-sm-12">
-      <label class="h4 pr-2" for="dateActive">Active: </label>
-      <input type="datetime-local" id="dateActive" name="dateActive" [(ngModel)]="survey.dateActive">
-    </div>
-    <div class="col-md-4 col-sm-12">
-      <label class="h4 pr-2" for="dateExpire">Expires: </label>
-      <input type="datetime-local" id="dateExpire" name="dateExpire" [(ngModel)]="survey.dateExpire">
-    </div>
-  </div>
+<div class="container" id="editSurveyContainer">
+  <h1 class="display-4 mt-5 mb-5 pl-5" id="editTitle">Edit Survey</h1>
+  <div class="container mb-5 row">
 
-  <app-questions [questions]="survey?.questions" (edit)="onQuestionEdit($event)"></app-questions>
-  <app-question-form (save)="onQuestionSave($event)" [question]="selectedQuestion"></app-question-form>
+    <!-- Question form conponent -->
+    <div class="col-lg-4 col-s-12">
+      <app-question-form (save)="onQuestionSave($event)" [question]="selectedQuestion"></app-question-form>
+    </div>
 
-  <div class="mt-4 d-flex justify-content-center">
-    <button (click)="onSurveySave()" class="btn btn-success btn-sm m-1 p-2">
-      <i class="far fa-lg fa-save"></i> SAVE SURVEY
-    </button>
-    <button (click)="onCancelEdit()" class="btn btn-danger btn-sm m-1 p-2">
-      <i class="far fa-lg fa-save"></i> CANCEL
-    </button>
+    <div class="col-lg-8 col-sm-12">
+
+      <div class="row mb-2">
+        <!-- Editable survey name -->
+        <h4>
+          <span class="ml-3 mr-3" contenteditable="true" [textContent]="survey?.name"
+            (input)="survey.name=$event.target.textContent" id="surveyName"></span>
+          <i class="fas fa-pencil-alt"></i>
+        </h4>
+      </div>
+
+      <div class="row mb-2">
+        <!-- Feilds for date active and expire -->
+        <div class="col-md-6 col-sm-12">
+          <label class="h4 pr-2" for="dateActive">Active: </label>
+          <input type="datetime-local" id="dateActive" name="dateActive" [(ngModel)]="survey.dateActive">
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <label class="h4 pr-2" for="dateExpire">Expires: </label>
+          <input type="datetime-local" id="dateExpire" name="dateExpire" [(ngModel)]="survey.dateExpire">
+        </div>
+      </div>
+
+      <app-questions [questions]="survey?.questions" (edit)="onQuestionEdit($event)"></app-questions>
+
+
+      <div class="mt-4 d-flex justify-content-center">
+        <button (click)="onSurveySave()" class="btn btn-primary btn-sm m-1 p-2">
+          <i class="far fa-lg fa-save"></i> SAVE SURVEY
+        </button>
+        <button (click)="onCancelEdit($event)" class="btn btn-secondary btn-sm m-1 p-2">
+          <i class="fas fa-undo"></i> CANCEL
+        </button>
+      </div>
+
+    </div>
+
   </div>
 </div>

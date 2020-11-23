@@ -69,10 +69,10 @@ module.exports.processRegisterPage = (req, res, next) => {
     User.register(newUser, req.body.password, (err) => {
         if (err) {
             console.log("Error: Inserting New User");
-            if (err.name == "UserExistsError") {
-                console.log("Error: User Already Exists!");
+            if (err.name == "UserExistsError") {  
+                return res.json({success: false, msg: 'Username taken, please choose another username.'});
             }
-            return res.json(err);
+            return res.json({success: false, msg: 'Error: failed to create user.'});
         } else {
         // if no error exists, then registration is successful
         return res.json({success: true, msg: 'User Registered Successfully!'});

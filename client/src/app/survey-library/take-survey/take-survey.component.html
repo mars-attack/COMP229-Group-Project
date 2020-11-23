@@ -3,32 +3,36 @@
   <h1>{{survey?.name}}</h1>
   <form>
     <!--Populating the page with questions-->
-    <div class="bg-light shoddow rounded m-3" *ngFor="let question of survey?.questions; let questionIndex= index;">
-      <h5>{{question.title}}</h5>
+    <div class="card bg-light shoddow rounded m-3"
+      *ngFor="let question of survey?.questions; let questionIndex= index;">
+      <h5 class="card-header">Q{{questionIndex + 1}}. {{question.title}}</h5>
 
       <!--Populating the page with options-->
 
-      <form class="form-check" *ngFor="let option of question.options; let optionIndex= index;">
-
+      <fieldset class="card-body pt-1 pb-1" *ngFor="let option of question.options; let optionIndex= index;">
         <!--Templete for radio button question-->
-        <div *ngIf="question.optionType === 'radio'">
+        <div class="pl-3" *ngIf="question.optionType === 'radio'">
           <input type="radio" id="{{'question' + questionIndex +'option' + questionIndex}}" class="form-check-input"
             name="{{'question' + questionIndex}}" value="{{option._id}}"
             [checked]="checkIfSelected(question, option._id)" (change)="onSelectOption(question, option._id)" />
           <label class="form-check-label" for="materialUnchecked">{{option.details}}</label>
         </div>
         <!--Templete for checkbox question-->
-        <div *ngIf="question.optionType === 'checkbox'">
+        <div class="pl-3" *ngIf="question.optionType === 'checkbox'">
           <input type="checkbox" id="{{'question' + questionIndex +'option' + questionIndex}}" class="form-check-input"
             name="{{'question' + questionIndex}}" value="{{option._id}}"
             [checked]="checkIfSelected(question, option._id)" (change)="onSelectOption(question, option._id)" />
           <label class="form-check-label" for="materialUnchecked">{{option.details}}</label>
         </div>
-      </form>
+      </fieldset>
     </div>
 
-    <button class="btn btn-success btn-sm m-1 p-2" (click)="onSurveySave($event)">
+    <button class="btn btn-success btn-sm m-1 p-2" (click)="onConfirmSubmit($event)">
       SUBMIT
     </button>
+    <button class="btn btn-warning btn-sm m-1 p-2" (click)="onCancelSubmit($event)">
+      CANCEL
+    </button>
+
   </form>
 </div>

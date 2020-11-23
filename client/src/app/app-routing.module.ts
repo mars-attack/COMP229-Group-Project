@@ -12,9 +12,9 @@ const routes: Routes = [
   {path: 'login', data: {title: 'Login'}, redirectTo: '/admin/login', pathMatch: 'full'},
   {path: 'register', data: {title: 'Register'}, redirectTo: '/admin/register', pathMatch: 'full'},
 
+  {path: 'surveys/take/:id', component: TakeSurveyComponent, data: {title: 'Take Survey'}},
   {path: 'surveys', component: SurveyManagementComponent, data: {title: 'Surveys'}, canActivate: [AuthGuard]},
   {path: 'surveys/edit/:id', component: EditSurveyComponent, data: {title: 'Edit Survey'}, canActivate: [AuthGuard]},
-  {path: 'surveys/take/:id', component: TakeSurveyComponent, data: {title: 'Take Survey'}, canActivate: [AuthGuard]},
   {path: 'surveys/results/:id', component: DisplayResultsComponent, data: {title: 'Results'}, canActivate: [AuthGuard]},
   {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path: '', redirectTo: '/home', pathMatch: 'full'},

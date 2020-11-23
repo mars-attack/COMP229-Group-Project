@@ -4,6 +4,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { Question } from 'src/app/interfaces';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-edit-survey',
@@ -41,11 +42,22 @@ export class EditSurveyComponent implements OnInit {
     this.selectedQuestion = undefined;
   }
 
-  onCancelEdit(): void {
-    // TODO: Ask for confirmation
-    if (confirm('Are your sure?')) {
-      this.router.navigateByUrl('/surveys');
-    }
+  onCancelEdit(event: Event): void {
+
+    event.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You changes will not be saved.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, discard changes',
+      cancelButtonText: 'No, keep working'
+    }).then((result) => {
+      if (result.value) {
+        this.router.navigateByUrl('/surveys');
+      }
+    });
+
   }
 
   onSurveySave(): void {

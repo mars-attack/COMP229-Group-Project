@@ -4,7 +4,7 @@ import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { Question, Option } from '../../interfaces';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-take-survey',
@@ -31,20 +31,44 @@ export class TakeSurveyComponent implements OnInit {
     }
   }
 
-  // get survey(): Survey
-  // {
-  //   const id = this.route.snapshot.params.id;
-  //   const survey = this.surveyRepository.getSurvey(id);
-  //   if (survey) {
-  //     survey.questions.forEach(question => {
-  //       question.chosenOptions = ['test'];
-  //     });
-  //   }
-  //   return survey;
-  // }
-
-  onSurveySave(event: Event): void {
+  onCancelSubmit(event: Event): void {
     event.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Your answers will not be saved.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, I\'m sure',
+      cancelButtonText: 'No, keep working'
+    }).then((result) => {
+      if (result.value) {
+        this.router.navigateByUrl('/');
+      }
+    });
+  }
+
+  onConfirmSubmit(event: Event): void {
+    event.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able change your answers.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, submit!',
+      cancelButtonText: 'No, keep working'
+    }).then((result) => {
+      if (result.value) {
+        this.surveySave();
+        Swal.fire({
+          title: 'Submitted!',
+          text: 'Thank you for completing this survey :)',
+          icon: 'success'
+        });
+      }
+    });
+  }
+
+  surveySave(): void {
     this.survey.responses++;
 
     // checking the selected option and updating the options count
@@ -72,12 +96,17 @@ export class TakeSurveyComponent implements OnInit {
       const error = data.error;
 
       if (error) {
-        // TODO: enhancement - show error in ui
+        Swal.fire({
+          title: 'Oh no! :(',
+          text: 'Something bad happened, please try again',
+          icon: 'error  '
+        });
       } else {
         this.router.navigateByUrl('/');
       }
     });
   }
+
 
   onSelectOption(question: Question, optionId: string): void {
 
