@@ -20,7 +20,7 @@ export class SurveyListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  // returns active surveys
   get surveys(): Survey[]
   {
     // for pagination

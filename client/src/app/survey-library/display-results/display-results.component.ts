@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Question } from 'src/app/interfaces';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-display-results',
@@ -11,23 +12,59 @@ import { SurveyRepository } from 'src/app/model/survey.repository';
 })
 export class DisplayResultsComponent implements OnInit {
 
+  survey: Survey;
+  questions: Question[];
+
   constructor(
     private surveyRepository: SurveyRepository,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.params.id;
+    this.survey = this.surveyRepository.getSurvey(id);
+    this.questions = this.survey.questions;
   }
 
-  get survey(): Survey
-  {
-    const id = this.route.snapshot.params.id;
-    return this.surveyRepository.getSurvey(id);
+  onConfirmReset(): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able recover these statistics.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, I\'m sure',
+      cancelButtonText: 'No, keep them'
+    }).then((result) => {
+      if (result.value) {
+        this.resultsReset();
+        Swal.fire({
+          title: 'Survey results reset!',
+          icon: 'success'
+        });
+      }
+    });
   }
 
-  get questions(): Question[]
-  {
-    const id = this.route.snapshot.params.id;
-    return this.surveyRepository.getSurvey(id).questions;
+  resultsReset(): void {
+    this.survey.responses = 0;
+    for (let i = 0; i <= this.questions.length - 1 ; i++)
+    {
+      const options = this.questions[i].options;
+      for (let j = 0; j <= options.length - 1; j ++) {
+        options[j].count = 0;
+      }
+    }
+    console.log(this.survey);
+
+    this.surveyRepository.updateSurvey(this.survey).subscribe(data => {
+      const error = data.error;
+      if (error) {
+        Swal.fire({
+          title: 'Oh no! :(',
+          text: 'Something bad happened, please try again',
+          icon: 'error'
+        });
+      }
+    });
   }
 }

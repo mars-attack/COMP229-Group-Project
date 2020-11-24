@@ -99,7 +99,7 @@ export class TakeSurveyComponent implements OnInit {
         Swal.fire({
           title: 'Oh no! :(',
           text: 'Something bad happened, please try again',
-          icon: 'error  '
+          icon: 'error'
         });
       } else {
         this.router.navigateByUrl('/');
