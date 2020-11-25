@@ -6,6 +6,8 @@ import { EditSurveyComponent } from './survey-library/edit-survey/edit-survey.co
 import { SurveyManagementComponent } from './survey-library/survey-management/survey-management.component';
 import { TakeSurveyComponent } from './survey-library/take-survey/take-survey.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ErrorComponent } from './pages/error/error.component';
+
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
@@ -18,7 +20,8 @@ const routes: Routes = [
   {path: 'surveys/results/:id', component: DisplayResultsComponent, data: {title: 'Results'}, canActivate: [AuthGuard]},
   {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'}
+  // {path: '**', redirectTo: '/home', pathMatch: 'full'},
+  {path: '**', component: ErrorComponent }
 ];
 
 @NgModule({
