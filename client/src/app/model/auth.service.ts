@@ -2,7 +2,6 @@ import { User } from './user.model';
 import { RestDataSource } from './rest.datasouce';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService
@@ -36,7 +35,12 @@ export class AuthService
 
   registerUser(user: User): Observable<any>
   {
-    return this.datasource. registerUser(user);
+    return this.datasource.registerUser(user);
+  }
+
+  updateUser(user: User): Observable<any>
+  {
+    return this.datasource.updateUser(user);
   }
 
 }

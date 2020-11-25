@@ -13,6 +13,9 @@ router.post('/login', indexController.processLoginPage);
 /* POST Route for processing the Register page */
 router.post('/register', indexController.processRegisterPage);
 
+/* POST Route for processing the Register page */
+router.post('/update', indexController.processUpdateUser);
+
 /* GET to perform UserLogout */
 router.get('/logout', indexController.performLogout);
 

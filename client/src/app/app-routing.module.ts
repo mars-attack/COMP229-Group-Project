@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
   {path: 'login', data: {title: 'Login'}, redirectTo: '/admin/login', pathMatch: 'full'},
   {path: 'register', data: {title: 'Register'}, redirectTo: '/admin/register', pathMatch: 'full'},
+  {path: 'update', data: {title: 'Upadate User Info'}, redirectTo: '/admin/update', pathMatch: 'full'},
 
   {path: 'surveys/take/:id', component: TakeSurveyComponent, data: {title: 'Take Survey'}},
   {path: 'surveys', component: SurveyManagementComponent, data: {title: 'Surveys'}, canActivate: [AuthGuard]},

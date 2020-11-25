@@ -52,36 +52,31 @@
         <!-- LOGIN/LOGOUT -->
 
         <!-- Admin menu -->
-        <li *ngIf='isLoggedIn()' class="nav-item ml-4" [routerLinkActive]="['active']">
-          <a class="nav-link text-warning" routerLink="/admin/main"><i class="fas fa-lg fa-user-shield"></i>
+
+        <li *ngIf='isLoggedIn()' class="nav-item dropdown ml-5" class="dropdown">
+          <a class="nav-link text-warning dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><i class="fas fa-lg fa-user-shield"></i>
             {{ user.displayName }} </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" routerLink="/update">Update account</a>
+            <!-- log out-->
+            <a (click)='onLogoutClick()' routerLink='/logout' class="dropdown-item" routerLink="/login">
+              <i class="fas fa-sign-out-alt"></i> Sign out </a>
+          </div>
         </li>
 
-        <!-- Display Name on navbar
-        <li *ngIf='isLoggedIn()' class="navbar-text text-success ml-5 mr-5 d-none d-lg-inline">
-          <i class="fas fa-lg fa-user"></i> Welcome, {{ user.displayName }}
-        </li> -->
-
-
-        <!-- TODO: Change bellow after confirming nav layout -->
         <li *ngIf='!isLoggedIn()' class="nav-item">
           <a class="nav-link" routerLink="/register">
             Register
           </a>
         </li>
 
-        <!-- <li class="nav-item">
-          <a routerLink="/login" class="btn btn-primary justify-content-center" id="heroBtn">
-            Login
-          </a>
-        </li> -->
 
-        <!-- Logout -->
-        <li *ngIf='isLoggedIn()' class="nav-item">
+        <!-- <li *ngIf='isLoggedIn()' class="nav-item">
           <a (click)='onLogoutClick()' routerLink='/logout' class="btn btn-primary justify-content-center"
             routerLink="/login" id="heroBtn">
             <i class="fas fa-sign-out-alt"></i> Logout </a>
-        </li>
+        </li> -->
 
         <!-- Login -->
         <li *ngIf='!isLoggedIn()' class="nav-item">
