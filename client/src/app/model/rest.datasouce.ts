@@ -67,6 +67,8 @@ export class RestDataSource
     return this.http.post<IResponse>(this.baseUrl + `surveys/update/${survey._id}`, survey);
   }
 
+  // Authentication Section
+
   authenticate(user: User): Observable<any>
   {
     return this.http.post<any>(this.baseUrl + 'login', user, this.httpOptions);
@@ -103,5 +105,9 @@ export class RestDataSource
 
   registerUser(user: User): Observable<any> {
     return this.http.post<any>( this.baseUrl + 'register', user, this.httpOptions);
+  }
+
+  updateUser(user: User): Observable<any> {
+    return this.http.post<any>( this.baseUrl + 'update', user, this.httpOptions);
   }
 }

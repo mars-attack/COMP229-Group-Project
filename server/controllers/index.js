@@ -80,6 +80,43 @@ module.exports.processRegisterPage = (req, res, next) => {
     });
 };
 
+//* controller for update user
+module.exports.processUpdateUser = (req, res, next) => {
+    const id = req.body.id;
+    const newDisplayName = req.body.displayName;
+    const newEmail = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    const newPassword = req.body.newPassword;
+
+    User.findByUsername(username).then((foundUser) => {
+        if (foundUser){
+            foundUser.changePassword(password, newPassword, (err) => {
+                if (err) {
+                    console.log("password did not match");
+                    res.json({success: false, message: 'old password does not match.'});
+                } else {
+                    // if passwords match, update displayname and date updated
+                    User.updateOne({_id: id}, {
+                        displayName: newDisplayName,
+                        email: newEmail,
+                        update: Date.now()
+                    }, (err) => {
+                        // there should be no error since we searched for the user before
+                    })
+                    foundUser.save();
+                    res.json({success: true, message: 'password reset successful.'});
+                }
+            });
+        } else {
+            res.status(500).json({success: false, message: 'This user does not exist'});
+        }
+    }, (err) => {
+        console.error(err);
+    })
+
+}
+
 //* controller for processing logout
 module.exports.performLogout = (req, res, next) => {
     req.logout();

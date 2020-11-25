@@ -26,3 +26,10 @@
   padding-left: 20px;
 }
 
+/*display dropdown menu on hover*/
+.dropdown:hover .dropdown-menu{
+  display: block;
+}
+.dropdown-menu{
+  margin-top: 0;
+}
