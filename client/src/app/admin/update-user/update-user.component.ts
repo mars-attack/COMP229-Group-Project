@@ -33,14 +33,14 @@ export class UpdateUserComponent implements OnInit {
     this.authService.updateUser(this.user).subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Account updated', {cssClass: 'alert-success', timeOut: 6000});
-        // this.router.navigate(['/surveys']);
+        localStorage.setItem('user', JSON.stringify(this.user));
+        // this.router.navigate(['/']);
       } else {
         this.flashMessage.show('Error updating account, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
       }
     });
     console.log(this.user);
 
-    localStorage.setItem('user', JSON.stringify(this.user));
     this.user.password = '';
     this.user.newPassword = '';
   }
