@@ -20,6 +20,7 @@ export function jwtTokenGetter(): string
   return localStorage.getItem('id_token');
 }
 import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { ErrorComponent } from './pages/error/error.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

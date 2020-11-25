@@ -4,7 +4,7 @@ import { IResponse, RestDataSource } from './rest.datasouce';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { Swal } from 'sweetalert2/dist/sweetalert2.js';
 
 @Injectable()
 export class SurveyRepository
