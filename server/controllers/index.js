@@ -21,7 +21,7 @@ module.exports.processLoginPage = (req,res, next) =>{
         //is there a user login error?
         if(!user)
         {
-            return res.json({success: false, msg: 'Error: failed to Log In User!'});
+            return res.json({success: false, msg: 'Error: Failed to log in user!'});
         }
 
         req.login(user, (err) => {

@@ -11,6 +11,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class RegisterComponent implements OnInit {
   user: User;
+  validEmail: boolean;
 
   constructor(
     private authService: AuthService,
@@ -32,5 +33,15 @@ export class RegisterComponent implements OnInit {
         this.flashMessage.show(data.msg, {cssClass: 'alert-danger', timeOut: 6000});
       }
     });
+  }
+
+
+  validateEmail(): boolean {
+    const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})$/;
+    if (emailCheck.test(this.user.email) === false) {
+
+      return false;
+    }
+    return true;
   }
 }
