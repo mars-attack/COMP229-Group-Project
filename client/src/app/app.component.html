@@ -1,6 +1,22 @@
-<app-header></app-header>
-<div id="flashMessages">
-  <flash-messages></flash-messages>
+<div class="page-wrapper">
+
+  <div class="sticky-header">
+      <app-header></app-header>
+  </div>
+
+  <div class="content-wrapper">
+
+      <div class="content">
+          <div id="flashMessages">
+            <flash-messages></flash-messages>
+          </div>
+
+          <router-outlet></router-outlet>
+      </div>
+
+      <div class="footer">
+          <app-footer></app-footer>
+      </div>
+
+  </div>
 </div>
-<router-outlet></router-outlet>
-<app-footer></app-footer>

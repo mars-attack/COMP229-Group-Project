@@ -154,3 +154,10 @@ tbody tr:last-child td {
 #page_opt {
   padding-left: 10px;
 }
+
+@media (max-width: 920px) {
+  #table_name {
+    font-size: 50px;
+    margin-left: -50px;
+  }
+}
