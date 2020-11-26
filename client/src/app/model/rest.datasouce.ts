@@ -52,19 +52,19 @@ export class RestDataSource
   addSurvey(survey: Survey): Observable<IResponse>
   {
     this.loadToken();
-    return this.http.post<IResponse>(this.baseUrl + 'surveys/add', survey);
+    return this.http.post<IResponse>(this.baseUrl + 'surveys/add', survey, this.httpOptions);
   }
 
   deleteSurvey(id: string): Observable<IResponse>
   {
     this.loadToken();
-    return this.http.post<IResponse>(this.baseUrl + `surveys/delete/${id}`, {});
+    return this.http.post<IResponse>(this.baseUrl + `surveys/delete/${id}`, {}, this.httpOptions);
   }
 
   updateSurvey(survey: Survey): Observable<IResponse>
   {
     this.loadToken();
-    return this.http.post<IResponse>(this.baseUrl + `surveys/update/${survey._id}`, survey);
+    return this.http.post<IResponse>(this.baseUrl + `surveys/update/${survey._id}`, survey, this.httpOptions);
   }
 
   // Authentication Section
@@ -76,7 +76,7 @@ export class RestDataSource
 
   storeUserData(token: any, user: User): void
   {
-    localStorage.setItem('id_token', 'Bearer' + token);
+    localStorage.setItem('id_token', 'Bearer ' + token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
@@ -96,18 +96,19 @@ export class RestDataSource
     return !this.jwtService.isTokenExpired(this.authToken);
   }
 
+  registerUser(user: User): Observable<any> {
+    return this.http.post<any>( this.baseUrl + 'register', user);
+  }
+
+  updateUser(user: User): Observable<any> {
+    this.loadToken();
+    return this.http.post<any>( this.baseUrl + 'update', user, this.httpOptions);
+  }
+
   private loadToken(): void
   {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this.authToken);
-  }
-
-  registerUser(user: User): Observable<any> {
-    return this.http.post<any>( this.baseUrl + 'register', user, this.httpOptions);
-  }
-
-  updateUser(user: User): Observable<any> {
-    return this.http.post<any>( this.baseUrl + 'update', user, this.httpOptions);
   }
 }

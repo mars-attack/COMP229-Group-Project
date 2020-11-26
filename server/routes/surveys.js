@@ -1,7 +1,9 @@
 /* GET home page. */
-let express = require('express');
-let router = express.Router();
-let surveyController = require('../controllers/survey');
+const express = require('express');
+const router = express.Router();
+const surveyController = require('../controllers/survey');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 // GET List of surveys
 router.get('/', surveyController.getSurveys);
@@ -10,13 +12,13 @@ router.get('/', surveyController.getSurveys);
 router.get('/:id', surveyController.getSurvey);
 
 // POST add survey
-router.post('/add',surveyController.addSurvey);
+router.post('/add', passport.authenticate('jwt', {session: false}), surveyController.addSurvey);
 
 // POST update survey by id 
-router.post('/update/:id', surveyController.updateSurvey);
+router.post('/update/:id', passport.authenticate('jwt', {session: false}), surveyController.updateSurvey);
 
 // POST delete survey by id
-router.post('/delete/:id', surveyController.deleteSurvey);
+router.post('/delete/:id', passport.authenticate('jwt', {session: false}), surveyController.deleteSurvey);
 
 
 module.exports = router;
