@@ -6,6 +6,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { EmailValidateDirective } from './email-validator';
 
 
 const routing = RouterModule.forChild([
@@ -18,6 +19,7 @@ const routing = RouterModule.forChild([
 @NgModule({
   imports: [CommonModule, FormsModule, routing],
   providers: [AuthGuard],
-  declarations: [LoginComponent, RegisterComponent, UpdateUserComponent]
+  declarations: [LoginComponent, RegisterComponent, UpdateUserComponent, EmailValidateDirective],
+  exports: [EmailValidateDirective]
 })
 export class AdminModule {}

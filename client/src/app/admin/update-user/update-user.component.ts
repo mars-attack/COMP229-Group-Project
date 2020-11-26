@@ -41,7 +41,6 @@ export class UpdateUserComponent implements OnInit {
     });
     console.log(this.user);
 
-    this.user.password = '';
     this.user.newPassword = '';
   }
 
