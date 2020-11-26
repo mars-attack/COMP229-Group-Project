@@ -32,21 +32,17 @@
 
       <tbody>
         <tr *ngFor="let survey of surveys">
-          <td>
-            <div>
-              {{ survey.name }}
-            </div>
-          </td>
+          <td> {{ survey.name }}</td>
           <td>{{ survey.dateActive | date: 'MMM d, y, h:mm a' }}</td>
           <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
           <td>
-            <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-success btn-sm">
-              EDIT
+            <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-primary btn-sm">
+              Edit
             </button>
           </td>
           <td>
             <button (click)="onDeleteSurvey(survey._id)" class="btn btn-danger btn-sm">
-              DELETE
+              Delete
             </button>
           </td>
           <td>

@@ -1,9 +1,10 @@
+<!-- Login Component -->
 <main class="container mt-5 mb-5">
   <div class="row">
     <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
 
       <h1>Please Login</h1>
-      <form autocomplete='off' #form='ngForm' (ngSubmit)='authenticate(form)'>
+      <form autocomplete='off' #form='ngForm' (ngSubmit)='authenticate(form)' #loginForm="ngForm">
 
         <fieldset class="form-group">
           <label for="username">Username:</label>
@@ -18,7 +19,7 @@
         </fieldset>
 
         <fieldset class="form-group text-left">
-          <button class='btn btn-primary m-1' type='submit'>
+          <button class='btn btn-primary m-1' type='submit' [disabled]="!loginForm.form.valid">
             <i class="fas fa-sign-in-alt"></i>
             Log In
           </button>
