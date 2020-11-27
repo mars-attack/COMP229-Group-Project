@@ -34,14 +34,4 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-
-
-  validateEmail(): boolean {
-    const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})$/;
-    if (emailCheck.test(this.user.email) === false) {
-
-      return false;
-    }
-    return true;
-  }
 }
