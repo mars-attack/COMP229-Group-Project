@@ -92,7 +92,7 @@ export class TakeSurveyComponent implements OnInit {
       question.chosenOptions = undefined; // reset chosen option
     }
 
-    this.surveyRepository.updateSurvey(this.survey).subscribe(data => {
+    this.surveyRepository.takeSurvey(this.survey).subscribe(data => {
       const error = data.error;
 
       if (error) {
@@ -132,7 +132,7 @@ export class TakeSurveyComponent implements OnInit {
   checkIfSelected(question: Question, optionId: string): boolean {
     if (question && question.chosenOptions && optionId) {
       console.log(this.survey.questions);
-      const condition = question.chosenOptions.indexOf(optionId) > -1;
+      const condition = question.chosenOptions.indexOf(optionId) > -1; // checks if the option is in the array
       console.log(question, optionId, condition);
       return condition;
     }

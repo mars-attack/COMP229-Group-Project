@@ -67,6 +67,11 @@ export class RestDataSource
     return this.http.post<IResponse>(this.baseUrl + `surveys/update/${survey._id}`, survey, this.httpOptions);
   }
 
+  takeSurvey(survey: Survey): Observable<IResponse>
+  {
+    return this.http.post<IResponse>(this.baseUrl + `surveys/take/${survey._id}`, survey);
+  }
+
   // Authentication Section
 
   authenticate(user: User): Observable<any>
@@ -97,7 +102,7 @@ export class RestDataSource
   }
 
   registerUser(user: User): Observable<any> {
-    return this.http.post<any>( this.baseUrl + 'register', user);
+    return this.http.post<any>( this.baseUrl + 'register', user, this.httpOptions);
   }
 
   updateUser(user: User): Observable<any> {
@@ -105,6 +110,7 @@ export class RestDataSource
     return this.http.post<any>( this.baseUrl + 'update', user, this.httpOptions);
   }
 
+  // updates the headers with the bearer token
   private loadToken(): void
   {
     const token = localStorage.getItem('id_token');

@@ -11,6 +11,9 @@ router.get('/', surveyController.getSurveys);
 // GET survey by id
 router.get('/:id', surveyController.getSurvey);
 
+// POST update survey by id 
+router.post('/take/:id', surveyController.takeSurvey);
+
 // POST add survey
 router.post('/add', passport.authenticate('jwt', {session: false}), surveyController.addSurvey);
 
