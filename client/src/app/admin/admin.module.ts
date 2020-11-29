@@ -10,9 +10,9 @@ import { EmailValidateDirective } from './email-validator';
 
 
 const routing = RouterModule.forChild([
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'update', component: UpdateUserComponent,  canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent, data: {title: 'Login'}},
+  { path: 'register', component: RegisterComponent, data: {title: 'Register'}},
+  { path: 'update', component: UpdateUserComponent,  data: {title: 'Update Account'}, canActivate: [AuthGuard]},
   { path: '**', redirectTo: 'login' },
 ]);
 
