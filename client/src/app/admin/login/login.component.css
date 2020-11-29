@@ -1,0 +1,168 @@
+ul {
+  display: flex;
+}
+
+li {
+  list-style: none;
+}
+
+h1{
+  margin-top:20px;
+  margin-left: auto;
+  margin-right: auto;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 101%;
+  /* or 101px */
+
+  color: #000000;
+}
+
+#username{
+
+  margin-top:25px;
+  margin-right: auto;
+
+
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+#password{
+
+  left: 5.31%;
+  right: 50.62%;
+  top: 50.95%;
+  bottom: 42.95%;
+
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+::placeholder {
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 28px;
+
+  color: rgba(0, 0, 0, 0.5);
+}
+
+h6{
+  font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 28px;
+color: rgba(0, 0, 0, 0.5);
+}
+
+#loginCancelBtn{
+  background: #686868;
+  border-radius: 5px;
+  border: #686868;
+  font-size: 13px;
+}
+#loginSubmitBtn{
+  background: #33CDA8;
+  border-radius: 5px;
+  border: #33CDA8;
+  font-size: 13px;
+}
+.loginImg
+{
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+
+/* -------------- /
+/ tablet screen /
+/ ------------ */
+@media only screen and (min-width:688px) and (max-width: 991px){
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    list-style: none;
+  }
+  .loginImg{
+
+    margin-top: 20px;
+    margin-left: 15px;
+    max-width: 40%;
+    max-height: 40%;
+    }
+  ::placeholder {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 25px;
+
+    color: rgba(0, 0, 0, 0.5);
+  }
+  #loginCancelBtn{
+    max-width: 30%;
+    max-height: 30%;
+  }
+  #loginSubmitBtn{
+    max-width: 30%;
+    max-height: 30%;
+  }
+
+}
+
+/* --------------/
+/ small screen /
+/ ------------*/
+
+@media only screen and (max-width:1198px){
+
+ul {
+  display: flex;
+}
+
+li {
+  list-style: none;
+}
+.loginImg{
+
+  margin-top: 20px;
+  margin-left: 15px;
+  max-width: 40%;
+  max-height: 40%
+  }
+  ::placeholder {
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 25px;
+
+    color: rgba(0, 0, 0, 0.5);
+  }
+  #loginCancelBtn{
+    max-width: 40%;
+    max-height: 40%;
+  }
+  #loginSubmitBtn{
+    max-width: 40%;
+    max-height: 40%;
+  }
+
+}
+
+
+

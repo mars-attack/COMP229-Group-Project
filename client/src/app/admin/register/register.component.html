@@ -2,46 +2,50 @@
   <div class="row">
     <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
       <form autocomplete="off" (submit)="onRegisterSubmit()">
-
-        <span class="text-center">
           <h1>Create an account</h1>
-        </span>
-
+      <ul>
+        <li>
         <fieldset class="form-group">
-          <label for="username">Username:</label>
+          <!--<label for="username">Username:</label>-->
           <input type="text" class="form-control" [(ngModel)]="user.username" name="username"
             placeholder="Enter Username" id="username" required autocomplete="off">
         </fieldset>
 
         <fieldset class="form-group">
-          <label for="password">Password:</label>
+          <!--<label for="password">Password:</label>-->
           <input type="password" class="form-control" [(ngModel)]="user.password" name="password"
             placeholder="Enter Password" id="password" required autocomplete="off">
         </fieldset>
 
         <fieldset class="form-group">
-          <label for="email">Email:</label>
+          <!--<label for="email">Email:</label>-->
           <input type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="Enter Email"
             id="email" required autocomplete="off">
         </fieldset>
 
         <fieldset class="form-group">
-          <label for="displayName">Display Name:</label>
+          <!--<label for="displayName">Display Name:</label>-->
           <input type="text" class="form-control" [(ngModel)]="user.displayName" name="displayName"
             placeholder="Enter Display Name" id="displayName" required autocomplete="off">
         </fieldset>
 
+
         <fieldset class="form-group text-left">
-          <button class='btn btn-primary m-1' type='submit'>
-            <i class="fas fa-sign-in-alt"></i>
-            Register
-          </button>
-          <button class='btn btn-warning m-1' routerLink='/home'>
+          <button id ='cancelBtn' class='btn btn-primary m-1' routerLink='/home'>
             <i class="fas fa-undo"></i>
             Cancel
           </button>
-        </fieldset>
+          <button id ='registerBtn' class='btn btn-primary m-1' type='submit'>
+            <i class="fas fa-sign-in-alt"></i>
+            Register
+          </button>
 
+        </fieldset>
+      </li>
+      <li class="registerImg">
+        <img src="../../../assets/images/registerImg.png" class="img" alt="registerPageImage">
+      </li>
+    </ul>
       </form>
     </div>
   </div>
