@@ -23,20 +23,6 @@
           </a>
         </li> -->
 
-        <!--Inpage hash tag link-->
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['home']" pageScroll href="#active_surveys" [pageScrollDuration]="200"
-            [pageScrollSpeed]="200" fragment="active_surveys">
-            See Active Surveys
-          </a>
-        </li>
-
-        <!--Inpage hash tag link , coding part is not done yet-->
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/surveys">
-            Check Statistics
-          </a>
-        </li>
 
       </ul>
     </div>
@@ -49,6 +35,24 @@
         <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" routerLink="/home"><i class="fas fa-lg fa-laptop-house"></i> Home </a>
         </li>
+
+
+        <!--Inpage hash tag link-->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['home']" pageScroll href="#active_surveys" [pageScrollDuration]="200"
+            [pageScrollSpeed]="200" fragment="active-surveys"><i class="fas fa-lg fa-tasks"></i>
+            See Active Surveys
+          </a>
+        </li>
+
+        <!--check statistics link to survey management when not logged in -->
+        <li *ngIf='!isLoggedIn()' class="nav-item">
+          <a class="nav-link" routerLink="/surveys"><i class="fas fa-lg fa-check-square"></i>
+            Check Statistics
+          </a>
+        </li>
+
+
         <!-- CREATE SURVEYS -->
         <li *ngIf='isLoggedIn()' class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" routerLink="/surveys"><i class="fas fa-poll fa-lg"></i> Manage Surveys </a>
@@ -71,7 +75,7 @@
         </li>
 
         <li *ngIf='!isLoggedIn()' class="nav-item">
-          <a class="nav-link" routerLink="/register">
+          <a class="nav-link" routerLink="/register"><i class="fas fa-lg fa-file-signature"></i>
             Register
           </a>
         </li>

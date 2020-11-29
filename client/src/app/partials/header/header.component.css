@@ -7,6 +7,15 @@
   background-color: #2e61ae;
   min-width: 350px;
 }
+
+.nav-item {
+  padding-left: 8px;
+}
+
+i {
+  margin-right: 5px;
+}
+
 .navbar-brand {
   font-size: 23px;
 }
@@ -15,7 +24,7 @@
   margin-right:auto;
   /* min-width: 1200px; */
   background-color: #2E61AE;
-  width: 80%;
+  width: 95%;
 }
 #logo {
   width: 50px;
@@ -36,52 +45,78 @@
   padding-right: 35px;
 }
 /*text link padding*/
-.nav-item {
+/* .nav-item{
   padding-left: 20px;
-}
+} */
 
 /*display dropdown menu on hover*/
 .dropdown:hover .dropdown-menu {
   display: block;
 }
-.dropdown-menu {
+
+.dropdown-menu{
   margin-top: 0;
 }
 
-/*====Web screen width<1230px====*/
-@media (max-width: 1229px) and (min-width: 768px) {
-  a {
-    font-size: 20px;
-  }
-  i {
-    font-size: 20px;
-  }
-}
-@media (max-width: 1150px) and (min-width: 768px) {
-  a {
-    font-size: 16px;
-  }
-}
-@media (max-width: 1025px) and (min-width: 768px) {
-  i {
-    display: none;
-  }
-}
-/*====mobile screen====*/
-@media (max-width: 767px) {
-  i {
-    display: none;
+
+
+/* -------------- */
+/* tablet screen */
+/* ------------ */
+@media only screen and (min-width:688px) and (max-width: 991px){
+
+  .nav-item {
+    margin: 8px 0;
+    padding-left: none;
   }
 
-  #heroBtn {
-    color: #ffffff94;
-    background-color: #33cda900;
-    border-color: #33cda900;
-    padding-left: 0px;
-    padding-right: 0px;
+  .dropdown-menu{
+    margin-top: 0;
+    background-color: transparent;
+    border: none;
   }
-  .navbar-toggler-icon {
-    width: 20px !important;
-    height: 30px !important;
+
+  .dropdown-item {
+    color: #ffffff80;
   }
+
+  .dropdown-item:hover {
+    color: rgba(255,255,255,.75);
+    background-color: transparent;
+    }
+
+}
+
+
+/* --------------*/
+/* small screen */
+/* ------------*/
+
+@media only screen and (max-width:687px){
+
+  .nav-item {
+    margin: 8px 0;
+    padding-left: none;
+  }
+
+  .dropdown-menu{
+    margin-top: 0;
+    background-color: transparent;
+    border: none;
+  }
+
+  .dropdown-item {
+    color: #ffffff80;
+  }
+
+  .dropdown-item:hover {
+    color: rgba(255,255,255,.75);
+    background-color: transparent;
+    }
+
+    .fas {
+      margin-right: 10px;
+  }
+
+
 }
