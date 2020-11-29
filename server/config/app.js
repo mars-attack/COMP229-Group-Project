@@ -5,7 +5,7 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let cors = require('cors');
 
-//***modules for authentication
+//* modules for authentication
 let session = require('express-session');
 let passport = require('passport');
 
@@ -52,37 +52,37 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 app.use(cors());
 
-//***setup express session
+//* setup express session
 app.use(session({
   secret: "SomeSecret",
   saveUninitialized: false,
   resave: false
 }));
 
-//***initialize flash
+// initialize flash
 app.use(flash());
 
-//***initialize passport
+//* initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-//***create a User Model Instance
+//* create a User Model Instance
 let userModel = require('../models/user');
 let User = userModel.User;
 
-//***implement a User Authentication Strategy
+//* implement a User Authentication Strategy
 passport.use(User.createStrategy());
 
-//serialize and deserialize the User info
+//* serialize and deserialize the User info
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//***To verify whether the token is being sent by the user and is valid*/
+//* To verify whether the token is being sent by the user and is valid*/
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = DB.Secret;
 
-//***find user from database
+//* find user from database
 let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
   User.findById(jwt_payload.id)
   .then(user => {
@@ -95,7 +95,7 @@ let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
 
 passport.use(strategy);
 
-//routing
+// routing
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/surveys', surveysRouter);
