@@ -27,3 +27,12 @@
   min-height: 60px;
   flex-grow: 0;
 }
+
+@media (min-width: 1200px) {
+  .fixed-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}

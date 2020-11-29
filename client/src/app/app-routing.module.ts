@@ -10,13 +10,13 @@ import { ErrorComponent } from './pages/error/error.component';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent, data: {title: 'Home'}},
+  {path: 'home', component: HomeComponent, data: {title: '3C Surveys'}},
   {path: 'login', data: {title: 'Login'}, redirectTo: '/admin/login', pathMatch: 'full'},
   {path: 'register', data: {title: 'Register'}, redirectTo: '/admin/register', pathMatch: 'full'},
   {path: 'update', data: {title: 'Upadate User Info'}, redirectTo: '/admin/update', pathMatch: 'full'},
 
   {path: 'surveys/take/:id', component: TakeSurveyComponent, data: {title: 'Take Survey'}},
-  {path: 'surveys', component: SurveyManagementComponent, data: {title: 'Surveys'}, canActivate: [AuthGuard]},
+  {path: 'surveys', component: SurveyManagementComponent, data: {title: 'Survey Management'}, canActivate: [AuthGuard]},
   {path: 'surveys/edit/:id', component: EditSurveyComponent, data: {title: 'Edit Survey'}, canActivate: [AuthGuard]},
   {path: 'surveys/results/:id', component: DisplayResultsComponent, data: {title: 'Results'}, canActivate: [AuthGuard]},
   {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
