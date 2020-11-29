@@ -1,41 +1,42 @@
+<!-- Login Component -->
 <main class="container mt-5 mb-5">
   <div class="row">
     <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
 
       <h1>Please Login</h1>
-      <form autocomplete='off' #form='ngForm' (ngSubmit)='authenticate(form)'>
+      <form autocomplete='off' #form='ngForm' (ngSubmit)='authenticate(form)' #loginForm="ngForm">
 
-      <ul>
-        <li>
-        <fieldset class="form-group">
-          <!--<label for="username">Username:</label>-->
-          <input type="text" class="form-control" [(ngModel)]='user.username' name='username'
-            placeholder='Enter Username' id='username' required autofocus autocomplete="off">
-        </fieldset>
+        <ul>
+          <li>
+            <fieldset class="form-group">
+              <!--<label for="username">Username:</label>-->
+              <input type="text" class="form-control" [(ngModel)]='user.username' name='username'
+                placeholder='Enter Username' id='username' required autofocus autocomplete="off">
+            </fieldset>
 
-        <fieldset class="form-group">
-          <!--<label for="password">Password:</label>-->
-          <input type="password" class="form-control" [(ngModel)]='user.password' name='password'
-            placeholder='Enter Password' id='password' required autocomplete="off">
-        </fieldset>
-        <h6>Register</h6>
+            <fieldset class="form-group">
+              <!--<label for="password">Password:</label>-->
+              <input type="password" class="form-control" [(ngModel)]='user.password' name='password'
+                placeholder='Enter Password' id='password' required autocomplete="off">
+            </fieldset>
+            <h6>Register</h6>
 
-        <fieldset class="form-group text-left">
-          <button id="loginCancelBtn" class='btn btn-primary m-1' routerLink='/home'>
-            <i class="fas fa-undo"></i>
-            Cancel
-          </button>
-          <button id="loginSubmitBtn" class='btn btn-primary m-1' type='submit'>
-            <i class="fas fa-sign-in-alt"></i>
-            Log In
-          </button>
+            <fieldset class="form-group text-left">
+              <button id="loginSubmitBtn" class='btn btn-primary m-1' type='submit' [disabled]="!loginForm.form.valid">
+                <i class="fas fa-sign-in-alt"></i>
+                Log In
+              </button>
+              <button class='btn btn-warning m-1' routerLink='/home'>
+                <i class="fas fa-undo"></i>
+                Cancel
+              </button>
 
-        </fieldset>
-        </li>
-        <li class="loginImg">
-          <img src="../../../assets/images/loginImg.png" class="img" alt="loginPageImage">
-        </li>
-      </ul>
+            </fieldset>
+          </li>
+          <li class="loginImg">
+            <img src="../../../assets/images/loginImg.png" class="img" alt="loginPageImage">
+          </li>
+        </ul>
 
       </form>
     </div>

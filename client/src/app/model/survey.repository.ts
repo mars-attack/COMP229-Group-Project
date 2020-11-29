@@ -76,7 +76,10 @@ export class SurveyRepository
   {
     return this.restDataSource.updateSurvey(survey);
   }
-
+  takeSurvey(survey: Survey): Observable<IResponse>
+  {
+    return this.restDataSource.takeSurvey(survey);
+  }
   initializeSurveys(): void {
     this.restDataSource.getSurveys().subscribe(data => { this.surveys = data.data; });
 

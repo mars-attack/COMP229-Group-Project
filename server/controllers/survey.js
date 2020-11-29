@@ -82,6 +82,36 @@ module.exports.updateSurvey = (req, res, next) => {
     });
 }
 
+module.exports.takeSurvey = (req, res, next) => {
+  let id = req.params.id
+  let updatedRespones = req.body.responses;
+  let updatedQuestions =  req.body.questions;
+
+  Survey.findById({"_id": id},
+   (err, survey) => {
+      if (err) {
+        console.error(err);
+        res.end(err);
+      } else 
+      {
+        console.log(survey);
+        // update response count
+        survey.responses = updatedRespones;  
+        // update options count
+        survey.questions.forEach((question, i) => {
+          question.options.forEach((option, j) => {
+            option.count = updatedQuestions[i].options[j].count;
+          });
+        });
+        survey.save();
+        
+        res.json({
+          error: err        
+        });
+      }
+  })
+}
+
 module.exports.deleteSurvey = (req, res, next) => {
   let id = req.params.id;
 

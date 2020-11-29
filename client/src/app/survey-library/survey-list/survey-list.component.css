@@ -1,7 +1,8 @@
 #divider {
   font-size: 20px;
 }
-#table_name {
+/* Table Name */
+#active_surveys {
   font-size: 60px;
   font-weight: 600;
   padding-left: 60px;
@@ -153,4 +154,12 @@ tbody tr:last-child td {
 
 #page_opt {
   padding-left: 10px;
+}
+
+@media (max-width: 920px) {
+  /* Table Title */
+  #active_surveys {
+    font-size: 50px;
+    margin-left: -50px;
+  }
 }

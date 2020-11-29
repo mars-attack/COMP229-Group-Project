@@ -1,21 +1,32 @@
 <!--SurveyResults Component-->
 <div class="container mt-5" id="resultsContainer">
+
   <div class="d-flex justify-content-between mb-3">
     <h2 class="pl-3">Survey: {{survey.name}}</h2>
-    <h2>Resonses: {{survey.responses}}</h2>
+    <div>
+      <button (click)="ExportTOExcel()" class="btn btn-success">Export to Excel</button>
+    </div>
   </div>
-  <div class="container shaddow rounded mt-4" *ngFor="let question of questions">
-    <h5>Q: {{ question.title }}</h5>
-    <table class="table table-striped table-bordered">
-      <tr>
-        <th scope="col">Option</th>
-        <th scope="col">Count</th>
-      </tr>
-      <tr *ngFor="let option of question.options">
-        <td>{{option.details}}</td>
-        <td>{{option.count}}</td>
-      </tr>
-    </table>
+  <!-- in a table for exporting to excel-->
+  <div #TABLE #table>
+    <tr>
+      <td class="pl-3" colspan="2"><b>Responses: {{survey.responses}}</b></td>
+    </tr>
+    <div class="container shaddow rounded mt-4" *ngFor="let question of questions">
+      <table class="table table-striped table-bordered">
+        <tr>
+          <td colspan="2">Q: {{ question.title }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Option</th>
+          <th scope="col">Count</th>
+        </tr>
+        <tr *ngFor="let option of question.options">
+          <td>{{option.details}}</td>
+          <td>{{option.count}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <div class="text-center">

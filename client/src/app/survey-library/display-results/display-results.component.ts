@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Question } from 'src/app/interfaces';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-display-results',
@@ -14,6 +15,17 @@ export class DisplayResultsComponent implements OnInit {
 
   survey: Survey;
   questions: Question[];
+
+  // for exporting to excel document
+  @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
+  title = 'Excel';
+  ExportTOExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.TABLE.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.survey.name + '.xlsx');
+  }
+
 
   constructor(
     private surveyRepository: SurveyRepository,

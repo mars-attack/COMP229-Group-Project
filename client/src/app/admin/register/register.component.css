@@ -1,168 +1,50 @@
 
-ul {
-  display: flex;
-}
-
-li {
-  list-style: none;
-}
-
-.container {
-  margin-top: 75px;
-  margin-left: 20px;
-  margin-right: 20px;
-  border: none;
-  height: 65vh;
-  /* max-width: 1200px; */
-}
+  .container {
+    width: 40%;
+  }
 
   h1{
 
     margin-top:20px;
-    margin-left: auto;
-    margin-right: auto;
-
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
     line-height: 101%;
-    /* or 101px */
-
-    color: #000000;
+    text-align: left;
+    margin-bottom: 25px;
+    color: #000;
   }
 
-  #username{
-
-    margin-top:25px;
-    margin-right: auto;
-
-
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 5px;
+  .btn {
+    width: 110px;
   }
 
-  #password{
 
-    left: 5.31%;
-    right: 50.62%;
-    top: 50.95%;
-    bottom: 42.95%;
+  /* ----------------- /
+  / Validation Styles /
+  / --------------- */
 
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 5px;
-  }
-  #email{
-
-    left: 5.31%;
-    right: 50.62%;
-    top: 65.96%;
-    bottom: 51.97%;
-
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 5px;
-
-  }
-  #displayName{
-
-    left: 5.31%;
-    right: 50.62%;
-    top: 80.97%;
-    bottom: 60.73%;
-
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 5px;
-
+  .ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
   }
 
-  ::placeholder {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 28px;
-
-    color: rgba(0, 0, 0, 0.5);
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
   }
 
-  #registerBtn{
-    background: #33CDA8;
-    border-radius: 5px;
-    border: #33CDA8;
-    font-size: 13px;
-    max-width: 80%;
-    max-height: 80%;
-  }
-  #cancelBtn{
-    background: #686868;
-    border-radius: 5px;
-    border: #686868;
-    font-size: 13px;
-    max-width: 80%;
-    max-height: 80%;
+  .form-group {
+    margin-bottom: 1.25rem;
   }
 
-  .registerImg{
-
-margin-top: 30px;
-margin-left: 20px;
-max-width: 70%;
-max-height: 70%;
-
-  }
 
   /* -------------- /
-/ tablet screen /
-/ ------------ */
-@media only screen and (min-width:688px) and (max-width: 991px){
+  / tablet screen  /
+  / ------------ */
+@media only screen and (min-width:688px) and (max-width: 1198px){
 
-  ul {
-    display: flex;
-  }
-
-  li {
-    list-style: none;
-  }
-  .registerImg{
-
-    margin-top: 20px;
-    margin-left: 15px;
-    max-width: 50%;
-    max-height:50%;
-
-  }
-  ::placeholder {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 8px;
-    line-height: 25px;
-
-    color: rgba(0, 0, 0, 0.5);
-  }
   .container {
-    margin-top: 55px;
-    margin-left: auto;
-    margin-right: auto;
-    border: none;
-    height: 75vh;
-    /* max-width: 1200px; */
-  }
-  #registerBtn{
-    max-width: 50%;
-    max-height: 50%;
-  }
-  #cancelBtn{
-    max-width: 50%;
-    max-height: 50%;
+    width: 60%;
   }
 
 }
@@ -171,59 +53,13 @@ max-height: 70%;
 / small screen /
 / ------------*/
 
-@media only screen  and (max-width:687px){
-
-  ul {
-    display: flex;
-  }
-
-  li {
-    list-style: none;
-  }
-  .registerImg{
-
-    margin-top: 20px;
-    margin-left: 15px;
-    max-width: 50%;
-    max-height:50%;
-  }
-  ::placeholder {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 8px;
-    line-height: 25px;
-
-    color: rgba(0, 0, 0, 0.5);
-  }
-
+@media only screen and (max-width: 687px){
   .container {
-    margin-top: 55px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: auto;
-    border: none;
-    height: 100vh;
-    /* max-width: 1200px; */
-  }
-  #registerBtn{
-    max-width: 60%;
-    max-height: 60%;
-  }
-  #cancelBtn{
-    max-width: 60%;
-    max-height: 60%;
+    width: 80%;
   }
 
-
-
+  #img-wrap{
+    display: none;
+  }
 }
-
-
-
-
-
-
-
-
 
