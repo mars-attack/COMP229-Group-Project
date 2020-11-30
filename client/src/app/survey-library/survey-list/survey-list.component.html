@@ -2,73 +2,62 @@
 <!-- Table for active surveys with example data-->
 
 <!-- Note:Can't use flash-messages here becase welcome messgae blcok need to be at the top-->
-<span id="divider">&nbsp;<br></span>
-<span id="active_surveys">Active Surveys</span>
+<div id="active_wrap">
+  <span id="divider">&nbsp;<br></span>
+  <span id="active_surveys">Active Surveys</span>
 
-<div id="table_wrapper">
-  <table>
-    <colgroup></colgroup>
-    <colgroup></colgroup>
-    <colgroup></colgroup>
-    <colgroup></colgroup>
-    <colgroup></colgroup>
+  <div id="table_wrap">
+    <table class="shadow">
+      <colgroup>
+        <col id="column-1">
+        <col id="column-2">
+        <col id="column-3">
+        <col id="column-4">
+        <col id="column-5">
+      </colgroup>
 
-    <!--Title line-->
-    <thead>
-      <tr>
-        <th>
-          #
-        </th>
+      <!--Title line-->
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Survey Name</th>
+          <th>Closing Date</th>
+          <th>Responses</th>
+          <th>Take Survey</th>
+        </tr>
+      </thead>
 
-        <th>
-          Survey Name
-        </th>
+      <tbody>
+        <tr *ngFor="let survey of surveys; let i = index">
+          <td scope="row">{{ i + 1 }}</td>
+          <td id="name">{{ survey.name }}</td>
+          <!--Change once set deactive date-->
+          <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
+          <td>{{ survey.responses }}</td>
+          <td>
+            <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-sm" id="take_survey_button">
+              Take Survey
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        <th>
-          Closing Date
-        </th>
+    <br>&nbsp;
 
-        <th>
-          Responses
-        </th>
+    <div id="page_opt" class="form-inline float-left mr-1">
+      <select class="form-control" [value]='surveysPerPage' (change)="changePageSize($event.target.value)">
+        <option value="4">4 per page</option>
+        <option value="6">6 per page</option>
+        <option value="8">8 per page</option>
+      </select>
+    </div>
 
-        <th>
-          Take Survey
-        </th>
-
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let survey of surveys; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
-        <td id="name">{{ survey.name }}</td>
-        <!--Change once set deactive date-->
-        <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
-        <td>{{ survey.responses }}</td>
-        <td>
-          <button routerLink="/surveys/take/{{survey._id}}" class="btn btn-sm" id="take_survey_button">
-            Take Survey
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <br>&nbsp;
-
-  <div id="page_opt" class="form-inline float-left mr-1">
-    <select class="form-control" [value]='surveysPerPage' (change)="changePageSize($event.target.value)">
-      <option value="4">4 per page</option>
-      <option value="6">6 per page</option>
-      <option value="8">8 per page</option>
-    </select>
-  </div>
-
-  <div class="btn-group float-right" id="not_selected">
-    <button class="btn" id="selected" *counter="let page of pageCount" (click)="changePage(page)"
-      [class.active]="page===selectedPage">
-      {{ page }}
-    </button>
+    <div class="float-right" id="not_selected">
+      <button class="btn selected-page" *counter="let page of pageCount" (click)="changePage(page)"
+        [class.active]="page===selectedPage">
+        {{ page }}
+      </button>
+    </div>
   </div>
 </div>
