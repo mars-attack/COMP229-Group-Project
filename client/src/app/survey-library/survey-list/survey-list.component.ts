@@ -42,6 +42,6 @@ export class SurveyListComponent implements OnInit {
   get pageCount(): number
   {
     return Math.ceil(this.repository
-      .getSurveys().length / this.surveysPerPage);
+      .getActiveSurveys().length / this.surveysPerPage);
   }
 }

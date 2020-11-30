@@ -1,3 +1,16 @@
+
+/*active Survey*/
+#active_wrap {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(255, 255, 255);
+  min-width: 1200px;
+}
+#table_wrap {
+  margin-top: 20px;
+}
+
 #divider {
   font-size: 20px;
 }
@@ -8,11 +21,9 @@
   padding-left: 60px;
 }
 
-#table_wrapper {
-  margin-top: 20px;
-}
 
 table {
+  border: 1px solid #ccc;
   width: 98%;
   margin-left: auto;
   margin-right: auto;
@@ -33,6 +44,7 @@ td {
   vertical-align: middle;
   text-align: left;
   padding: 1em;
+  border: 1px solid #ccc;
 }
 
 th {
@@ -40,39 +52,29 @@ th {
   text-align: left;
 }
 
-colgroup:nth-child(1) {
+#column-1 {
   height: 1%;
   width: 5px;
   font-size: 60px;
   background-color: #f7f7fa;
-  border: 1px solid rgb(184, 184, 184);
   text-align: left;
 }
 
-colgroup:nth-child(2) {
+#column-2 {
   width: 40%;
-  border: 1px solid rgb(184, 184, 184);
   text-align: left !important;
 }
 
-colgroup:nth-child(3) {
+#column-3 {
   width: 35%;
-  border: 1px solid rgb(184, 184, 184);
 }
 
-colgroup:nth-child(4) {
+#column-4 {
   width: 1%;
-  border: 1px solid rgb(184, 184, 184);
 }
 
-colgroup:nth-child(5) {
+#column-5 {
   width: 17.5%;
-  border: 1px solid rgb(184, 184, 184);
-}
-
-colgroup:nth-child(6) {
-  width: 13.5%;
-  border: 1px solid rgb(184, 184, 184);
 }
 
 /* Tablehead */
@@ -91,7 +93,6 @@ thead th {
 
 tbody th {
   background: #fff;
-  border-left: 1px solid #ccc;
 }
 
 tbody th span {
@@ -106,15 +107,8 @@ tbody td {
   text-align: center;
 }
 
-tbody tr:nth-child(even) th,
 tbody tr:nth-child(even) td {
   background: #f5f5f5;
-  border: 1px solid #ccc;
-  border-width: 1px 0 1px 1px;
-}
-
-tbody tr:last-child td {
-  border-bottom: 0 none;
 }
 
 /*buttons*/
@@ -123,29 +117,28 @@ tbody tr:last-child td {
   color: white;
   font-size: 16px;
 }
-#statistics_button {
-  background-color: #ffa825;
-  color: black;
-  font-size: 16px;
-}
 
 #name {
   text-align: left;
 }
 
-#selected {
+/* pagination css */
+.selected-page {
   border-radius: 15px;
-  margin-left: 10px;
+  margin-right: 10px;
   color: #6e6e6e;
   background-color: #f7f5f5;
 }
 
-#selected:active,
-#selected:focus {
+.selected-page.active{
   border-radius: 15px;
-  margin-left: 10px;
-  color: #ffffff;
+  margin-left: 8px;
+  color: #fff;
   background-color: #33cda8;
+}
+.selected-page:hover {
+  background-color: #6e6e6e;
+  color: #f7f5f5;
 }
 
 .btn btn-outline-primary {
@@ -163,3 +156,69 @@ tbody tr:last-child td {
     margin-left: -50px;
   }
 }
+
+
+/* mobile and tablet display */
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  td {
+    border: none;
+  }
+  #active_wrap {
+    width: 90%;
+    min-width: 0;
+  }
+  #active_wrap * {
+    text-align: left;
+  }
+
+  tbody tr:nth-child(even) th,
+  tbody tr:nth-child(even) td {
+    border: none;
+  }
+
+	/* Force table into row formation*/
+	table, thead, tbody, th, td, tr {
+    display: block;
+    text-align: left;
+	}
+
+	/* Hide table headers*/
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	tr { border: 1px solid #ccc; }
+
+	td {
+		/* border: none;
+		border-bottom: 1px solid #eee; */
+		position: relative;
+		padding-left: 50%;
+	}
+
+	td:before {
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 30%;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+    white-space: nowrap;
+
+    font-weight: bold;
+	}
+
+	/*New table headers*/
+	td:nth-of-type(1):before {content: "Number"; }
+	td:nth-of-type(2):before {content: "Survey Name"; }
+	td:nth-of-type(3):before {content: "Expires"; }
+	td:nth-of-type(4):before {content: "Responses"; }
+  td:nth-of-type(5):before {content: "Take Survey"; }
+
+}
+
