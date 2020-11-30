@@ -6,9 +6,10 @@
     <h4>Create a survey</h4>
     <div class="form-group">
       <div class="row">
-        <input class="form-control col-10" placeholder="Enter survery name" name="survey-name"
+        <input class="form-control col-10" placeholder="Enter survery name" name="survey-name" id="create_input"
           [(ngModel)]="newSurvey.name">
-        <button [disabled]="!newSurvey.name" (click)="onCreateSurvey()" class="btn btn-success btn-sm ml-2">
+        <button [disabled]="!newSurvey.name" (click)="onCreateSurvey()" class="btn btn-success btn-sm ml-2"
+          id="create_btn">
           CREATE
         </button>
       </div>
@@ -18,15 +19,15 @@
   <!-- Table displaying all surveys-->
   <div class="mt-5">
     <h4>All Surveys</h4>
-    <table class="table">
+    <table class="table shadow">
       <thead class="col-9">
         <tr>
-          <th scope="col" style="width:40%">Survey Name</th>
-          <th scope="col">ACTIVE</th>
-          <th scope="col">EXPIRE</th>
-          <th scope="col">EDIT</th>
-          <th scope="col">DELETE</th>
-          <th scope="col">RESULTS</th>
+          <th scope="col">Survey Name</th>
+          <th scope="col">Active</th>
+          <th scope="col">Expires</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Results</th>
         </tr>
       </thead>
 
@@ -36,7 +37,7 @@
           <td>{{ survey.dateActive | date: 'MMM d, y, h:mm a' }}</td>
           <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
           <td>
-            <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-primary btn-sm">
+            <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-sm" id="edit_button">
               Edit
             </button>
           </td>

@@ -74,22 +74,6 @@
   font-weight: normal;
 }
 
-/*active Survey*/
-#active_wrap {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: rgb(255, 255, 255);
-  min-width: 1200px;
-}
-#table_wrap {
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-  min-width: 900px;
-  background-color: rgb(255, 255, 255);
-}
-
 /*====Web screen width<1800px====*/
 @media (max-width: 1710px) {
   #text_top {

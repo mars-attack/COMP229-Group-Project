@@ -6,26 +6,26 @@
     <!-- Text and button section -->
     <div id="text_div_wrap">
       <div id="text_div">
-          <p id="text_top" class="text-left">
-            Survey with 3C,<br>learn without distance !
+        <p id="text_top" class="text-left">
+          Survey with 3C,<br>learn without distance !
+        </p>
+
+        <div id="text_subtitle_wrap">
+          <p class="text-left">
+            <span id="text_subtitle">
+              <br>As a survey creator<br>
+            </span>
+            <span id="text_content">
+              (1) Register / login your account<br>
+              (2) Create a survey template<br>
+              (3) Share the page link to survey takers
+            </span>
           </p>
+        </div>
 
-          <div id="text_subtitle_wrap">
-              <p class="text-left">
-                  <span id="text_subtitle">
-                    <br>As a survey creator<br>
-                  </span>
-                  <span id="text_content">
-                    (1) Register / login your account<br>
-                    (2) Create a survey template<br>
-                    (3) Share the page link to survey takers
-                  </span>
-              </p>
-          </div>
-
-          <a id="heroBtn" routerLink="/surveys" class="btn btn-primary justify-content-center" id="heroBtn">
-            Create Survey
-          </a>
+        <a id="heroBtn" routerLink="/surveys" class="btn btn-primary justify-content-center" id="heroBtn">
+          Create Survey
+        </a>
 
       </div>
     </div>
@@ -38,10 +38,6 @@
 </div>
 
 <div id="background2">
-  <!-- Active Survey -->
-  <div id="active_wrap">
-    <div id="table_wrap">
-      <app-survey-list></app-survey-list>
-    </div>
-  </div>
+  <!-- Active Surveys -->
+  <app-survey-list></app-survey-list>
 </div>
