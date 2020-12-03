@@ -45,7 +45,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/assets/images/cup.png",
+              "src/assets/favicon.ico",
               "src/assets"
             ],
             "styles": [

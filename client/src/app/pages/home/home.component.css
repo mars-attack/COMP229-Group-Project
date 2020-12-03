@@ -1,67 +1,152 @@
-/*====Web screen width>1800px====*/
+/* --------------------*/
+/* Headline animation */
+/* ------------------*/
+.css-typing p {
+  font-size: 50px;
+  font-weight: 500;
+  color: #ffffff;
+  border-right: .15em solid #f8ad1b;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.css-typing p:nth-child(1) {
+  width: 8.5em;
+  -webkit-animation: type 2s steps(40, end);
+  animation: type 2s steps(40, end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.css-typing p:nth-child(2) {
+  width: 11em;
+  opacity: 0;
+  -webkit-animation: type3 2s steps(40, end), blink .5s step-end infinite alternate;
+  animation: type3 2s steps(40, end), blink .5s step-end infinite alternate;
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid #f8ad1b;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@-webkit-keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid #f8ad1b;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid #f8ad1b;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@-webkit-keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid #f8ad1b;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    border-color: tranparent;
+  }
+}
+
+/* --------------- */
+/* desktop screen */
+/* ------------- */
+
 #background {
   width: 100%;
-  height: 570px;
+  height: 90vh;
   overflow: hidden;
   background-color: #2e61ae;
 }
+
 #background2 {
   width: 100%;
   height: auto;
   margin-bottom: 50px;
   background-color: #ffffff;
 }
-#welcome_div_wrap {
-  width: 80%;
-  background-color: #2e61ae;
+
+table {
+  width: 90%;
+  margin-top: 70px;
   margin-left: auto;
   margin-right: auto;
-  min-width: 1200px;
+  table-layout: fixed;
 }
 
-/*Welcome - text secion*/
-#text_div {
-  position: relative;
-  float: right;
-}
-#text_div_wrap {
-  float: left;
-  min-width: 600px;
-  width: 50%;
-  height: 550px;
-  background-color: #2e61ae;
-  color: white;
-  padding: 50px;
-  padding-left: 100px;
-}
-#text_top {
-  font-size: 50px;
-  font-weight: 500;
-}
-#text_subtitle_wrap {
-  margin-top: -30px;
-}
-#text_subtitle {
-  font-size: 35px;
-  font-weight: normal;
-}
-#text_content {
-  font-size: 20px;
-  font-weight: normal;
-  line-height: 5px;
-}
-
-/*Welcome - pic secion*/
-#pic_div {
-  float: right;
-  min-width: 600px;
-  width: 50%;
-  background-color: #2e61ae;
-  height: 550px;
-}
-#main_img {
-  padding-top: 70px;
-  margin-left: 5px;
+.pic {
+  text-align: center;
 }
 
 /*button style*/
@@ -74,73 +159,169 @@
   font-weight: normal;
 }
 
-/*====Web screen width<1800px====*/
-@media (max-width: 1710px) {
-  #text_top {
-    font-size: 40px;
-  }
-}
-@media (max-width: 1200px) {
-  #pic_div {
-    float: right;
-    min-width: 270px;
-    background-color: #2e61ae;
-    height: 550px;
-  }
-  #main_img {
-    width: 320px;
-    height: auto;
-    padding-top: 220px;
-    margin-left: -45px;
-  }
+.main_title {
+  padding-left: 50px;
 }
 
-@media (max-width: 920px) {
-  #pic_div {
-    float: right;
-    min-width: 270px;
-    background-color: #2e61ae;
-    height: 550px;
-  }
-  #main_img {
-    width: 180px;
-    height: auto;
-    padding-top: 280px;
-    margin-left: -85px;
-  }
+.sub_title {
+  padding-left: 50px;
+  color: #ffffff;
 }
 
-/* Mobile screen*/
-@media (max-width: 700px) {
-  #welcome_div_wrap {
-    width: 80%;
-    min-width: 0px;
-  }
-  #background {
-    height: 400px;
-  }
-  #text_div_wrap {
-    min-width: 300px;
-    height: 350px;
-    padding: 20px 20px 20px 40px;
-  }
-  #pic_div {
-    display: none;
-  }
-  #text_top {
-    font-size: 25px;
+.sub_title h3 {
+  font-size: 35px;
+  font-weight: normal;
+}
+
+.sub_title li {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+/* ------------- */
+/* laptop screen*/
+/* ----------- */
+@media only screen and (min-width:992px) and (max-width: 1200px){
+
+  .css-typing p {
+    font-size: 42px;
     font-weight: 500;
   }
-  #text_subtitle_wrap {
-    margin-top: -30px;
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
-  #text_subtitle {
-    font-size: 20px;
-    font-weight: normal;
+
+}
+
+/* --------------/
+/ tablet screen /
+/ ------------*/
+@media only screen and (min-width:801px) and (max-width: 991px){
+
+  .css-typing p {
+    font-size: 36px;
   }
-  #text_content {
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 5px;
+
+  .sub_title h3{
+    font-size: 24px;
+  }
+
+  .sub_title li {
+    font-size: 18px;
+  }
+
+  img {
+    width: 80%;
+    max-width: 100%;
+    height: auto;
   }
 }
+
+@media only screen and (min-width:688px) and (max-width:800px){
+
+  .css-typing p {
+    font-size: 42px;
+  }
+
+  .sub_title h3{
+    font-size: 28px;
+  }
+
+  .sub_title li {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  img {
+    width: 60%;
+    max-width: 100%;
+    height: auto;
+    padding-top: 50%;
+  }
+
+}
+
+/*--------------/
+/ small screen /
+/ -----------*/
+
+@media only screen and (min-width:501px) and (max-width:687px){
+
+  .main_title {
+    padding-left: 50px;
+  }
+
+  .css-typing p {
+    font-size: 36px;
+
+  }
+  .sub_title {
+    margin-top: 28px;
+  }
+
+  .sub_title h3{
+    font-size: 24px;
+  }
+
+  .sub_title li {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .pic {
+    display: none;
+  }
+
+  td {
+    display: block;
+  }
+
+  .css-typing p{
+    font-size: 36px;
+  }
+
+}
+
+@media only screen and (max-width:500px){
+
+  .main_title {
+    padding-left: 25px;
+  }
+
+  .css-typing p {
+    font-size: 28px;
+
+  }
+  .sub_title {
+    margin-top: 50px;
+    padding-left: 25px;
+  }
+
+  .sub_title h3{
+    font-size: 24px;
+  }
+
+  .sub_title li {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .pic {
+    display: none;
+  }
+
+  td {
+    display: block;
+  }
+
+}
+
