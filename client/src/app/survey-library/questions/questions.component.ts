@@ -23,4 +23,5 @@ export class QuestionsComponent implements OnInit {
     const index = this.questions.indexOf(question);
     this.questions.splice(index, 1);
   }
+
 }

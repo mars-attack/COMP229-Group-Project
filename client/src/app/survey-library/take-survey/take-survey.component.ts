@@ -125,15 +125,11 @@ export class TakeSurveyComponent implements OnInit {
         question.chosenOptions.splice(question.chosenOptions.indexOf(optionId), 1);
       }
     }
-
-    console.log('after select', question.chosenOptions);
   }
 
   checkIfSelected(question: Question, optionId: string): boolean {
     if (question && question.chosenOptions && optionId) {
-      console.log(this.survey.questions);
       const condition = question.chosenOptions.indexOf(optionId) > -1; // checks if the option is in the array
-      console.log(question, optionId, condition);
       return condition;
     }
   }

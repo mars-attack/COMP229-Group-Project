@@ -61,19 +61,23 @@ th {
 }
 
 #column-2 {
-  width: 40%;
-  text-align: left !important;
+  width: 15%;
 }
 
 #column-3 {
-  width: 35%;
+  /* width: 40%; */
+  text-align: left !important;
 }
 
 #column-4 {
-  width: 1%;
+  width: 15%;
 }
 
 #column-5 {
+  width: 1%;
+}
+
+#column-6 {
   width: 17.5%;
 }
 
@@ -116,6 +120,11 @@ tbody tr:nth-child(even) td {
   background-color: #2e61ae;
   color: white;
   font-size: 16px;
+  width: 115px;
+
+}
+#take_survey_button:hover {
+  background-color: #254e8b;
 }
 
 #name {
@@ -215,10 +224,11 @@ only screen and (max-width: 760px),
 
 	/*New table headers*/
 	td:nth-of-type(1):before {content: "Number"; }
-	td:nth-of-type(2):before {content: "Survey Name"; }
-	td:nth-of-type(3):before {content: "Expires"; }
-	td:nth-of-type(4):before {content: "Responses"; }
-  td:nth-of-type(5):before {content: "Take Survey"; }
+	td:nth-of-type(2):before {content: "Created By"; }
+	td:nth-of-type(3):before {content: "Survey Name"; }
+	td:nth-of-type(4):before {content: "Expires"; }
+	td:nth-of-type(5):before {content: "Responses"; }
+  td:nth-of-type(6):before {content: "Take Survey"; }
 
 }
 

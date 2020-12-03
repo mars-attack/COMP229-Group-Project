@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/interfaces';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
+import { User } from 'src/app/model/user.model';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import * as XLSX from 'xlsx';
 
@@ -11,10 +12,11 @@ import * as XLSX from 'xlsx';
   templateUrl: './display-results.component.html',
   styleUrls: ['./display-results.component.css']
 })
-export class DisplayResultsComponent implements OnInit {
+export class DisplayResultsComponent implements OnInit, AfterViewInit {
 
   survey: Survey;
   questions: Question[];
+  user: User;
 
   // for exporting to excel document
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
@@ -22,12 +24,13 @@ export class DisplayResultsComponent implements OnInit {
   ExportTOExcel(): void {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.TABLE.nativeElement);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'Survey Results');
     XLSX.writeFile(wb, this.survey.name + '.xlsx');
   }
 
 
   constructor(
+    private router: Router,
     private surveyRepository: SurveyRepository,
     private route: ActivatedRoute
   ) { }
@@ -36,6 +39,16 @@ export class DisplayResultsComponent implements OnInit {
     const id = this.route.snapshot.params.id;
     this.survey = this.surveyRepository.getSurvey(id);
     this.questions = this.survey.questions;
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
+
+  // TODO: this does't work. try something else
+  ngAfterViewInit(): void {
+    // reroute user if not his own survey
+    // if (this.user.id !== this.survey.user) {
+    //   this.router.navigateByUrl('/');
+    //   console.log("navigate");
+    // }
   }
 
   onConfirmReset(): void {
@@ -66,9 +79,8 @@ export class DisplayResultsComponent implements OnInit {
         options[j].count = 0;
       }
     }
-    console.log(this.survey);
 
-    this.surveyRepository.updateSurvey(this.survey).subscribe(data => {
+    this.surveyRepository.updateSurvey(this.survey , this.user.id).subscribe(data => {
       const error = data.error;
       if (error) {
         Swal.fire({

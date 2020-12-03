@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 
 // create a model class
 let surveyModel = mongoose.Schema({
+  user: String, // user's id
   
   name: String,
   dateCreated:

@@ -7,6 +7,10 @@ button {
   width: 115px;
 }
 
+#edit-td, #del-td, #view-td {
+  text-align: center;
+}
+
 #edit_button {
   background-color: #2e61ae;
   color: white;
@@ -66,6 +70,9 @@ screen smaller than 760px and for tablets.
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
+  #edit-td, #del-td, #view-td {
+    text-align: left;
+  }
 
   #create_btn {
     top: 18px;

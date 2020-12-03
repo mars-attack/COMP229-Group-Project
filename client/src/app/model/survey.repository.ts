@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Swal } from 'sweetalert2/dist/sweetalert2.js';
+import { User } from './user.model';
 
 @Injectable()
 export class SurveyRepository
@@ -53,9 +54,10 @@ export class SurveyRepository
     });
   }
 
-  deleteSurvey(id: string): void
+  deleteSurvey(surveyData: Survey, userID: string): void
   {
-    this.restDataSource.deleteSurvey(id).subscribe(data => {
+    const userSurveyData = {survey: surveyData, userID};
+    this.restDataSource.deleteSurvey(userSurveyData).subscribe(data => {
       const error = data.error;
 
       if (error) {
@@ -72,9 +74,10 @@ export class SurveyRepository
     });
   }
 
-  updateSurvey(survey: Survey): Observable<IResponse>
+  updateSurvey(surveyData: Survey, userID: string): Observable<IResponse>
   {
-    return this.restDataSource.updateSurvey(survey);
+    const data = {survey: surveyData, userID};
+    return this.restDataSource.updateSurvey(data);
   }
   takeSurvey(survey: Survey): Observable<IResponse>
   {

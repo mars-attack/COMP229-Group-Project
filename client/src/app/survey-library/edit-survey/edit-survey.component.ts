@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Question } from 'src/app/interfaces';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
+import { User } from 'src/app/model/user.model';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
@@ -11,8 +12,10 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   templateUrl: './edit-survey.component.html',
   styleUrls: ['./edit-survey.component.css']
 })
-export class EditSurveyComponent implements OnInit {
+export class EditSurveyComponent implements OnInit, AfterViewInit{
   public selectedQuestion: Question;
+  private user: User;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -21,6 +24,14 @@ export class EditSurveyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
+
+  ngAfterViewInit(): void {
+    // reroute user if not his own survey
+    if (this.user.id !== this.survey.user) {
+      this.router.navigateByUrl('/error');
+    }
   }
 
   get survey(): Survey {
@@ -63,23 +74,23 @@ export class EditSurveyComponent implements OnInit {
   onSurveySave(): void {
     if (this.validateDates() && this.validateQuestions()) {
       // if dates and number of questions are valid
-      this.surveyRepository.updateSurvey(this.survey).subscribe(data => {
+      this.surveyRepository.updateSurvey(this.survey, this.user.id).subscribe(data => {
         const error = data.error;
         if (error) {
           this.flashMessage.show('Update failed, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
         } else {
           this.surveyRepository.initializeSurveys();
+          this.flashMessage.show('Survey updated', {cssClass: 'alert-success', timeOut: 6000});
           this.router.navigateByUrl('/surveys');
         }
       });
-      this.flashMessage.show('Survey updated', {cssClass: 'alert-success', timeOut: 6000});
     }
   }
 
   validateDates(): boolean {
     const activeDate = new Date(this.survey.dateActive).getTime();
     const expireDate = new Date(this.survey.dateExpire).getTime();
-    const currentDate = (new Date(Date.now())).getTime();
+    const currentDate = (new Date(Date.now())).getTime() - 60000; // adjust by one minute to allow user to select current time;
 
     let errorMessage;
 

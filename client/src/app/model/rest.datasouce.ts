@@ -55,16 +55,16 @@ export class RestDataSource
     return this.http.post<IResponse>(this.baseUrl + 'surveys/add', survey, this.httpOptions);
   }
 
-  deleteSurvey(id: string): Observable<IResponse>
+  deleteSurvey(data: any): Observable<IResponse>
   {
     this.loadToken();
-    return this.http.post<IResponse>(this.baseUrl + `surveys/delete/${id}`, {}, this.httpOptions);
+    return this.http.post<IResponse>(this.baseUrl + `surveys/delete`, data, this.httpOptions);
   }
 
-  updateSurvey(survey: Survey): Observable<IResponse>
+  updateSurvey(data: any): Observable<IResponse>
   {
     this.loadToken();
-    return this.http.post<IResponse>(this.baseUrl + `surveys/update/${survey._id}`, survey, this.httpOptions);
+    return this.http.post<IResponse>(this.baseUrl + `surveys/update/${data.survey._id}`, data, this.httpOptions);
   }
 
   takeSurvey(survey: Survey): Observable<IResponse>

@@ -39,7 +39,6 @@ export class UpdateUserComponent implements OnInit {
         this.flashMessage.show('Error updating account, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
       }
     });
-    console.log(this.user);
 
     this.user.newPassword = '';
   }
