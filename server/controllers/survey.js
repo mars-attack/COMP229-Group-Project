@@ -4,38 +4,39 @@ let User = userModel.User; // alias
 let passport = require("passport");
 
 module.exports.getSurveys = (req, res, next) => {
+  const promises = [];
+
   Survey.find((err, surveys) => {
     if (err) {
       console.error(err);
       res.end(err);
     } else {
-      let surveysToReturn = [];
-      const promises = [];
-
+      const filteredSurveys = surveys.filter(survey => survey.user);
       // updating returned surveys to include displayName of user
-      surveys.forEach((survey, i) => {
-        if (!survey.user) {
-          return;
-        }
+      filteredSurveys.forEach((survey, i) => {
+ 
         // handle asynchronous function
         const promise = User.findById({"_id": survey.user}, (err, foundUser) => {
           if (err) {
             console.error(err);
-          } else {
-            const surveyToReturn = {
-              ...survey._doc,
-              displayName:  foundUser.displayName
-            }
-            surveysToReturn.push(surveyToReturn);
           }
          }).exec();
 
          promises.push(promise);
       })
 
-      Promise.all(promises).then(() => {
+      Promise.all(promises).then((values) => {
+        let surveysToReturn = [];
+        filteredSurveys.forEach((survey, index) => {
+          surveysToReturn.push({
+            ...survey._doc, // destructuring survey object from db
+            displayName: values[index].displayName
+          });
+        })
         
-        //find display name here
+        // sort by id
+        surveysToReturn.sort((a, b) => (a._id < b._id) ? 1 : -1);
+
         res.json({
           error: err,
           data: surveysToReturn
@@ -43,8 +44,9 @@ module.exports.getSurveys = (req, res, next) => {
       })
 
     }
-  }).sort({_id: -1});
+  });
 };
+
 
 module.exports.getSurvey = (req, res, next) => {
   let id = req.params.id

@@ -1,11 +1,11 @@
 
 /*active Survey*/
 #active_wrap {
-  width: 60%;
+  width: 100%;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   background-color: rgb(255, 255, 255);
-  min-width: 1200px;
 }
 #table_wrap {
   margin-top: 20px;

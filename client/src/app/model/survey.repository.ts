@@ -84,7 +84,10 @@ export class SurveyRepository
     return this.restDataSource.takeSurvey(survey);
   }
   initializeSurveys(): void {
-    this.restDataSource.getSurveys().subscribe(data => { this.surveys = data.data; });
+    this.restDataSource.getSurveys().subscribe(data => {
+      console.log(data.data);
+      this.surveys = data.data;
+    });
 
     // this.restDataSource.getSurveys().subscribe(data => {
     //   // sort by dateCreated desc

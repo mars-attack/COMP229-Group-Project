@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { User } from 'src/app/model/user.model';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   templateUrl: './survey-management.component.html',
   styleUrls: ['./survey-management.component.css']
 })
-export class SurveyManagementComponent implements OnInit {
+export class SurveyManagementComponent implements OnInit, AfterViewInit {
   public newSurvey: Survey;
   user: User;
 
@@ -28,6 +28,9 @@ export class SurveyManagementComponent implements OnInit {
   }
 
 
+  ngAfterViewInit(): void {
+
+  }
 
   onCreateSurvey(): void {
     this.newSurvey.user = this.user.id;

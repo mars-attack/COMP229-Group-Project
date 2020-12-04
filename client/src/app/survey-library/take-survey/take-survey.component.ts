@@ -12,8 +12,10 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./take-survey.component.css']
 })
 
-export class TakeSurveyComponent implements OnInit {
-  survey: Survey;
+export class TakeSurveyComponent implements OnInit, AfterViewInit {
+  // survey: Survey;
+  // TODO: include overlay in html
+  showCannotTakeOverlay: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,13 +24,29 @@ export class TakeSurveyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
-    this.survey = this.surveyRepository.getSurvey(id);
+    // const id = this.route.snapshot.params.id;
+    // this.survey = this.surveyRepository.getSurvey(id);
+
     if (this.survey) {
       this.survey.questions.forEach(question => {
         question.chosenOptions = ['test'];
       });
     }
+  }
+
+  get survey(): Survey {
+    const id = this.route.snapshot.params.id;
+    return this.surveyRepository.getSurvey(id);
+  }
+
+  // reroute if survey is inactive
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.survey && !this.surveyRepository.isActive(this.survey)){
+        // this.router.navigateByUrl('/');
+        this.showCannotTakeOverlay = true;
+      }
+    }, 250);
   }
 
   onCancelSubmit(event: Event): void {

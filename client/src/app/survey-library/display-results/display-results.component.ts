@@ -14,8 +14,6 @@ import * as XLSX from 'xlsx';
 })
 export class DisplayResultsComponent implements OnInit, AfterViewInit {
 
-  survey: Survey;
-  questions: Question[];
   user: User;
 
   // for exporting to excel document
@@ -28,7 +26,6 @@ export class DisplayResultsComponent implements OnInit, AfterViewInit {
     XLSX.writeFile(wb, this.survey.name + '.xlsx');
   }
 
-
   constructor(
     private router: Router,
     private surveyRepository: SurveyRepository,
@@ -36,19 +33,26 @@ export class DisplayResultsComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
-    this.survey = this.surveyRepository.getSurvey(id);
-    this.questions = this.survey.questions;
     this.user = JSON.parse(localStorage.getItem('user'));
   }
 
-  // TODO: this does't work. try something else
+  get survey(): Survey
+  {
+    // display only surveys made by current user
+    const id = this.route.snapshot.params.id;
+    return this.surveyRepository.getSurvey(id);
+  }
+
+  get questions(): Question[]
+  {
+    return this.survey.questions;
+  }
+
   ngAfterViewInit(): void {
     // reroute user if not his own survey
-    // if (this.user.id !== this.survey.user) {
-    //   this.router.navigateByUrl('/');
-    //   console.log("navigate");
-    // }
+    if (this.user.id !== this.survey.user) {
+      this.router.navigateByUrl('/');
+    }
   }
 
   onConfirmReset(): void {
