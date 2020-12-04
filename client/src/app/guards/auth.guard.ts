@@ -23,7 +23,7 @@ export class AuthGuard
     else
     {
       console.log('cannnot authenticate');
-      this.router.navigate(['/admin/auth']);
+      this.router.navigate(['/login']);
       return false;
     }
   }

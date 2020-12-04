@@ -17,8 +17,8 @@
   </div>
 
   <!-- Table displaying all surveys-->
-  <div class="mt-5">
-    <h4>All Surveys</h4>
+  <div class="mt-5" id="table_wrap">
+    <h4>My Surveys</h4>
     <table class="table shadow">
       <thead class="col-9">
         <tr>
@@ -36,17 +36,17 @@
           <td> {{ survey.name }}</td>
           <td>{{ survey.dateActive | date: 'MMM d, y, h:mm a' }}</td>
           <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
-          <td>
+          <td id="edit-td">
             <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-sm" id="edit_button">
               Edit
             </button>
           </td>
-          <td>
-            <button (click)="onDeleteSurvey(survey._id)" class="btn btn-danger btn-sm">
+          <td id="del-td">
+            <button (click)="onDeleteSurvey(survey)" class="btn btn-danger btn-sm">
               Delete
             </button>
           </td>
-          <td>
+          <td id="view-td">
             <button routerLink="/surveys/results/{{survey._id}}" class="btn btn-info btn-sm">
               View Results
             </button>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
+import { User } from 'src/app/model/user.model';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
@@ -8,22 +9,31 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   templateUrl: './survey-management.component.html',
   styleUrls: ['./survey-management.component.css']
 })
-export class SurveyManagementComponent implements OnInit {
+export class SurveyManagementComponent implements OnInit, AfterViewInit {
   public newSurvey: Survey;
+  user: User;
 
   constructor(private repository: SurveyRepository) {}
 
   ngOnInit(): void {
     this.initializeNewSurvey();
     this.repository.initializeSurveys();
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   get surveys(): Survey[]
   {
-    return this.repository.getSurveys();
+    // display only surveys made by current user
+    return this.repository.getSurveys().filter((survey) => survey.user === this.user.id);
+  }
+
+
+  ngAfterViewInit(): void {
+
   }
 
   onCreateSurvey(): void {
+    this.newSurvey.user = this.user.id;
     this.repository.addSurvey(this.newSurvey);
     this.initializeNewSurvey();
     Swal.fire({
@@ -33,8 +43,7 @@ export class SurveyManagementComponent implements OnInit {
     });
   }
 
-  onDeleteSurvey(id: string): void {
-
+  onDeleteSurvey(survey: Survey): void {
     Swal.fire({
       title: 'Are you sure?',
       text: 'You will not be able recover this survey.',
@@ -44,7 +53,7 @@ export class SurveyManagementComponent implements OnInit {
       cancelButtonText: 'No, I change my mind'
     }).then((result) => {
       if (result.value) {
-        this.repository.deleteSurvey(id);
+        this.repository.deleteSurvey(survey, this.user.id);
         Swal.fire({
           title: 'Survey deleted',
           icon: 'success'

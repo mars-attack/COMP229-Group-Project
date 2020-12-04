@@ -1,18 +1,52 @@
 let Survey = require('../models/survey');
+let userModel = require("../models/user");
+let User = userModel.User; // alias
+let passport = require("passport");
 
 module.exports.getSurveys = (req, res, next) => {
+  const promises = [];
+
   Survey.find((err, surveys) => {
     if (err) {
       console.error(err);
       res.end(err);
     } else {
-      res.json({
-        error: err,
-        data: surveys
-      });
+      const filteredSurveys = surveys.filter(survey => survey.user);
+      // updating returned surveys to include displayName of user
+      filteredSurveys.forEach((survey, i) => {
+ 
+        // handle asynchronous function
+        const promise = User.findById({"_id": survey.user}, (err, foundUser) => {
+          if (err) {
+            console.error(err);
+          }
+         }).exec();
+
+         promises.push(promise);
+      })
+
+      Promise.all(promises).then((values) => {
+        let surveysToReturn = [];
+        filteredSurveys.forEach((survey, index) => {
+          surveysToReturn.push({
+            ...survey._doc, // destructuring survey object from db
+            displayName: values[index].displayName
+          });
+        })
+        
+        // sort by id
+        surveysToReturn.sort((a, b) => (a._id < b._id) ? 1 : -1);
+
+        res.json({
+          error: err,
+          data: surveysToReturn
+        });
+      })
+
     }
-  }).sort({_id: -1});
+  });
 };
+
 
 module.exports.getSurvey = (req, res, next) => {
   let id = req.params.id
@@ -32,7 +66,8 @@ module.exports.getSurvey = (req, res, next) => {
 
 
 module.exports.addSurvey = (req, res, next) => {
-  let newSurvey = Survey({      
+  let newSurvey = Survey({   
+      "user":req.body.user,
       "name":req.body.name,
       "dateCreated":req.body.dateCreated,
       "dateActive":req.body.dateActive,
@@ -58,28 +93,40 @@ module.exports.addSurvey = (req, res, next) => {
 }
 
 module.exports.updateSurvey = (req, res, next) => {
+  // the req body has two objects: survey and user
   let id = req.params.id
+  let userID = req.body.userID
   let survey = Survey({
     "_id": id,
-    "name": req.body.name,
-    "dateCreated":req.body.dateCreated,
-    "dateActive":req.body.dateActive,
-    "dateExpire":req.body.dateExpire,
-    "responses":req.body.responses,
-    "questions":req.body.questions
+    "user": req.body.survey.user,
+    "name": req.body.survey.name,
+    "dateCreated":req.body.survey.dateCreated,
+    "dateActive":req.body.survey.dateActive,
+    "dateExpire":req.body.survey.dateExpire,
+    "responses":req.body.survey.responses,
+    "questions":req.body.survey.questions
   })
 
-  Survey.updateOne({_id: id}, survey, (err) => {
-    if (err) {
-      console.error(err);
-      res.end(err);
-    } else 
-    {
-      res.json({
-        error: err        
-      });
-    }
+  console.log(survey.user);
+  console.log(userID);
+  
+  //prevent users from updating if survey is not theirs
+  if (survey.user === userID)
+  {
+    Survey.updateOne({_id: id}, survey, (err) => {
+      if (err) {
+        console.error(err);
+        res.end(err);
+      } else 
+      {
+        res.json({error: err});
+      }
     });
+  }
+  else
+  {
+    res.json({error: 'Failed to update messgage'});
+  }
 }
 
 module.exports.takeSurvey = (req, res, next) => {
@@ -113,20 +160,29 @@ module.exports.takeSurvey = (req, res, next) => {
 }
 
 module.exports.deleteSurvey = (req, res, next) => {
-  let id = req.params.id;
-
-  Survey.remove({_id: id}, (err)=> {
-    if (err) 
-    {
-      console.error(err);
-      res.end(err);
-    } 
-    else
-     {
-      res.json({
-        error: err
-      });
+  let id = req.body.survey._id
+  let userID = req.body.userID;
+  let surveyUser = req.body.survey.user;
+  
+  if (surveyUser === userID)
+  {
+    Survey.remove({_id: id}, (err)=> {
+      if (err) 
+      {
+        console.error(err);
+        res.end(err);
+      } 
+      else
+      {
+        res.json({
+          error: err
+        });
       }
     });
-    }
+  } else
+  {
+    res.json({error: 'Failed to delete survey'});
+  }
+
+}
  

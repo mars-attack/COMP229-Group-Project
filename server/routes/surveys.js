@@ -21,7 +21,7 @@ router.post('/add', passport.authenticate('jwt', {session: false}), surveyContro
 router.post('/update/:id', passport.authenticate('jwt', {session: false}), surveyController.updateSurvey);
 
 // POST delete survey by id
-router.post('/delete/:id', passport.authenticate('jwt', {session: false}), surveyController.deleteSurvey);
+router.post('/delete', passport.authenticate('jwt', {session: false}), surveyController.deleteSurvey);
 
 
 module.exports = router;

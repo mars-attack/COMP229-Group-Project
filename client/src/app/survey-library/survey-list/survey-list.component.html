@@ -14,12 +14,14 @@
         <col id="column-3">
         <col id="column-4">
         <col id="column-5">
+        <col id="column-6">
       </colgroup>
 
       <!--Title line-->
       <thead>
         <tr>
           <th>#</th>
+          <th>Created By</th>
           <th>Survey Name</th>
           <th>Closing Date</th>
           <th>Responses</th>
@@ -30,6 +32,7 @@
       <tbody>
         <tr *ngFor="let survey of surveys; let i = index">
           <td scope="row">{{ i + 1 }}</td>
+          <td id="displayName">{{ survey.displayName }}</td>
           <td id="name">{{ survey.name }}</td>
           <!--Change once set deactive date-->
           <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>

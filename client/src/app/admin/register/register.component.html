@@ -7,7 +7,7 @@
 
     <form class="col col-lg-8 col-md-12" autocomplete="off" (submit)="onRegisterSubmit()" #registerForm="ngForm">
       <fieldset class="form-group">
-        <!-- <label for="username">Username:</label> -->
+        <label for="username" [ngStyle]="{'visibility': user.username? 'visible':'hidden'}">Username:</label>
 
         <input type="username" class="form-control" [(ngModel)]="user.username" name="username"
           placeholder="Enter username" #username="ngModel"
@@ -18,7 +18,7 @@
       </fieldset>
 
       <fieldset class="form-group">
-        <!-- <label for="password">Password:</label> -->
+        <label for="password" [ngStyle]="{'visibility': user.password? 'visible':'hidden'}">Password:</label>
 
         <input type="password" class="form-control" [(ngModel)]="user.password" name="password"
           placeholder="Enter Password" #password="ngModel"
@@ -30,7 +30,7 @@
       </fieldset>
 
       <fieldset class="form-group">
-        <!-- <label for="email">Email:</label> -->
+        <label for="email" [ngStyle]="{'visibility': user.email? 'visible':'hidden'}">Email:</label>
         <!-- uses custom email directive validator-->
         <input type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="Enter Email"
           id="email" autocomplete="off" #email="ngModel" required emailValidateDirective
@@ -42,7 +42,7 @@
       </fieldset>
 
       <fieldset class="form-group">
-        <!-- <label for="displayName">Display Name:</label> -->
+        <label for="displayName" [ngStyle]="{'visibility': user.displayName? 'visible':'hidden'}">Display Name:</label>
 
         <input type="displayName" class="form-control" [(ngModel)]="user.displayName" name="displayName"
           placeholder="Enter Display Name" #displayName="ngModel"
@@ -53,7 +53,7 @@
       </fieldset>
 
 
-      <fieldset class="form-group text-left">
+      <fieldset class="mt-4 form-group text-left">
         <button class='btn btn-primary m-1' type='submit' [disabled]="!registerForm.form.valid">
           <i class="fas fa-sign-in-alt"></i>
           Register
