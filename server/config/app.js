@@ -96,9 +96,12 @@ let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
 passport.use(strategy);
 
 // routing
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/surveys', surveysRouter);
+app.use('/api', indexRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/surveys', surveysRouter);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
