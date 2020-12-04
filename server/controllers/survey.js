@@ -106,9 +106,6 @@ module.exports.updateSurvey = (req, res, next) => {
     "responses":req.body.survey.responses,
     "questions":req.body.survey.questions
   })
-
-  console.log(survey.user);
-  console.log(userID);
   
   //prevent users from updating if survey is not theirs
   if (survey.user === userID)
@@ -141,7 +138,6 @@ module.exports.takeSurvey = (req, res, next) => {
         res.end(err);
       } else 
       {
-        console.log(survey);
         // update response count
         survey.responses = updatedRespones;  
         // update options count

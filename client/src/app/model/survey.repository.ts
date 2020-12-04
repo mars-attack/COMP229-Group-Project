@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Swal } from 'sweetalert2/dist/sweetalert2.js';
-import { User } from './user.model';
 
 @Injectable()
 export class SurveyRepository
@@ -85,17 +84,8 @@ export class SurveyRepository
   }
   initializeSurveys(): void {
     this.restDataSource.getSurveys().subscribe(data => {
-      console.log(data.data);
       this.surveys = data.data;
     });
-
-    // this.restDataSource.getSurveys().subscribe(data => {
-    //   // sort by dateCreated desc
-    //   const survey = data.data.slice().sort((a, b) => {
-    //     return (new Date(b.dateCreated) as any) - ( new Date(a.dateCreated) as any);
-    //   });
-    //   this.surveys = survey;
-    // });
   }
 
   isActive(survey: Survey): boolean {

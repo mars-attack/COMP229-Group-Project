@@ -36,7 +36,8 @@ export class RestDataSource
               private jwtService: JwtHelperService)
   {
     this.user = new User();
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+    // this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
+    this.baseUrl = `https://comp229-group-project-3c.herokuapp.com/api/`;
   }
 
   getSurveys(): Observable<IResponse>
@@ -81,7 +82,9 @@ export class RestDataSource
 
   storeUserData(token: any, user: User): void
   {
-    localStorage.setItem('id_token', 'Bearer ' + token);
+    // * 'bearer ' not needed for deploy on heroku
+    // localStorage.setItem('id_token', 'Bearer ' + token);
+    localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
