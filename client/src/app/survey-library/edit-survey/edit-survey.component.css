@@ -17,3 +17,41 @@
   left: 15px;
   top: 32px;
 }
+
+.date-input {
+  width: 245px;
+}
+
+.date-wrapper:nth-child(1) {
+  margin-left: 20px;
+}
+
+
+/* -------------- /
+/ tablet screen /
+/ ------------ */
+@media only screen and (min-width:688px) and (max-width: 1198px){
+
+  .date-wrapper:nth-child(2) {
+    margin-top: 8px;
+  }
+  .date-wrapper{
+    margin-left: 20px;
+  }
+
+ }
+
+
+/* --------------/
+/ small screen /
+/ ------------*/
+
+@media only screen and (max-width:687px){
+  .date-wrapper:nth-child(2) {
+    margin-top: 8px;
+  }
+  .date-wrapper{
+    margin-left: 20px;
+  }
+}
+

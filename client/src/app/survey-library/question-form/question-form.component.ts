@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Question, OptionType } from 'src/app/interfaces';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-question-form',
@@ -10,7 +11,9 @@ export class QuestionFormComponent implements OnInit, OnChanges {
   @Input() question: Question;
   @Output() save = new EventEmitter();
   public placeholderQuestion: Question;
-  constructor() { }
+  constructor(
+    private flashMessage: FlashMessagesService
+  ) { }
 
   ngOnInit(): void {
     this.initializePlaceholderQuestion();
