@@ -845,9 +845,9 @@ class RestDataSource {
         };
         this.user = new _user_model__WEBPACK_IMPORTED_MODULE_2__["User"]();
         // * Development
-        this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
-        // * Production
-        // this.baseUrl = `https://comp229-group-project-3c.herokuapp.com/api/`;
+        // this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
+        // * Deployment
+        this.baseUrl = `https://comp229-group-project-3c.herokuapp.com/api/`;
     }
     getSurveys() {
         return this.http.get(this.baseUrl + 'surveys');
