@@ -128,7 +128,7 @@ module.exports.updateSurvey = (req, res, next) => {
 
 module.exports.takeSurvey = (req, res, next) => {
   let id = req.params.id
-  let updatedRespones = req.body.responses;
+  // bellow stores questions with responses
   let updatedQuestions =  req.body.questions;
 
   Survey.findById({"_id": id},
@@ -139,11 +139,14 @@ module.exports.takeSurvey = (req, res, next) => {
       } else 
       {
         // update response count
-        survey.responses = updatedRespones;  
+        survey.responses++;  
         // update options count
         survey.questions.forEach((question, i) => {
           question.options.forEach((option, j) => {
-            option.count = updatedQuestions[i].options[j].count;
+            if (updatedQuestions[i].options[j].count > 0)
+            {
+              option.count++;
+            }
           });
         });
         survey.save();

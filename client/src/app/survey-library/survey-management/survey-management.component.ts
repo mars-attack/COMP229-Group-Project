@@ -3,6 +3,7 @@ import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { User } from 'src/app/model/user.model';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { createPopper } from '@popperjs/core';
 
 @Component({
   selector: 'app-survey-management',
@@ -61,6 +62,50 @@ export class SurveyManagementComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  onShareLink(id: string, event: any): void {
+    const link = 'https://comp229-group-project-3c.herokuapp.com/surveys/take/' + id;
+    // needs a text area to work. removed after copy
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = link;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+
+    const message = document.getElementById(event.target.nextSibling.id);
+    message.innerText = 'Link copied!';
+  }
+
+  showTooltip(event: any): void {
+    const icon = document.getElementById(event.target.id);
+    const message = document.getElementById(event.target.nextSibling.id);
+    message.innerText = 'Click to copy';
+    message.classList.add('show-tooltip');
+    createPopper(icon, message, {
+      placement: 'right-start',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 8],
+          },
+        },
+      ],
+    });
+  }
+
+  hideTooltip(event: any): void {
+    const icon = document.getElementById(event.target.id);
+    const message = document.getElementById(event.target.nextSibling.id);
+    message.classList.remove('show-tooltip');
+  }
+
 
   initializeNewSurvey(): void {
     this.newSurvey = {

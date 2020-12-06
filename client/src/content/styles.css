@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+h1 {
+  margin-top: 3rem!important;
+}
+
+.green-btn {
+  background: #33CDA8;
+  border: none;
+  color: white;
+}
+.green-btn:hover {
+  background: #249279;
+  color: white;
+}
+
+.green-btn:disabled:hover {
+  background: #33CDA8;
+}

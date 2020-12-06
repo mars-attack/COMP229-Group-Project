@@ -1,6 +1,6 @@
 <!--EditSurvey Component-->
 <div class="container" id="editSurveyContainer">
-  <h1 class="display-4 mt-5 mb-5 pl-5" id="editTitle">Edit Survey</h1>
+  <h1 class="mb-5" id="editTitle">Edit Survey</h1>
   <div class="container mb-5 row">
 
     <!-- Question form conponent -->
@@ -21,13 +21,15 @@
 
       <div class="row mb-2">
         <!-- Feilds for date active and expire -->
-        <div class="col-md-6 col-sm-12 p-0">
+        <div class="col-md-6 col-sm-12 p-0 row date-wrapper">
           <label class="h4 pr-2" for="dateActive">Active: </label>
-          <input type="datetime-local" id="dateActive" name="dateActive" [(ngModel)]="survey.dateActive">
+          <input class="form-control date-input" type="datetime-local" id="dateActive" name="dateActive"
+            [(ngModel)]="survey.dateActive">
         </div>
-        <div class="col-md-6 col-sm-12 p-0">
+        <div class="col-md-6 col-sm-12 p-0 row date-wrapper">
           <label class="h4 pr-2" for="dateExpire">Expires: </label>
-          <input type="datetime-local" id="dateExpire" name="dateExpire" [(ngModel)]="survey.dateExpire">
+          <input class="form-control date-input" type="datetime-local" id="dateExpire" name="dateExpire"
+            [(ngModel)]="survey.dateExpire">
         </div>
       </div>
 
