@@ -37,10 +37,10 @@ export class RestDataSource
   {
     this.user = new User();
     // * Development
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
+    // this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
 
-    // * Production
-    // this.baseUrl = `https://comp229-group-project-3c.herokuapp.com/api/`;
+    // * Deployment
+    this.baseUrl = `https://comp229-group-project-3c.herokuapp.com/api/`;
   }
 
   getSurveys(): Observable<IResponse>
