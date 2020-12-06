@@ -18,6 +18,7 @@ export class SurveyListComponent implements OnInit {
   constructor(private repository: SurveyRepository) { }
 
   ngOnInit(): void {
+    this.repository.initializeSurveys();
   }
 
   // returns active surveys

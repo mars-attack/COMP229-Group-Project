@@ -1,11 +1,59 @@
 #surveyContainer {
   padding-bottom: 150px;
 }
+
+
+h1{
+  margin-top:20px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 101%;
+  /* or 101px */
+  text-align: left;
+  color: #000000;
+}
+
 /* Buttons*/
 button {
   font-size: 16px;
   width: 115px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 }
+
+/* tooltips */
+.share-link {
+  color: #686868;
+  float: right;
+}
+
+.share-link:hover {
+  color: #ffc107;
+}
+
+.tooltip {
+  border-radius: 5px;
+  background: white;
+  color: #333;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  display: none;
+}
+.show-tooltip {
+  display: block;
+  opacity: 1;
+}
+
+/* table style */
+
+td:nth-child(2), td:nth-child(3) {
+  max-width: 140px;
+}
+
 #table_wrap {
   width: 100%;
   max-width: 1200px;
@@ -28,13 +76,24 @@ button {
 }
 
 #delete_button {
-  background-color: #ffa825;
-  color: black;
+  background: #FF4C25;
+  color: white;
   font-size: 16px;
 }
+#delete_button:hover {
+  background: #dd411e;
+}
 
+#results_button {
+  background-color:#F8AF1B;
+  color: white;
+  font-size: 16px;
+}
+#results_button:hover {
+  background-color:#da9814;
+}
 table {
-  border: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
 /* Tablehead */
 thead th {
@@ -45,6 +104,7 @@ thead th {
   font-weight: bolder;
   color: rgb(0, 0, 0);
   height: 20px;
+  padding: 1em;
 }
 
 /* thead th:first-child {
@@ -59,8 +119,6 @@ td {
   color: rgb(0, 0, 0);
   vertical-align: middle;
   text-align: left;
-  padding: 1em;
-
   border: 1px solid #ccc;
 }
 
@@ -81,6 +139,10 @@ only screen and (max-width: 760px),
     text-align: left;
   }
 
+  td:nth-child(2), td:nth-child(3) {
+    max-width: none;
+  }
+
   #create_btn {
     top: 18px;
     left: 10px;
@@ -91,7 +153,8 @@ only screen and (max-width: 760px),
     left: 18px;
   }
 
-  tbody tr:nth-child(even) td {
+  tbody tr:nth-child(even) th,
+  tbody tr:nth-child(even) td  {
     border: none;
   }
 	/* Force table to not be like tables anymore */
@@ -106,7 +169,9 @@ only screen and (max-width: 760px),
 		left: -9999px;
 	}
 
-	tr { border: 1px solid #ccc; }
+	tr {
+    border: 1px solid #ccc;
+  }
 
 	td {
 		border: none;

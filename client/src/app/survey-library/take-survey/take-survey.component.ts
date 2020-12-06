@@ -24,12 +24,14 @@ export class TakeSurveyComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    // const id = this.route.snapshot.params.id;
-    // this.survey = this.surveyRepository.getSurvey(id);
-
     if (this.survey) {
-      this.survey.questions.forEach(question => {
+      this.survey.questions.forEach((question, i) => {
         question.chosenOptions = ['test'];
+
+        // reset count to zero. update will be in backend
+        this.survey.questions[i].options.forEach(option => {
+          option.count = 0;
+        });
       });
     }
   }
@@ -77,17 +79,11 @@ export class TakeSurveyComponent implements OnInit, AfterViewInit {
     }).then((result) => {
       if (result.value) {
         this.surveySave();
-        Swal.fire({
-          title: 'Submitted!',
-          text: 'Thank you for completing this survey :)',
-          icon: 'success'
-        });
       }
     });
   }
 
   surveySave(): void {
-    this.survey.responses++;
 
     // checking the selected option and updating the options count
     for (let index = 0; index <=  this.survey.questions.length - 1; index++)
@@ -120,7 +116,15 @@ export class TakeSurveyComponent implements OnInit, AfterViewInit {
           icon: 'error'
         });
       } else {
-        this.router.navigateByUrl('/');
+        Swal.fire({
+          title: 'Submitted!',
+          text: 'Thank you for completing this survey :)',
+          icon: 'success'
+        }).then(result => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/');
+          }
+        });
       }
     });
   }
@@ -138,9 +142,9 @@ export class TakeSurveyComponent implements OnInit, AfterViewInit {
     } else if (question.optionType === 'checkbox') {
       if (!question.chosenOptions.includes(optionId)) // if first selection
       {
-        question.chosenOptions.push(optionId); // remove
+        question.chosenOptions.push(optionId); // add to chosen options
       } else {
-        question.chosenOptions.splice(question.chosenOptions.indexOf(optionId), 1);
+        question.chosenOptions.splice(question.chosenOptions.indexOf(optionId), 1); // else remove
       }
     }
   }

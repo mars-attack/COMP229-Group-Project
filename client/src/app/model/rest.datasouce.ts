@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { User } from './user.model';
 
 const PROTOCOL = 'http';
-const  PORT = 3000;
+const  PORT = 3500;
 
 export interface IResponse {
   error: string | undefined | null;
@@ -36,8 +36,11 @@ export class RestDataSource
               private jwtService: JwtHelperService)
   {
     this.user = new User();
-    // this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
-    this.baseUrl = `https://comp229-group-project-3c.herokuapp.com/api/`;
+    // * Development
+    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
+
+    // * Production
+    // this.baseUrl = `https://comp229-group-project-3c.herokuapp.com/api/`;
   }
 
   getSurveys(): Observable<IResponse>
