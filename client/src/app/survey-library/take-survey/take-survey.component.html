@@ -1,6 +1,14 @@
 <!--TakeSurvey Comoponent-->
 <div class="container">
-  <h1>{{survey?.name}}</h1>
+  <div id="heading_material">
+    <h1>{{survey?.name}}</h1>
+    <div class="row">
+      <span class="pt-1 col-md-6 col-sm-12">Author: {{survey?.displayName}}</span>
+      <span class="pt-1 col-md-6 col-sm-12 " id="date_expire">Closing Date:
+        {{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}
+      </span>
+    </div>
+  </div>
   <form>
     <!--Populating the page with questions-->
     <div class="card bg-light shoddow rounded m-3"
@@ -27,12 +35,15 @@
       </fieldset>
     </div>
 
-    <button class="btn btn-success btn-sm m-1 p-2" (click)="onConfirmSubmit($event)">
-      SUBMIT
-    </button>
-    <button class="btn btn-warning btn-sm m-1 p-2" (click)="onCancelSubmit($event)">
-      CANCEL
-    </button>
+
+    <div id="button_wrapper">
+      <button class="btn btn-success btn-sm m-1 p-2 submitBtn" (click)="onConfirmSubmit($event)">
+        SUBMIT
+      </button>
+      <button class="btn btn-secondary btn-sm m-1 p-2 cancelBtn" (click)="onCancelSubmit($event)">
+        CANCEL
+      </button>
+    </div>
 
   </form>
 </div>

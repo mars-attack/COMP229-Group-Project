@@ -18,6 +18,7 @@ export class SurveyListComponent implements OnInit {
   constructor(private repository: SurveyRepository) { }
 
   ngOnInit(): void {
+    this.repository.initializeSurveys();
   }
 
   // returns active surveys
@@ -25,7 +26,13 @@ export class SurveyListComponent implements OnInit {
   {
     // for pagination
     const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
-    return this.repository.getActiveSurveys().slice(pageIndex, pageIndex + this.surveysPerPage);
+
+    // sort by by closing date
+    const surveysTOReturn = this.repository.getActiveSurveys().sort((a, b) =>
+      ((new Date(b.dateExpire)).getTime() < (new Date (a.dateExpire)).getTime()) ? 1 : -1
+    );
+
+    return surveysTOReturn.slice(pageIndex, pageIndex + this.surveysPerPage);
   }
 
   changePage(newPage: number): void

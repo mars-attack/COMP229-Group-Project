@@ -21,8 +21,9 @@ const routes: Routes = [
   {path: 'surveys/results/:id', component: DisplayResultsComponent, data: {title: 'Results'}, canActivate: [AuthGuard]},
   {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  // {path: '**', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', component: ErrorComponent }
+  {path: 'error', component: ErrorComponent, data: {title: 'Error'}},
+  {path: '**', redirectTo: '/error', pathMatch: 'full'},
+  // {path: '**', component: ErrorComponent }
 ];
 
 @NgModule({

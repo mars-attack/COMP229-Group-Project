@@ -12,8 +12,10 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./take-survey.component.css']
 })
 
-export class TakeSurveyComponent implements OnInit {
-  survey: Survey;
+export class TakeSurveyComponent implements OnInit, AfterViewInit {
+  // survey: Survey;
+  // TODO: include overlay in html
+  showCannotTakeOverlay: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,13 +24,31 @@ export class TakeSurveyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
-    this.survey = this.surveyRepository.getSurvey(id);
     if (this.survey) {
-      this.survey.questions.forEach(question => {
+      this.survey.questions.forEach((question, i) => {
         question.chosenOptions = ['test'];
+
+        // reset count to zero. update will be in backend
+        this.survey.questions[i].options.forEach(option => {
+          option.count = 0;
+        });
       });
     }
+  }
+
+  get survey(): Survey {
+    const id = this.route.snapshot.params.id;
+    return this.surveyRepository.getSurvey(id);
+  }
+
+  // reroute if survey is inactive
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.survey && !this.surveyRepository.isActive(this.survey)){
+        // this.router.navigateByUrl('/');
+        this.showCannotTakeOverlay = true;
+      }
+    }, 250);
   }
 
   onCancelSubmit(event: Event): void {
@@ -59,17 +79,11 @@ export class TakeSurveyComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.surveySave();
-        Swal.fire({
-          title: 'Submitted!',
-          text: 'Thank you for completing this survey :)',
-          icon: 'success'
-        });
       }
     });
   }
 
   surveySave(): void {
-    this.survey.responses++;
 
     // checking the selected option and updating the options count
     for (let index = 0; index <=  this.survey.questions.length - 1; index++)
@@ -102,7 +116,15 @@ export class TakeSurveyComponent implements OnInit {
           icon: 'error'
         });
       } else {
-        this.router.navigateByUrl('/');
+        Swal.fire({
+          title: 'Submitted!',
+          text: 'Thank you for completing this survey :)',
+          icon: 'success'
+        }).then(result => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/');
+          }
+        });
       }
     });
   }
@@ -120,20 +142,16 @@ export class TakeSurveyComponent implements OnInit {
     } else if (question.optionType === 'checkbox') {
       if (!question.chosenOptions.includes(optionId)) // if first selection
       {
-        question.chosenOptions.push(optionId); // remove
+        question.chosenOptions.push(optionId); // add to chosen options
       } else {
-        question.chosenOptions.splice(question.chosenOptions.indexOf(optionId), 1);
+        question.chosenOptions.splice(question.chosenOptions.indexOf(optionId), 1); // else remove
       }
     }
-
-    console.log('after select', question.chosenOptions);
   }
 
   checkIfSelected(question: Question, optionId: string): boolean {
     if (question && question.chosenOptions && optionId) {
-      console.log(this.survey.questions);
       const condition = question.chosenOptions.indexOf(optionId) > -1; // checks if the option is in the array
-      console.log(question, optionId, condition);
       return condition;
     }
   }

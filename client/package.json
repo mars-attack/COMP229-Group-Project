@@ -25,6 +25,7 @@
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "json-server": "^0.16.2",
+    "ngx-clipboard": "^14.0.1",
     "ngx-page-scroll": "^7.0.3",
     "ngx-page-scroll-core": "^7.0.3",
     "popper.js": "^1.16.1",

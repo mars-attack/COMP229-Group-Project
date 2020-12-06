@@ -11,12 +11,9 @@
   <tbody>
     <tr *ngFor="let question of questions">
       <td>
-        <div>
-          {{ question.title }}
-        </div>
-        <div>
-          {{ question.optionType }}
-        </div>
+        <div><b>Title: </b>{{ question.title }}</div>
+        <div><b>Type: </b>{{ question.optionType }}</div>
+        <div><b>Options: </b></div>
         <div *ngFor="let option of question.options" class="ml-5">
           <li>{{ option.details }}</li>
         </div>

@@ -68,9 +68,8 @@ module.exports.processRegisterPage = (req, res, next) => {
 
     User.register(newUser, req.body.password, (err) => {
         if (err) {
-            console.log("Error: Inserting New User");
             if (err.name == "UserExistsError") {  
-                return res.json({success: false, msg: 'Username taken, please choose another username.'});
+                //return res.json({success: false, msg: 'Username taken, please choose another username.'});
             }
             return res.json({success: false, msg: 'Error: failed to create user.'});
         } else {
@@ -93,7 +92,6 @@ module.exports.processUpdateUser = (req, res, next) => {
         if (foundUser){
             foundUser.changePassword(password, newPassword, (err) => {
                 if (err) {
-                    console.log("password did not match");
                     res.json({success: false, message: 'old password does not match.'});
                 } else {
                     // if passwords match, update displayname and date updated

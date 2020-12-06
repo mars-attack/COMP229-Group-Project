@@ -17,13 +17,13 @@ export class AuthGuard
   {
     if (this.auth.authenticated)
     {
-      console.log('authenticated');
+      // console.log('authenticated');
       return true;
     }
     else
     {
-      console.log('cannnot authenticate');
-      this.router.navigate(['/admin/auth']);
+      // console.log('cannnot authenticate');
+      this.router.navigate(['/login']);
       return false;
     }
   }

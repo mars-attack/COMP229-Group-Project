@@ -53,9 +53,10 @@ export class SurveyRepository
     });
   }
 
-  deleteSurvey(id: string): void
+  deleteSurvey(surveyData: Survey, userID: string): void
   {
-    this.restDataSource.deleteSurvey(id).subscribe(data => {
+    const userSurveyData = {survey: surveyData, userID};
+    this.restDataSource.deleteSurvey(userSurveyData).subscribe(data => {
       const error = data.error;
 
       if (error) {
@@ -72,24 +73,19 @@ export class SurveyRepository
     });
   }
 
-  updateSurvey(survey: Survey): Observable<IResponse>
+  updateSurvey(surveyData: Survey, userID: string): Observable<IResponse>
   {
-    return this.restDataSource.updateSurvey(survey);
+    const data = {survey: surveyData, userID};
+    return this.restDataSource.updateSurvey(data);
   }
   takeSurvey(survey: Survey): Observable<IResponse>
   {
     return this.restDataSource.takeSurvey(survey);
   }
   initializeSurveys(): void {
-    this.restDataSource.getSurveys().subscribe(data => { this.surveys = data.data; });
-
-    // this.restDataSource.getSurveys().subscribe(data => {
-    //   // sort by dateCreated desc
-    //   const survey = data.data.slice().sort((a, b) => {
-    //     return (new Date(b.dateCreated) as any) - ( new Date(a.dateCreated) as any);
-    //   });
-    //   this.surveys = survey;
-    // });
+    this.restDataSource.getSurveys().subscribe(data => {
+      this.surveys = data.data;
+    });
   }
 
   isActive(survey: Survey): boolean {

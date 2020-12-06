@@ -8,7 +8,7 @@
       <div class="row">
         <input class="form-control col-10" placeholder="Enter survery name" name="survey-name" id="create_input"
           [(ngModel)]="newSurvey.name">
-        <button [disabled]="!newSurvey.name" (click)="onCreateSurvey()" class="btn btn-success btn-sm ml-2"
+        <button [disabled]="!newSurvey.name" (click)="onCreateSurvey()" class="btn btn-sm ml-2 green-btn"
           id="create_btn">
           CREATE
         </button>
@@ -17,10 +17,11 @@
   </div>
 
   <!-- Table displaying all surveys-->
-  <div class="mt-5">
-    <h4>All Surveys</h4>
+  <div class="mt-5" id="table_wrap">
+    <h4>My Surveys</h4>
     <table class="table shadow">
       <thead class="col-9">
+
         <tr>
           <th scope="col">Survey Name</th>
           <th scope="col">Active</th>
@@ -32,22 +33,25 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let survey of surveys">
-          <td> {{ survey.name }}</td>
+        <tr *ngFor="let survey of surveys; let i = index">
+          <td> {{ survey.name }} <i class="fas fa-lg fa-link share-link" id="link{{i}}"
+              (click)="onShareLink(survey._id, $event)" (mouseenter)="showTooltip($event)"
+              (mouseleave)="hideTooltip($event)"></i>
+            <span class="tooltip" id="tooltip{{i}}">click to copy<div id="arrow" data-popper-arrow></div></span></td>
           <td>{{ survey.dateActive | date: 'MMM d, y, h:mm a' }}</td>
           <td>{{ survey.dateExpire | date: 'MMM d, y, h:mm a' }}</td>
-          <td>
+          <td id="edit-td">
             <button routerLink="/surveys/edit/{{survey._id}}" class="btn btn-sm" id="edit_button">
               Edit
             </button>
           </td>
-          <td>
-            <button (click)="onDeleteSurvey(survey._id)" class="btn btn-danger btn-sm">
+          <td id="del-td">
+            <button (click)="onDeleteSurvey(survey)" class="btn btn-sm" id="delete_button">
               Delete
             </button>
           </td>
-          <td>
-            <button routerLink="/surveys/results/{{survey._id}}" class="btn btn-info btn-sm">
+          <td id="view-td">
+            <button routerLink="/surveys/results/{{survey._id}}" class="btn btn-sm" id="results_button">
               View Results
             </button>
           </td>

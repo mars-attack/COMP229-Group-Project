@@ -1,10 +1,79 @@
 #surveyContainer {
   padding-bottom: 150px;
 }
+
+
+h1{
+  margin-top:20px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 101%;
+  /* or 101px */
+  text-align: left;
+  color: #000000;
+}
+h4 {
+  margin-left: 13px;
+}
+
+#create_input {
+  margin-left: 25px !important;
+}
+
 /* Buttons*/
 button {
   font-size: 16px;
   width: 115px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+#create_btn {
+  margin-left: 25px !important;
+}
+
+/* tooltips */
+.share-link {
+  color: #686868;
+  float: right;
+}
+
+.share-link:hover {
+  color: #ffc107;
+}
+
+.tooltip {
+  border-radius: 5px;
+  background: white;
+  color: #333;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  display: none;
+}
+.show-tooltip {
+  display: block;
+  opacity: 1;
+}
+
+/* table style */
+
+td:nth-child(2), td:nth-child(3) {
+  max-width: 140px;
+}
+
+#table_wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(255, 255, 255);
+}
+
+#edit-td, #del-td, #view-td {
+  text-align: center;
 }
 
 #edit_button {
@@ -17,13 +86,24 @@ button {
 }
 
 #delete_button {
-  background-color: #ffa825;
-  color: black;
+  background: #FF4C25;
+  color: white;
   font-size: 16px;
 }
+#delete_button:hover {
+  background: #dd411e;
+}
 
+#results_button {
+  background-color:#F8AF1B;
+  color: white;
+  font-size: 16px;
+}
+#results_button:hover {
+  background-color:#da9814;
+}
 table {
-  border: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
 /* Tablehead */
 thead th {
@@ -34,6 +114,7 @@ thead th {
   font-weight: bolder;
   color: rgb(0, 0, 0);
   height: 20px;
+  padding: 1em;
 }
 
 /* thead th:first-child {
@@ -48,8 +129,6 @@ td {
   color: rgb(0, 0, 0);
   vertical-align: middle;
   text-align: left;
-  padding: 1em;
-
   border: 1px solid #ccc;
 }
 
@@ -59,6 +138,26 @@ tbody tr:nth-child(even) td{
   border-bottom: 1px solid #ccc;
   border-width: 1px 0 1px 1px;
 }
+ /* -------------- /
+  / tablet screen  /
+  / ------------ */
+  @media only screen and (min-width:688px) and (max-width: 1198px){
+
+    h4 {
+      margin-left: 30px;
+    }
+    #create_btn {
+      top: 18px;
+      left: 10px;
+      position: relative;
+      margin-left: 34px !important;
+    }
+    #create_input {
+      margin-top: 6px;
+      left: 18px;
+    }
+
+  }
 
 /*
 screen smaller than 760px and for tablets.
@@ -66,18 +165,30 @@ screen smaller than 760px and for tablets.
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
+  #edit-td, #del-td, #view-td {
+    text-align: left;
+  }
+  h4 {
+    margin-left: 30px;
+  }
+
+  td:nth-child(2), td:nth-child(3) {
+    max-width: none;
+  }
 
   #create_btn {
     top: 18px;
     left: 10px;
     position: relative;
+    margin-left: 34px !important;
   }
   #create_input {
     margin-top: 6px;
     left: 18px;
   }
 
-  tbody tr:nth-child(even) td {
+  tbody tr:nth-child(even) th,
+  tbody tr:nth-child(even) td  {
     border: none;
   }
 	/* Force table to not be like tables anymore */
@@ -92,7 +203,9 @@ only screen and (max-width: 760px),
 		left: -9999px;
 	}
 
-	tr { border: 1px solid #ccc; }
+	tr {
+    border: 1px solid #ccc;
+  }
 
 	td {
 		border: none;
