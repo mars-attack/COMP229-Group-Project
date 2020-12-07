@@ -1,14 +1,13 @@
 <!--EditSurvey Component-->
 <div class="container" id="editSurveyContainer">
-  <h1 class="mb-5" id="editTitle">Edit Survey</h1>
-  <div class="container mb-5 row">
-
+  <h1 class="text-center" id="editTitle">Edit Survey</h1>
+  <div class="container mt-4 row">
     <!-- Question form conponent -->
     <div class="col-lg-4 col-s-12">
       <app-question-form (save)="onQuestionSave($event)" [question]="selectedQuestion"></app-question-form>
     </div>
 
-    <div class="col-lg-8 col-sm-12">
+    <div class="col-lg-8 col-sm-12" id="question_list_wrapper">
 
       <div class="row mb-2">
         <!-- Editable survey name -->
@@ -21,12 +20,12 @@
 
       <div class="row mb-2">
         <!-- Feilds for date active and expire -->
-        <div class="col-md-6 col-sm-12 p-0 row date-wrapper">
+        <div class="col-lg-6 col-md-12 col-sm-12 p-0 row date-wrapper">
           <label class="h4 pr-2" for="dateActive">Active: </label>
           <input class="form-control date-input" type="datetime-local" id="dateActive" name="dateActive"
             [(ngModel)]="survey.dateActive">
         </div>
-        <div class="col-md-6 col-sm-12 p-0 row date-wrapper">
+        <div class="col-lg-6 col-md-12 col-sm-12 p-0 row date-wrapper">
           <label class="h4 pr-2" for="dateExpire">Expires: </label>
           <input class="form-control date-input" type="datetime-local" id="dateExpire" name="dateExpire"
             [(ngModel)]="survey.dateExpire">
@@ -37,10 +36,10 @@
 
 
       <div class="mt-4 d-flex justify-content-center">
-        <button (click)="onSurveySave()" class="btn btn-primary btn-sm m-1 p-2">
+        <button (click)="onSurveySave()" class="btn btn-sm blue-btn m-1 large-btn btn-shadow" id="save_btn">
           <i class="far fa-lg fa-save"></i> SAVE SURVEY
         </button>
-        <button (click)="onCancelEdit($event)" class="btn btn-secondary btn-sm m-1 p-2">
+        <button (click)="onCancelEdit($event)" class="btn btn-secondary m-1 large-btn btn-shadow" id="delete_btn">
           <i class="fas fa-undo"></i> CANCEL
         </button>
       </div>

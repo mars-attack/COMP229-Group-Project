@@ -11,8 +11,7 @@
   </div>
   <form>
     <!--Populating the page with questions-->
-    <div class="card bg-light shoddow rounded m-3"
-      *ngFor="let question of survey?.questions; let questionIndex= index;">
+    <div class="card bg-light rounded m-3" *ngFor="let question of survey?.questions; let questionIndex= index;">
       <h5 class="card-header">Q{{questionIndex + 1}}. {{question.title}}</h5>
 
       <!--Populating the page with options-->
@@ -37,10 +36,10 @@
 
 
     <div id="button_wrapper">
-      <button class="btn btn-success btn-sm m-1 p-2 submitBtn" (click)="onConfirmSubmit($event)">
+      <button class="btn btn-success btn-sm m-1 p-2 submitBtn btn-shadow" (click)="onConfirmSubmit($event)">
         SUBMIT
       </button>
-      <button class="btn btn-secondary btn-sm m-1 p-2 cancelBtn" (click)="onCancelSubmit($event)">
+      <button class="btn btn-secondary btn-sm m-1 p-2 cancelBtn btn-shadow" (click)="onCancelSubmit($event)">
         CANCEL
       </button>
     </div>
