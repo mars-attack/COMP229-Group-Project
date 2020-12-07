@@ -424,12 +424,27 @@ class TakeSurveyComponent {
     }
     // reroute if survey is inactive
     ngAfterViewInit() {
-        setTimeout(() => {
-            if (this.survey && !this.surveyRepository.isActive(this.survey)) {
-                // this.router.navigateByUrl('/');
-                this.showCannotTakeOverlay = true;
-            }
-        }, 250);
+        if (this.survey && !this.surveyRepository.isActive(this.survey)) {
+            // removove elements from site
+            const content = document.getElementById('mainContainer');
+            content.parentNode.removeChild(content);
+            // display alert
+            sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+                title: 'OOPS! :(',
+                text: 'You can\'t take this survey yet!',
+                icon: 'warning',
+                width: 800,
+                padding: '3em',
+                allowOutsideClick: false,
+                backdrop: `
+          rgba(0,0,0,0.9)
+        `
+            }).then((result) => {
+                if (result.value) {
+                    this.router.navigateByUrl('/');
+                }
+            });
+        }
     }
     onCancelSubmit(event) {
         event.preventDefault();
@@ -489,7 +504,8 @@ class TakeSurveyComponent {
                 sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
                     title: 'Submitted!',
                     text: 'Thank you for completing this survey :)',
-                    icon: 'success'
+                    icon: 'success',
+                    allowOutsideClick: false
                 }).then(result => {
                     if (result.isConfirmed) {
                         this.router.navigateByUrl('/');
@@ -524,7 +540,7 @@ class TakeSurveyComponent {
     }
 }
 TakeSurveyComponent.ɵfac = function TakeSurveyComponent_Factory(t) { return new (t || TakeSurveyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_model_survey_repository__WEBPACK_IMPORTED_MODULE_3__["SurveyRepository"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
-TakeSurveyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TakeSurveyComponent, selectors: [["app-take-survey"]], decls: 17, vars: 7, consts: [[1, "container"], ["id", "heading_material"], [1, "row"], [1, "pt-1", "col-md-6", "col-sm-12"], ["id", "date_expire", 1, "pt-1", "col-md-6", "col-sm-12"], ["class", "card bg-light rounded m-3", 4, "ngFor", "ngForOf"], ["id", "button_wrapper"], [1, "btn", "btn-success", "btn-sm", "m-1", "p-2", "submitBtn", "btn-shadow", 3, "click"], [1, "btn", "btn-secondary", "btn-sm", "m-1", "p-2", "cancelBtn", "btn-shadow", 3, "click"], [1, "card", "bg-light", "rounded", "m-3"], [1, "card-header"], ["class", "card-body pt-1 pb-1", 4, "ngFor", "ngForOf"], [1, "card-body", "pt-1", "pb-1"], ["class", "pl-3", 4, "ngIf"], [1, "pl-3"], ["type", "radio", 1, "form-check-input", 3, "id", "name", "value", "checked", "change"], ["for", "materialUnchecked", 1, "form-check-label"], ["type", "checkbox", 1, "form-check-input", 3, "id", "name", "value", "checked", "change"]], template: function TakeSurveyComponent_Template(rf, ctx) { if (rf & 1) {
+TakeSurveyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TakeSurveyComponent, selectors: [["app-take-survey"]], decls: 17, vars: 7, consts: [["id", "mainContainer", 1, "container"], ["id", "heading_material"], [1, "row"], [1, "pt-1", "col-md-6", "col-sm-12"], ["id", "date_expire", 1, "pt-1", "col-md-6", "col-sm-12"], ["class", "card bg-light rounded m-3", 4, "ngFor", "ngForOf"], ["id", "button_wrapper"], [1, "btn", "btn-success", "btn-sm", "m-1", "p-2", "submitBtn", "btn-shadow", 3, "click"], [1, "btn", "btn-secondary", "btn-sm", "m-1", "p-2", "cancelBtn", "btn-shadow", 3, "click"], [1, "card", "bg-light", "rounded", "m-3"], [1, "card-header"], ["class", "card-body pt-1 pb-1", 4, "ngFor", "ngForOf"], [1, "card-body", "pt-1", "pb-1"], ["class", "pl-3", 4, "ngIf"], [1, "pl-3"], ["type", "radio", 1, "form-check-input", 3, "id", "name", "value", "checked", "change"], ["for", "materialUnchecked", 1, "form-check-label"], ["type", "checkbox", 1, "form-check-input", 3, "id", "name", "value", "checked", "change"]], template: function TakeSurveyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "h1");
@@ -563,7 +579,7 @@ TakeSurveyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Closing Date: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](9, 4, ctx.survey.dateExpire, "MMM d, y, h:mm a"), " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.survey == null ? null : ctx.survey.questions);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"]], styles: [".btn[_ngcontent-%COMP%] {\r\n  width: 115px;\r\n}\r\n\r\n.submitBtn[_ngcontent-%COMP%] {\r\n  background: #33CDA8;\r\n  border: none;\r\n  border-radius: 5px;\r\n  color: white;\r\n}\r\n\r\n.submitBtn[_ngcontent-%COMP%]:hover {\r\n  background: #249279;\r\n  border-radius: 5px;\r\n  color: white;\r\n}\r\n\r\n.btn-secondary[_ngcontent-%COMP%] {\r\n  border-radius: 5px;\r\n  border: none;\r\n}\r\n\r\n#heading_material[_ngcontent-%COMP%], #button_wrapper[_ngcontent-%COMP%] {\r\n  margin-left: 25px;\r\n}\r\n\r\n#date_expire[_ngcontent-%COMP%] {\r\n  text-align: right;\r\n  padding-right: 34px;\r\n}\r\n\r\n@media only screen and (max-width:687px) {\r\n  #date_expire[_ngcontent-%COMP%] {\r\n    text-align: left;\r\n  }\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3VydmV5LWxpYnJhcnkvdGFrZS1zdXJ2ZXkvdGFrZS1zdXJ2ZXkuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixZQUFZO0VBQ1osa0JBQWtCO0VBQ2xCLFlBQVk7QUFDZDs7QUFDQTtFQUNFLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsWUFBWTtBQUNkOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLFlBQVk7QUFDZDs7QUFHQTtFQUNFLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRTtJQUNFLGdCQUFnQjtFQUNsQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvc3VydmV5LWxpYnJhcnkvdGFrZS1zdXJ2ZXkvdGFrZS1zdXJ2ZXkuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5idG4ge1xyXG4gIHdpZHRoOiAxMTVweDtcclxufVxyXG5cclxuLnN1Ym1pdEJ0biB7XHJcbiAgYmFja2dyb3VuZDogIzMzQ0RBODtcclxuICBib3JkZXI6IG5vbmU7XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxufVxyXG4uc3VibWl0QnRuOmhvdmVyIHtcclxuICBiYWNrZ3JvdW5kOiAjMjQ5Mjc5O1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICBjb2xvcjogd2hpdGU7XHJcbn1cclxuXHJcbi5idG4tc2Vjb25kYXJ5IHtcclxuICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgYm9yZGVyOiBub25lO1xyXG59XHJcblxyXG5cclxuI2hlYWRpbmdfbWF0ZXJpYWwsICNidXR0b25fd3JhcHBlciB7XHJcbiAgbWFyZ2luLWxlZnQ6IDI1cHg7XHJcbn1cclxuXHJcbiNkYXRlX2V4cGlyZSB7XHJcbiAgdGV4dC1hbGlnbjogcmlnaHQ7XHJcbiAgcGFkZGluZy1yaWdodDogMzRweDtcclxufVxyXG5cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOjY4N3B4KSB7XHJcbiAgI2RhdGVfZXhwaXJlIHtcclxuICAgIHRleHQtYWxpZ246IGxlZnQ7XHJcbiAgfVxyXG59XHJcbiJdfQ== */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"]], styles: [".container[_ngcontent-%COMP%] {\r\n  padding-bottom: 100px;\r\n}\r\n\r\n.btn[_ngcontent-%COMP%] {\r\n  width: 115px;\r\n}\r\n\r\n.submitBtn[_ngcontent-%COMP%] {\r\n  background: #33CDA8;\r\n  border: none;\r\n  border-radius: 5px;\r\n  color: white;\r\n}\r\n\r\n.submitBtn[_ngcontent-%COMP%]:hover {\r\n  background: #249279;\r\n  border-radius: 5px;\r\n  color: white;\r\n}\r\n\r\n.btn-secondary[_ngcontent-%COMP%] {\r\n  border-radius: 5px;\r\n  border: none;\r\n}\r\n\r\n#heading_material[_ngcontent-%COMP%], #button_wrapper[_ngcontent-%COMP%] {\r\n  margin-left: 25px;\r\n}\r\n\r\n#date_expire[_ngcontent-%COMP%] {\r\n  text-align: right;\r\n  padding-right: 34px;\r\n}\r\n\r\n@media only screen and (max-width:687px) {\r\n  #date_expire[_ngcontent-%COMP%] {\r\n    text-align: left;\r\n  }\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3VydmV5LWxpYnJhcnkvdGFrZS1zdXJ2ZXkvdGFrZS1zdXJ2ZXkuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixZQUFZO0VBQ1osa0JBQWtCO0VBQ2xCLFlBQVk7QUFDZDs7QUFDQTtFQUNFLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsWUFBWTtBQUNkOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLFlBQVk7QUFDZDs7QUFHQTtFQUNFLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRTtJQUNFLGdCQUFnQjtFQUNsQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvc3VydmV5LWxpYnJhcnkvdGFrZS1zdXJ2ZXkvdGFrZS1zdXJ2ZXkuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xyXG4gIHBhZGRpbmctYm90dG9tOiAxMDBweDtcclxufVxyXG5cclxuLmJ0biB7XHJcbiAgd2lkdGg6IDExNXB4O1xyXG59XHJcblxyXG4uc3VibWl0QnRuIHtcclxuICBiYWNrZ3JvdW5kOiAjMzNDREE4O1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG59XHJcbi5zdWJtaXRCdG46aG92ZXIge1xyXG4gIGJhY2tncm91bmQ6ICMyNDkyNzk7XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxufVxyXG5cclxuLmJ0bi1zZWNvbmRhcnkge1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICBib3JkZXI6IG5vbmU7XHJcbn1cclxuXHJcblxyXG4jaGVhZGluZ19tYXRlcmlhbCwgI2J1dHRvbl93cmFwcGVyIHtcclxuICBtYXJnaW4tbGVmdDogMjVweDtcclxufVxyXG5cclxuI2RhdGVfZXhwaXJlIHtcclxuICB0ZXh0LWFsaWduOiByaWdodDtcclxuICBwYWRkaW5nLXJpZ2h0OiAzNHB4O1xyXG59XHJcblxyXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6Njg3cHgpIHtcclxuICAjZGF0ZV9leHBpcmUge1xyXG4gICAgdGV4dC1hbGlnbjogbGVmdDtcclxuICB9XHJcbn1cclxuIl19 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TakeSurveyComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
