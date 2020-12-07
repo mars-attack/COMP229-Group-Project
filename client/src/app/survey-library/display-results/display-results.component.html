@@ -2,18 +2,20 @@
 <div class="container mt-5" id="resultsContainer">
 
   <div class="d-flex justify-content-between mb-3">
-    <h2 class="pl-3">Survey: {{survey.name}}</h2>
-    <div>
-      <button (click)="ExportTOExcel()" class="btn btn-success">Export to Excel</button>
-    </div>
+    <h2 class="pl-3 text-center">{{survey.name}}</h2>
   </div>
   <!-- in a table for exporting to excel-->
   <div #TABLE #table>
+    <div class="excel">
+      <button (click)="ExportTOExcel()" class="btn btn-success">Export to Excel</button>
+    </div>
     <tr>
       <td class="pl-3" colspan="2"><b>Responses: {{survey.responses}}</b></td>
     </tr>
+
+
     <div class="container shaddow rounded mt-4" *ngFor="let question of questions">
-      <table class="table table-striped table-bordered">
+      <table class="table table-striped table-bordered shadow rounded">
         <tr>
           <td colspan="2">Q: {{ question.title }}</td>
         </tr>
@@ -30,12 +32,13 @@
   </div>
 
   <div class="text-center">
-    <button class="btn btn-primary pl-4 pr-4 m-2" (click)="onConfirmReset()">
+    <button class="btn btn-primary btn-shadow pl-4 pr-4 m-2" (click)="onConfirmReset()">
       Reset
     </button>
-    <button routerLink='/surveys' class="btn btn-secondary pl-4 pr-4 m-2">
+    <button routerLink='/surveys' class="btn btn-secondary btn-shadow pl-4 pr-4 m-2">
       Return
     </button>
   </div>
+
 
 </div>
