@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from 'src/app/model/auth.service';
@@ -24,23 +25,27 @@ export class UpdateUserComponent implements OnInit {
     this.user.newPassword = '';
   }
 
-  onUpdateSubmit(): void {
+  onUpdateSubmit(form: NgForm): void {
 
-    // So the user can update info without changing password
-    if (this.user.newPassword === '' || this.user.newPassword === null) {
-      this.user.newPassword = this.user.password;
-    }
-    this.authService.updateUser(this.user).subscribe(data => {
-      if (data.success) {
-        this.flashMessage.show('Account updated', {cssClass: 'alert-success', timeOut: 6000});
-        localStorage.setItem('user', JSON.stringify(this.user));
-        // this.router.navigate(['/']);
-      } else {
-        this.flashMessage.show('Error updating account, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
+    if (form.valid)
+    {
+      // So the user can update info without changing password
+      if (this.user.newPassword === '' || this.user.newPassword === null) {
+        this.user.newPassword = this.user.password;
       }
-    });
+      this.authService.updateUser(this.user).subscribe(data => {
+        if (data.success) {
+          this.flashMessage.show('Account updated', {cssClass: 'alert-success', timeOut: 6000});
+          localStorage.setItem('user', JSON.stringify(this.user));
+          // this.router.navigate(['/']);
+        } else {
+          this.flashMessage.show('Error updating account, please try again.', {cssClass: 'alert-danger', timeOut: 6000});
+        }
+      });
 
-    this.user.newPassword = '';
+      this.user.newPassword = '';
+    }
   }
+
 
 }

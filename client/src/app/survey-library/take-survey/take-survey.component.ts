@@ -43,12 +43,29 @@ export class TakeSurveyComponent implements OnInit, AfterViewInit {
 
   // reroute if survey is inactive
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (this.survey && !this.surveyRepository.isActive(this.survey)){
-        // this.router.navigateByUrl('/');
-        this.showCannotTakeOverlay = true;
-      }
-    }, 250);
+    if (this.survey && !this.surveyRepository.isActive(this.survey)){
+
+      // removove elements from site
+      const content = document.getElementById('mainContainer');
+      content.parentNode.removeChild(content);
+
+      // display alert
+      Swal.fire({
+        title: 'OOPS! :(',
+        text: 'You can\'t take this survey yet!',
+        icon: 'warning',
+        width: 800,
+        padding: '3em',
+        allowOutsideClick: false,
+        backdrop: `
+          rgba(0,0,0,0.9)
+        `
+      }).then((result) => {
+        if (result.value) {
+          this.router.navigateByUrl('/');
+        }
+      });
+    }
   }
 
   onCancelSubmit(event: Event): void {
@@ -119,7 +136,8 @@ export class TakeSurveyComponent implements OnInit, AfterViewInit {
         Swal.fire({
           title: 'Submitted!',
           text: 'Thank you for completing this survey :)',
-          icon: 'success'
+          icon: 'success',
+          allowOutsideClick: false
         }).then(result => {
           if (result.isConfirmed) {
             this.router.navigateByUrl('/');

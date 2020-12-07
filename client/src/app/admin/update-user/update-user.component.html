@@ -2,7 +2,7 @@
 <main class="container mb-5">
   <div class="row">
     <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
-      <form autocomplete="off">
+      <form autocomplete="off" #form='ngForm' (ngSubmit)='form.form.valid && onUpdateSubmit(form)'>
 
         <span class="text-center">
           <h1>Update Your Account</h1>
@@ -36,8 +36,8 @@
           <label for="password" [ngStyle]="{'visibility': user.password? 'visible':'hidden'}">*Current Password:</label>
           <input type="password" class="form-control" [(ngModel)]="user.password" name="password"
             placeholder="Enter Current Password" #password="ngModel" id="password" required autocomplete="off"
-            [ngClass]="{ 'is-invalid': password.invalid && password.dirty}">
-          <div *ngIf="password.invalid && password.dirty" class="invalid-feedback">
+            [ngClass]="{ 'is-invalid': password.invalid && form.submitted}">
+          <div *ngIf="form.submitted && password.invalid" class="invalid-feedback">
             <div *ngIf="password.errors.required">Password is required</div>
           </div>
         </fieldset>
@@ -54,11 +54,11 @@
         </fieldset>
 
         <fieldset class="mt-4 form-group text-left">
-          <button class='btn btn-primary m-1' type='submit' (click)="onUpdateSubmit()">
+          <button class='btn btn-primary m-1' type='submit'>
             <i class="fas fa-sign-in-alt"></i>
             Update
           </button>
-          <button class='btn btn-secondary m-1' routerLink='/home'>
+          <button class='btn btn-secondary m-1' routerLink='/surveys'>
             <i class="fas fa-undo"></i>
             Cancel
           </button>
