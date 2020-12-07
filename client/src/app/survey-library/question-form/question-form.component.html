@@ -31,13 +31,15 @@
     </div>
 
     <div class="row ml-0">
-      <button [disabled]="!placeholderQuestion.title" (click)="onAddOption()" class="btn btn-info btn-sm m-1">
+      <button [disabled]="!placeholderQuestion.title" (click)="onAddOption()"
+        class="btn btn-sm blue-btn m-1 btn-shadow large-btn">
         <i class="fas fa-plus-circle"></i> ADD OPTION
       </button>
 
       <div>
-        <button [disabled]="!placeholderQuestion.title" (click)="onSave()" class="btn btn-success btn-sm m-1">
-          {{question ? 'SAVE' : 'ADD QUESTION'}}
+        <button [disabled]="!placeholderQuestion.title" (click)="onSave()"
+          class="btn green-btn btn-sm m-1 btn-shadow large-btn">
+          {{question ? 'UPDATE' : 'ADD QUESTION'}}
         </button>
       </div>
 
