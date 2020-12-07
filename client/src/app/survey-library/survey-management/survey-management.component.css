@@ -10,8 +10,6 @@ h1{
   font-weight: bold;
   font-size: 40px;
   line-height: 101%;
-  /* or 101px */
-  text-align: left;
   color: #000000;
 }
 h4 {
